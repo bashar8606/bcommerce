@@ -73,6 +73,19 @@ html {
   }
 }
 
+
+.btn {
+  @apply bg-primary text-white font-medium py-2 px-4 rounded transition duration-300 ease-in-out transform;
+}
+
+.btn:hover {
+  @apply bg-blue-700 scale-105;
+}
+
+.btn:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-opacity-50;
+}
+
 @layer base {
   * {
     @apply border-border;

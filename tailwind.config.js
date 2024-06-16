@@ -11,10 +11,11 @@ module.exports = {
   theme: {
     aspectRatio: {
       '4/3': '4 / 3',
+      '1/1': '1 / 1',
       'portrait': '100 / 135',
     },
     flex: {
-      'column': '0 0 auto'
+      'col-auto': '0 0 auto'
     },
     container: {
       center: true,

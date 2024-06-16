@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function ProductCard() {
@@ -10,6 +11,9 @@ export default function ProductCard() {
                 <p className=''>
                     <span className='text-sm font-semibold text-red-700'>AED 8.00</span>
                 </p>
+                <div className='pt-3'>
+                    <Link href={'#'} className='btn'>View now</Link>
+                </div>
             </div>
         </div>
     )
