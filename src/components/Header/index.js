@@ -89,7 +89,7 @@ export default function Header() {
           </Sheet>
         </div>
       </div>
-      <div className="shadow-sm">
+      <div className="shadow-md">
         <div className="container mx-auto flex  items-center justify-center py-1 px-4 md:px-6">
           <nav className="hidden space-x-4 md:flex">
             <Link

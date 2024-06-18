@@ -17,6 +17,9 @@ module.exports = {
     flex: {
       'col-auto': '0 0 auto'
     },
+    flexBasis: {
+      '1/8': '12.5%',
+    },
     container: {
       center: true,
       padding: "2rem",

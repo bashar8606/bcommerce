@@ -75,7 +75,7 @@ html {
 
 
 .btn {
-  @apply bg-primary text-white font-medium py-2 px-4 rounded transition duration-300 ease-in-out transform;
+  @apply bg-primary text-white font-medium text-sm py-2 px-4 rounded transition duration-300 ease-in-out transform;
 }
 
 .btn:hover {
