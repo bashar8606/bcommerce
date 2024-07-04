@@ -1,11 +1,18 @@
+"use client"
 import Link from "next/link"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
+import { useHeader } from "./useHeader"
+import { signIn, signOut, useSession } from "next-auth/react"
 
 export default function Header() {
+  const {main, isScrollingDown} = useHeader()
+
+  const session=useSession()
+  console.log(session,"sessionsession");
   return (
-    <header className="fixed top-0 left-0 z-50 w-full bg-white  dark:bg-gray-950 dark:text-gray-50">
-      <div className="shadow-sm">
+    <header className="fixed top-0 left-0 z-50 w-full   dark:bg-gray-950 dark:text-gray-50" ref={main}>
+      <div className="shadow-sm bg-white z-50  relative" >
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
           <Link href="#" className="flex items-center" prefetch={false}>
             <MountainIcon className="h-6 w-6" />
@@ -89,7 +96,7 @@ export default function Header() {
           </Sheet>
         </div>
       </div>
-      <div className="shadow-md">
+      <div className={`shadow-md bg-white transition-transform duration-300 ${isScrollingDown ? '-translate-y-full':'translate-x-0'}`}>
         <div className="container mx-auto flex  items-center justify-center py-1 px-4 md:px-6">
           <nav className="hidden space-x-4 md:flex">
             <Link
@@ -120,6 +127,7 @@ export default function Header() {
             >
               Contact
             </Link>
+            <button onClick={signIn}>Login</button>
           </nav>
         </div>
       </div>
