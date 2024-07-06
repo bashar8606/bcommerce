@@ -1,7 +1,9 @@
+import WishlistWidget from "@/widgets/WishlistWidget";
 
-export default function Register() {
+export default function WishlistPage() {
     return (
         <main>
+            <WishlistWidget />
         </main>
     )
 }

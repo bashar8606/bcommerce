@@ -1,7 +1,9 @@
+import CartWidget from "@/widgets/CartWidget";
 
-export default function Cart() {
+export default function CartPage() {
     return (
         <main>
+            <CartWidget />
         </main>
     )
 }
