@@ -1,5 +1,5 @@
 
-export default function Register() {
+export default function Cart() {
     return (
         <main>
         </main>
