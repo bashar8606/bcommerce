@@ -75,10 +75,18 @@ html {
 
 
 .btn {
-  @apply bg-primary text-white font-medium text-sm py-2 px-4 rounded transition duration-300 ease-in-out transform;
+  @apply font-medium text-sm py-2 px-4 rounded transition duration-300 ease-in-out transform;
 }
 
-.btn:hover {
+.btn-primary {
+  @apply bg-primary text-white;
+}
+
+.btn-blue {
+  @apply bg-blue-700 text-white;
+}
+
+.btn-blue:hover {
   @apply bg-blue-700 scale-105;
 }
 
