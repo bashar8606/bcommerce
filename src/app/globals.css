@@ -85,6 +85,15 @@ html {
 .btn-blue {
   @apply bg-blue-700 text-white;
 }
+.btn-outline-light {
+  @apply bg-transparent border border-zinc-300 ;
+}
+.btn-grad {
+  @apply bg-gradient-to-r from-orange-300 to-red-300
+}
+.btn-lg {
+  @apply  py-3 px-4 ;
+}
 
 .btn-blue:hover {
   @apply bg-blue-700 scale-105;
