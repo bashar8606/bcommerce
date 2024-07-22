@@ -1,7 +1,8 @@
 
 export default function Login() {
     return (
-        <main>
+        <main className="min-h-screen pt-20 ">
+            page
         </main>
     )
 }

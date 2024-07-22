@@ -1,10 +1,9 @@
-import ModalLogin  from '@/components/ModalLogin'
-import LoginWidget from '@/widgets/LoginWidget'
+
 
 export default function Page() {
     return (
-        <ModalLogin>
-            asd
-        </ModalLogin>
+        <main className="min-h-screen pt-20 absolute top-0 left-0 z-30 bg-black h-full w-full">
+        page
+    </main>
     )
 }

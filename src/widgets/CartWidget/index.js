@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import PaymetnIcons from "@/components/PaymentIcons";
+import OrderSummary from "@/components/OrderSummary";
 
 
 const CartWidget = () => {
@@ -21,7 +22,7 @@ const CartWidget = () => {
   return (
     <section className="">
       <div className="container">
-        <Breadcrumb className="mb-5">
+        <Breadcrumb className="mb-2">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -33,11 +34,35 @@ const CartWidget = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-12 lg:col-span-9 ">
-            <div>
-              <h2 className="text-black text-xl font-semibold">Your Cart</h2>
+
+        <div className=" justify-center items-center gap-1.5 flex mb-5">
+            <div className="p-2 justify-center items-center gap-2 flex">
+              <div className="text-center text-black text-sm font-medium ">
+                Shipping Address
+              </div>
             </div>
+            <div className="w-20 h-px border border-stone-300"></div>
+            <div className="p-2 opacity-50 justify-center items-center gap-2 flex">
+              <div className="text-center text-black text-sm font-medium ">
+                Payment
+              </div>
+            </div>
+            <div className="w-20 h-px border border-stone-300"></div>
+            <div className="p-2 opacity-50 justify-center items-center gap-2 flex">
+              <div className="text-center text-black text-sm font-medium ">
+                Payment
+              </div>
+            </div>
+          </div>
+
+
+
+
+              <h2 className="text-black text-xl font-semibold mb-4">Your Cart <span className="text-neutral-500 text-base font-medium ">( 2 item )</span>
+              </h2>
+        <div className="flex flex-wrap -mx-4">
+          <div className="flex-col-auto w-100 lg:w-[75%] px-4">
+            
             <CartItem  />
             <CartItem />
             <CartItem  />
@@ -47,8 +72,8 @@ const CartWidget = () => {
               <CartItem key={item.id} />
             ))} */}
           </div>
-          <div className="col-span-12 lg:col-span-4 lg:px-5">
-            sfd
+          <div className="flex-col-auto w-100 lg:w-[25%] px-4">
+            <OrderSummary/>
             {/* <p>Total: ${cart.total}</p>
             <button onClick={() => addItem({ id: 'new-item', name: 'New Item', price: 10 })}>
               Add Item

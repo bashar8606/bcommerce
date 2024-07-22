@@ -14,6 +14,7 @@ import BuyNow from "@/components/BuyNow";
 import AddToCart from "@/components/AddToCart";
 import { VariantCheckbox } from "@/components/variant-checkbox";
 import { IoCardOutline } from "react-icons/io5";
+import EmiComponent from "@/components/EmiComponent";
 
 
 export default function ProductDetail() {
@@ -63,7 +64,7 @@ export default function ProductDetail() {
                 <div className="col-span-3 lg:col-span-2">
                   <div className="aspect-[490/625] w-full relative">
                     <Image
-                      src={"/images/b1.png"}
+                      src={"/images/34.png"}
                       fill
                       className="object-cover"
                       alt="logo"
@@ -144,19 +145,8 @@ export default function ProductDetail() {
               <BuyNow />
               <PaymetnIcons />
 
-              <div className="px-3 py-4 rounded-sm border border-emerald-400 text-black text-xs mb-5 relative">
-                <div className="aspect-[46/17] w-11 absolute top-0 left-3 -translate-y-1/2">
-                  <Image src={"/images/tabby_logo.png"} fill className="object-contain" alt="logo" />
-                </div>
-                Pay 4 interest-free payments of AED 812.25.Learn more
-              </div>
-
-              <div className="px-3 py-4 rounded-sm border border-red-400  text-black text-xs mb-5 relative">
-                <div className="aspect-[46/17] w-11 absolute top-0 left-3 -translate-y-1/2">
-                  <Image src={"/images/tamara_logo.png"} fill className="object-contain" alt="logo" />
-                </div>
-                Pay 4 interest-free payments of AED 812.25.Learn more
-              </div>
+              <EmiComponent type="tabby"/>
+              <EmiComponent type="tamara"/>
 
               <div className="justify-start items-center gap-3 inline-flex">
                 <div className="h-9 w-9 border-solid-neutral-200  rounded-full border flex items-center justify-center">

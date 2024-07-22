@@ -30,7 +30,7 @@ export default function ProductThumbSlider() {
           <SwiperSlide>
             <div className="aspect-[490/625] w-full relative">
               <Image
-                src={"/images/b1.png"}
+               src={"/images/34.png"}
                 fill
                 className="object-cover"
                 alt="logo"
@@ -43,7 +43,7 @@ export default function ProductThumbSlider() {
         <SwiperSlide>
           <div className="aspect-[490/625] w-full relative">
             <Image
-              src={"/images/b1.png"}
+             src={"/images/34.png"}
               fill
               className="object-cover"
               alt="logo"
@@ -54,7 +54,7 @@ export default function ProductThumbSlider() {
         <SwiperSlide>
           <div className="aspect-[490/625] w-full relative">
             <Image
-              src={"/images/b1.png"}
+             src={"/images/34.png"}
               fill
               className="object-cover"
               alt="logo"

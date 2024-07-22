@@ -57,7 +57,7 @@ export default function Header() {
               {" "}
               <BiShoppingBag />
             </Link>
-            <Link href="#" className="btn btn-primary " prefetch={false}>
+            <Link href="/en/login" className="btn btn-primary " >
               Login
             </Link>
           </nav>

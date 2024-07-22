@@ -8,6 +8,7 @@ import {
   DialogClose,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import OrderSummary from "../OrderSummary";
 
 export default function BuyNow() {
   return (
@@ -18,14 +19,31 @@ export default function BuyNow() {
             Buy Now
           </button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Share link</DialogTitle>
-            <DialogDescription>
-              Anyone who has this link will be able to view this.
-            </DialogDescription>
-          </DialogHeader>
-          dfgdfg
+        <DialogContent className="sm:max-w-4xl">
+          <div className=" justify-center items-center gap-1.5 inline-flex">
+            <div className="p-2 justify-center items-center gap-2 flex">
+              <div className="text-center text-black text-sm font-medium ">
+                Shipping Address
+              </div>
+            </div>
+            <div className="w-20 h-px border border-stone-300"></div>
+            <div className="p-2 opacity-50 justify-center items-center gap-2 flex">
+              <div className="text-center text-black text-sm font-medium ">
+                Payment
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 lg:col-span-8 ">
+              <p className=" text-stone-950 text-base font-semibold ">
+                Shipping address{" "}
+              </p>
+              <div></div>
+            </div>
+            <div class="col-span-12 lg:col-span-4 ">
+              <OrderSummary/>
+            </div>
+          </div>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>Close</DialogClose>
           </DialogFooter>
