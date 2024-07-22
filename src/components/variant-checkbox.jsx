@@ -11,7 +11,7 @@ export function VariantCheckbox() {
     (
 
       <RadioGroup value={selectedSize} onValueChange={setSelectedSize}>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4"> 
           {variants?.map((variant, i)=>{
             return(
               <Label
