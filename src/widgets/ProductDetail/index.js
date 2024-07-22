@@ -7,13 +7,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Image from "next/image";
-import FilterSideBar from "@/components/FilterSideBar";
 import ProductThumbSlider from "../ProductThumbSlider";
 import Counter from "@/components/Counter";
 import PaymetnIcons from "@/components/PaymentIcons";
 import BuyNow from "@/components/BuyNow";
 import AddToCart from "@/components/AddToCart";
 import { VariantCheckbox } from "@/components/variant-checkbox";
+import { IoCardOutline } from "react-icons/io5";
+
 
 export default function ProductDetail() {
   return (
@@ -36,11 +37,11 @@ export default function ProductDetail() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div class="grid grid-cols-12 gap-4">
-          <div class="col-span-12 lg:col-span-4 ">
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-12 lg:col-span-4 ">
             <ProductThumbSlider />
           </div>
-          <div class="col-span-12 lg:col-span-5 lg:px-5">
+          <div className="col-span-12 lg:col-span-5 lg:px-5">
             <h1 className=" text-stone-950 text-xl font-semibold mb-3">
               Lace elegance pintex abaya Lace elegance pintex abaya Printed XL
             </h1>
@@ -58,7 +59,7 @@ export default function ProductDetail() {
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
-              <div class="grid grid-cols-12 gap-4">
+              <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-3 lg:col-span-2">
                   <div className="aspect-[490/625] w-full relative">
                     <Image
@@ -73,11 +74,16 @@ export default function ProductDetail() {
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
-              <Counter />
+              <div className="flex items-center gap-4">
+                <Counter />
+                <div className="text-orange-600 text-sm font-medium leading-tight">Only 2 left</div>
+              </div>
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
-              <VariantCheckbox/>
+              <p className="text-stone-950 text-base font-semibold mb-3">Size: XL</p>
+
+              <VariantCheckbox />
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
@@ -103,56 +109,65 @@ export default function ProductDetail() {
             <div className="py-3 lg:py-4 border-b border-gray-200">
               <h3 className=" text-base font-semibold mb-3">Specifications</h3>
 
-              <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-6 ">
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-6 ">
                   <p className=" text-stone-500 text-sm mb-1">Colour</p>
                   <div className=" text-black text-sm font-medium ">Green</div>
                 </div>
 
-                <div class="col-span-6 ">
+                <div className="col-span-6 ">
                   <p className=" text-stone-500 text-sm mb-1">Colour</p>
                   <div className=" text-black text-sm font-medium ">Green</div>
                 </div>
 
-                <div class="col-span-6 ">
+                <div className="col-span-6 ">
                   <p className=" text-stone-500 text-sm mb-1">Colour</p>
                   <div className=" text-black text-sm font-medium ">Green</div>
                 </div>
 
-                <div class="col-span-6 ">
+                <div className="col-span-6 ">
                   <p className=" text-stone-500 text-sm mb-1">Colour</p>
                   <div className=" text-black text-sm font-medium ">Green</div>
                 </div>
 
-                <div class="col-span-6 ">
+                <div className="col-span-6 ">
                   <p className=" text-stone-500 text-sm mb-1">Colour</p>
                   <div className=" text-black text-sm font-medium ">Green</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-span-12 lg:col-span-3 ">
-            <AddToCart />
-            <BuyNow />
-            <PaymetnIcons />
+          <div className="col-span-12 lg:col-span-3 ">
+            <div className="sticky top-24">
 
-            <div className="px-3 py-4 rounded-sm border border-emerald-400 text-black text-xs mb-5">
-              {/* <div className="w-11 h-4 justify-center items-center inline-flex" /> */}
-              Pay 4 interest-free payments of AED 812.25.Learn more
-            </div>
+              <AddToCart />
+              <BuyNow />
+              <PaymetnIcons />
 
-            <div className="px-3 py-4 rounded-sm border border-red-400  text-black text-xs mb-5">
-              {/* <div className="w-11 h-4 justify-center items-center inline-flex" /> */}
-              Pay 4 interest-free payments of AED 812.25.Learn more
-            </div>
+              <div className="px-3 py-4 rounded-sm border border-emerald-400 text-black text-xs mb-5 relative">
+                <div className="aspect-[46/17] w-11 absolute top-0 left-3 -translate-y-1/2">
+                  <Image src={"/images/tabby_logo.png"} fill className="object-contain" alt="logo" />
+                </div>
+                Pay 4 interest-free payments of AED 812.25.Learn more
+              </div>
 
-            <div className="justify-start items-center gap-3 inline-flex">
-              <div className="h-9 w-9 border-solid-neutral-200  rounded-full border "></div>
+              <div className="px-3 py-4 rounded-sm border border-red-400  text-black text-xs mb-5 relative">
+                <div className="aspect-[46/17] w-11 absolute top-0 left-3 -translate-y-1/2">
+                  <Image src={"/images/tamara_logo.png"} fill className="object-contain" alt="logo" />
+                </div>
+                Pay 4 interest-free payments of AED 812.25.Learn more
+              </div>
 
-              <div className="grow shrink basis-0 self-stretch text-black text-sm font-medium ">
-                Secure Payments
-                <br />
-                100% secure payment
+              <div className="justify-start items-center gap-3 inline-flex">
+                <div className="h-9 w-9 border-solid-neutral-200  rounded-full border flex items-center justify-center">
+                  <IoCardOutline />
+                </div>
+
+                <div className="grow shrink basis-0 self-stretch text-black text-sm font-medium ">
+                  Secure Payments
+                  <br />
+                  100% secure payment
+                </div>
               </div>
             </div>
           </div>
