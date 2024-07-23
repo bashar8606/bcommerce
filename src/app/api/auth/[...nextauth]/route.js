@@ -1,8 +1,11 @@
+import { handlers } from "@/auth";
 import NextAuth from "next-auth"
 
 // importing providers
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google";
+
+// export const { GET, POST } = handlers
 
 const handler = NextAuth({
     providers: [

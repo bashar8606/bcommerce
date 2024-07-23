@@ -22,14 +22,34 @@ export default function CategoriesSlider({ data }) {
       <div className="container">
         <h2 className="text-xl font-semibold mb-4">All Categories</h2>
         <Slider className={""} customSettings={customSettings}>
-          {categoryArray?.length > 0 &&
+          {/* {categoryArray?.length > 0 &&
             categoryArray?.map((item, i) => {
-              return (
-                <SwiperSlide key={i}>
-                  <CategoryCard data={item} />
-                </SwiperSlide>
-              );
-            })}
+              return ( */}
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+                <SwiperSlide ><CategoryCard  /></SwiperSlide>
+              {/* );
+            })} */}
         </Slider>
       </div>
     </section>

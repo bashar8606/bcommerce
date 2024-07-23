@@ -16,6 +16,7 @@ export const useCartWidget = () => {
     };
     setCart(updatedCart);
     if (data.isAuthenticated) {
+      // https://www.ikkxa.com/user/addToCart
       fetch('/api/cart', {
         method: 'POST',
         headers: {

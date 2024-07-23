@@ -10,3 +10,5 @@ export const config = {
   // Match only internationalized pathnames
   matcher: ['/', '/(ar|en)/:path*']
 };
+
+// export { auth as middleware } from "@/auth"
