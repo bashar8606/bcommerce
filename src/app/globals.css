@@ -101,6 +101,10 @@ html {
 .btn-blue:hover {
   @apply bg-blue-700 scale-105;
 }
+
+.btn:disabled {
+  @apply bg-opacity-35 bg-black;
+}
 .btn-outline-secondary:hover {
   @apply bg-black text-white border border-black ;
 }

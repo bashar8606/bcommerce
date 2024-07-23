@@ -1,8 +1,8 @@
-
+import AddressWidget from "@/components/AddressWidget";
 export default function ManagePayment() {
-    return (
-        <main>
-           Manage address
-        </main>
-    )
+  return (
+    <main>
+      <AddressWidget />
+    </main>
+  );
 }

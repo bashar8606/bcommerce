@@ -1,7 +1,8 @@
-export default function ChangePayment() {
+import PasswordWidget from "@/components/PasswordWidget"
+export default function ChangePassword() {
     return (
         <main>
-            change password
+            <PasswordWidget/>
         </main>
     )
 }
