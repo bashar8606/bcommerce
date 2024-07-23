@@ -88,6 +88,9 @@ html {
 .btn-outline-light {
   @apply bg-transparent border border-zinc-300 ;
 }
+.btn-outline-secondary {
+  @apply bg-transparent border border-black ;
+}
 .btn-grad {
   @apply bg-gradient-to-r from-orange-300 to-red-300
 }
@@ -97,6 +100,9 @@ html {
 
 .btn-blue:hover {
   @apply bg-blue-700 scale-105;
+}
+.btn-outline-secondary:hover {
+  @apply bg-black text-white border border-black ;
 }
 
 .btn:focus {

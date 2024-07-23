@@ -7,6 +7,9 @@ export default function FilterSideBar() {
             <h2 className="text-md font-semibold">FILTERS</h2>
             <FilterPriceRange />
             <FilterCheckBox />
+            <FilterCheckBox />
+            <FilterCheckBox />
+            <FilterCheckBox />
         </div>
     )
 }

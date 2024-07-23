@@ -40,7 +40,7 @@ export default function Products() {
                                 <h2 className="text-xl font-semibold">Deals of the day</h2>
                             </div>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
+                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-4 px-4">
                             <div className="">
                                 <ProductCard />
                             </div>
@@ -48,6 +48,9 @@ export default function Products() {
                                 <ProductCard />
                             </div>
                             <div className="">
+                                <ProductCard />
+                            </div>
+                            <div className=" ">
                                 <ProductCard />
                             </div>
                             <div className=" ">

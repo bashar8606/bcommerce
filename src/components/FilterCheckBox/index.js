@@ -1,7 +1,7 @@
 import { Checkbox } from "../ui/checkbox";
 export default function FilterCheckBox() {
     return (
-        <div className="border-b  py-5">
+        <div className="border-b  pt-5 pb-3">
             <h2 className="text-base font-semibold mb-4">Categories</h2>
             <div className="flex items-center space-x-2 mb-[18px]">
                 <Checkbox id="terms" />

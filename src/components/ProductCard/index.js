@@ -12,12 +12,9 @@ export default function ProductCard({data}) {
                 <Image src={"/images/34.png"} className="object-cover" fill alt="sdfsdf" />
             </div>
             <div className='py-2'>
-                <h4 className='text-sm font-normal line-clamp-2 mb-1'>Pink Soft Sole Baby Trainers (Newborn-18mths)</h4>
-                <p className=' text-base font-semibold mb-1 '>140.76 SAR<span className='text-neutral-400 text-xs font-semibold line-through'>AED 8.00</span></p>
-                <p className=''>
-                    
-                </p>
-                <div className='pt-3'>
+                <h4 className='text-sm font-normal line-clamp-2 mb-2'>Pink Soft Sole Baby Trainers (Newborn-18mths)</h4>
+                <p className=' text-base font-semibold mb-1 '>140.76 SAR<span className='text-neutral-400 text-xs font-semibold line-through ml-1'>AED 8.00</span></p>
+                <div className='pt-4'>
                     <Link href={'#'} className='btn btn-outline-secondary'>Add to cart</Link>
                 </div>
             </div>
