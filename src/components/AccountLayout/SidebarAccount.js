@@ -1,7 +1,9 @@
+
 import Link from "next/link";
 import React from "react";
 
-export default function SidebarAccount({data}) {
+
+export default function SidebarAccount({data, pathname}) {
   return (
     <div>
       <div className="p-6 bg-white rounded border border-stone-200 ">
@@ -17,7 +19,7 @@ export default function SidebarAccount({data}) {
             <div className="mb-6">
                 {data?.map((item, i)=>{
                     return(
-                        <Link key={i} href="" className={`${item?.isActive?`bg-black text-white border-transparent`:`text-black border-gray-200 `} px-2 py-4  border-b rounded font-medium  gap-1.5 flex`}>{item?.title}</Link>
+                        <Link key={i} href={`/en/${item?.url}`} className={`${item?.url===pathname?`bg-black text-white border-transparent`:`text-black border-gray-200 `} px-2 py-4  border-b rounded font-medium  gap-1.5 flex`}>{item?.title}</Link>
                     )
                 })}
             </div>

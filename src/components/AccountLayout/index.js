@@ -1,6 +1,15 @@
 "use client";
 import { usePathname } from "next/navigation";
 import SidebarAccount from "./SidebarAccount";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+
 
 const AccountLayout = ({ children }) => {
   const pathname = usePathname();
@@ -8,16 +17,26 @@ const AccountLayout = ({ children }) => {
   return (
     <main className={`min-h-screen pt-20 bg-stone-50`}>
       <div className="container ">
-      <div class=" w-full max-w-5xl mx-auto ">
-        <div className="flex space-x-5 col-span-12">
-          <div className="flex-col-auto w-[280px]">
-            <SidebarAccount data={links}/>
-          </div>
-          <div className="flex-1 flex flex-col w-full">
-          {children}
+        <Breadcrumb className="mb-8">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          
+            <BreadcrumbItem>
+              <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <div class=" w-full max-w-5xl mx-auto ">
+          <div className="flex space-x-5 col-span-12">
+            <div className="flex-col-auto w-[280px]">
+              <SidebarAccount path={pathname} data={links} />
+            </div>
+            <div className="flex-1 flex flex-col w-full">{children}</div>
           </div>
         </div>
-      </div>
       </div>
     </main>
   );
@@ -30,7 +49,7 @@ const links = [
     url: "/profile",
     title: "Profile",
     title_sm: "Profile",
-    isActive:true,
+    isActive: true,
     icon: {
       url: "/assets/images/icons/icon-dl-profile.svg",
       alt: "profile icon",
