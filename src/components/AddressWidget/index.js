@@ -9,6 +9,7 @@ export default function AddressWidget() {
         <h3 className=" text-black text-lg font-semibold mb-5 leading-relaxed">Addresses </h3>
 
        <AddressItem/>
+       <AddressItem/>
       </div>
   );
 }

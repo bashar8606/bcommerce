@@ -1,7 +1,9 @@
+import OrdersWidget from "@/components/OrdersWidget";
+
 export default function OrderPage() {
     return (
         <main>
-            Orders
+            <OrdersWidget/>
         </main>
     )
 }
