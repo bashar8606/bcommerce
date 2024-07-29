@@ -33,8 +33,10 @@ export default function ProductThumbSlider({ data }) {
                 <div className="aspect-[490/625] w-full relative">
                   <Image
                     src={item}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw"
                     fill
                     className="object-cover"
+                    priority
                     alt="logo"
                   />
                 </div>
@@ -45,12 +47,13 @@ export default function ProductThumbSlider({ data }) {
         </Slider>
       </div>
       <Slider className={""} customSettings={customSettings2}>
-        {data?.small?.map((item, i) => {
+        {data?.large?.map((item, i) => {
           return (
             <SwiperSlide key={i}>
               <div className="aspect-[490/625] w-full relative">
                 <Image
                   src={item}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 15vw"
                   fill
                   className="object-cover"
                   alt="logo"
