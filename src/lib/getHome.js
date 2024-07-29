@@ -1,4 +1,4 @@
-import { HOME } from "@/constants/apiRoutes";
+import { FILTER, HOME } from "@/constants/apiRoutes";
 import strapiFetch from "@/utils/strapiFetch";
 
 const options = {
@@ -28,4 +28,22 @@ export async function getHomeProducts() {
     };
     const data = await strapiFetch(url, urlParamsObject, options);
     return data;
+}
+
+
+export async function getFilter(slug) {
+    const url = `${FILTER}`;
+    const urlParamsObject = {
+        slug: slug,
+    };
+    const data = await strapiFetch(url, urlParamsObject, options);
+    if (data.status === "fulfilled") {
+        const result = data.result;
+        console.log(result);
+        return result;
+        // Do something with result
+      } else {
+        console.error("Error:");
+      }
+  
 }
