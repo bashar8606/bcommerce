@@ -42,7 +42,7 @@ export default function ProductDetail({ data }) {
         </Breadcrumb>
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-12 lg:col-span-4 ">
-            <ProductThumbSlider />
+            <ProductThumbSlider data={data?.product?.gallery} />
           </div>
           <div className="col-span-12 lg:col-span-5 lg:px-5">
             <h1 className=" text-stone-950 text-xl font-semibold mb-3">
@@ -67,7 +67,7 @@ export default function ProductDetail({ data }) {
                   return (
                     <Link key={i} href={`/en/products/${item?.slug}`} className="block col-span-3 lg:col-span-2">
                       <div className="aspect-[490/625] w-full relative" key={i}>
-                        <Image src={item?.thumbnail?.original_image} fill className="object-cover" alt="logo" />
+                        <Image src={item?.thumbnail?.image_190x230} fill className="object-cover" alt={item?.product_name}/>
                       </div>
                     </Link>
                   )

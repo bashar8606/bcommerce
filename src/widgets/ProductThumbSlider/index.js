@@ -3,7 +3,7 @@ import Image from "@/components/Image/image";
 import Slider from "@/components/Slider";
 import { SwiperSlide } from "swiper/react";
 
-export default function ProductThumbSlider() {
+export default function ProductThumbSlider({ data }) {
   const customSettings = {
     slidesPerView: 1,
     pagination: false,
@@ -27,40 +27,38 @@ export default function ProductThumbSlider() {
     <div className="">
       <div className="mb-4 relative">
         <Slider className={""} customSettings={customSettings}>
-          <SwiperSlide>
-            <div className="aspect-[490/625] w-full relative">
-              <Image
-               src={"/images/34.png"}
-                fill
-                className="object-cover"
-                alt="logo"
-              />
-            </div>
-          </SwiperSlide>
+          {data?.large?.map((item, i) => {
+            return (
+              <SwiperSlide key={i}>
+                <div className="aspect-[490/625] w-full relative">
+                  <Image
+                    src={item}
+                    fill
+                    className="object-cover"
+                    alt="logo"
+                  />
+                </div>
+              </SwiperSlide>
+            )
+          })}
+
         </Slider>
       </div>
       <Slider className={""} customSettings={customSettings2}>
-        <SwiperSlide>
-          <div className="aspect-[490/625] w-full relative">
-            <Image
-             src={"/images/34.png"}
-              fill
-              className="object-cover"
-              alt="logo"
-            />
-          </div>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <div className="aspect-[490/625] w-full relative">
-            <Image
-             src={"/images/34.png"}
-              fill
-              className="object-cover"
-              alt="logo"
-            />
-          </div>
-        </SwiperSlide>
+        {data?.small?.map((item, i) => {
+          return (
+            <SwiperSlide key={i}>
+              <div className="aspect-[490/625] w-full relative">
+                <Image
+                  src={item}
+                  fill
+                  className="object-cover"
+                  alt="logo"
+                />
+              </div>
+            </SwiperSlide>
+          )
+        })}
       </Slider>
     </div>
   );
