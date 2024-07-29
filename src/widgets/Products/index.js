@@ -18,7 +18,7 @@ import useProducts from "./useProducts";
 export default function Products({ slug }) {
   const { categories, isLoading, isError } = useCategories({ slug });
   const { products } = useProducts({ slug });
-  console.log(products, "categoriescategories");
+  console.log(products,"categoriescategories");
 
   return (
     <section className="">
@@ -28,12 +28,7 @@ export default function Products({ slug }) {
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/docs/components">
-                Components
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+          
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
@@ -43,7 +38,7 @@ export default function Products({ slug }) {
         <div className="flex">
           <div className="flex-col-auto w-[260px] border-e">
             {isLoading ? <div>Loading...</div> : ""}
-            <FilterSideBar />
+            <FilterSideBar catId={products?.page?.id} data={categories} />
           </div>
           <div className="flex-grow">
             <div className="grid grid-cols-2 mb-4 border-b px-4 py-3">
@@ -51,7 +46,7 @@ export default function Products({ slug }) {
                 <h2 className="text-xl font-semibold">Deals of the day</h2>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-4 px-4">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-4 px-4">
               {products?.products?.data?.map((product, index) => {
                 return (
                   <div className="" key={index}>

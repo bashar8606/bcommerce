@@ -4,7 +4,7 @@ import Slider from "@/components/Slider";
 import { SwiperSlide } from "swiper/react";
 
 export default function CategoriesSlider({ data }) {
-  const categoryArray = data?.components["top_categories-7"];
+  // const categoryArray = data?.components["top_categories-7"];
 
   const customSettings = {
     spaceBetween: 30,
@@ -22,34 +22,12 @@ export default function CategoriesSlider({ data }) {
       <div className="container">
         <h2 className="text-xl font-semibold mb-4">All Categories</h2>
         <Slider className={""} customSettings={customSettings}>
-          {/* {categoryArray?.length > 0 &&
-            categoryArray?.map((item, i) => {
-              return ( */}
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-                <SwiperSlide ><CategoryCard  /></SwiperSlide>
-              {/* );
-            })} */}
+          {data?.categories?.length > 0 &&
+            data?.categories?.map((item, i) => {
+              return (
+                <SwiperSlide key={i}><CategoryCard data={item}  /></SwiperSlide>
+               );
+            })}
         </Slider>
       </div>
     </section>

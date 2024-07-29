@@ -17,7 +17,6 @@ import EmiComponent from "@/components/EmiComponent";
 import Link from "next/link";
 import Image from "@/components/Image";
 
-
 export default function ProductDetail({ data }) {
   console.log(data, "asdasd");
   return (
@@ -29,11 +28,14 @@ export default function ProductDetail({ data }) {
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/docs/components">
+            <li className="inline-flex items-center gap-1.5">
+              <Link
+                className="transition-colors hover:text-foreground"
+                href="/en/categories/jalabiyas"
+              >
                 Jalabiyas
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+              </Link>
+            </li>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage> {data?.product?.product_name}</BreadcrumbPage>
@@ -60,32 +62,46 @@ export default function ProductDetail({ data }) {
                 140.76 SAR
               </p>
             </div>
-
+            {data?.product?.related?.length>0&&
             <div className="py-3 lg:py-4 border-b border-gray-200">
-              <div className="grid grid-cols-12 gap-4">
+              <div className="grid grid-cols-12 gap-2">
                 {data?.product?.related?.map((item, i) => {
                   return (
-                    <Link key={i} href={`/en/products/${item?.slug}`} className="block col-span-3 lg:col-span-2">
+                    <Link
+                      key={i}
+                      href={`/en/products/${item?.slug}`}
+                      className="block col-span-3 lg:col-span-2"
+                    >
                       <div className="aspect-[490/625] w-full relative" key={i}>
-                        <Image src={item?.thumbnail?.image_190x230} fill className="object-cover" alt={item?.product_name}/>
+                        <Image
+                          src={item?.thumbnail?.image_190x230}
+                          fill
+                          className="object-cover"
+                          alt={item?.product_name}
+                        />
                       </div>
                     </Link>
-                  )
+                  );
                 })}
               </div>
-            </div>
+            </div>}
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
               <div className="flex items-center gap-4">
                 <Counter />
-                <div className="text-orange-600 text-sm font-medium leading-tight">Only 2 left</div>
+                <div className="text-orange-600 text-sm font-medium leading-tight">
+                  Only 2 left
+                </div>
               </div>
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
-              <p className="text-stone-950 text-base font-semibold mb-3">Size: XL</p>
-              {data?.product?.attribute_values &&
-                <VariantCheckbox data={data?.product?.attribute_values} />}
+              <p className="text-stone-950 text-base font-semibold mb-3">
+                Size: XL
+              </p>
+              {data?.product?.attribute_values && (
+                <VariantCheckbox data={data?.product?.attribute_values} />
+              )}
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
@@ -141,7 +157,6 @@ export default function ProductDetail({ data }) {
           </div>
           <div className="col-span-12 lg:col-span-3 ">
             <div className="sticky top-24">
-
               <AddToCart />
               <BuyNow />
               <PaymetnIcons />

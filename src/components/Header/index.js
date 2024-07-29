@@ -22,7 +22,7 @@ export default function Header() {
     >
       <div className="shadow-sm bg-white z-50  relative">
         <div className="container mx-auto flex h-16 items-center  px-4 md:px-6">
-          <Link href="#" className="flex items-center" prefetch={false}>
+          <Link href="/" className="flex items-center" prefetch={false}>
             <div className="aspect-[126/52] w-[126px] relative me-3">
               <Image
                 src={"/images/logo.png"}
@@ -37,6 +37,7 @@ export default function Header() {
               return (
                 <Link
                   href="#"
+                  key={i}
                   className="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
                   prefetch={false}
                 >
