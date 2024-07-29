@@ -1,9 +1,9 @@
 import Products from "@/widgets/Products";
 
-export default function CategorySingle({ params: { slug } }) {
+export default async function CategorySingle({ params: { category } }) {
   return (
     <main className="min-h-screen pt-20">
-      <Products slug={slug} />
+      <Products slug={category} />
     </main>
   );
 }

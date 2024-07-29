@@ -6,6 +6,7 @@ import { FILTER } from '@/constants/apiRoutes';
 const fetcher = url => axios.get(url).then(res => res.data);
 
 const useCategories = ({slug}) => {
+  console.log(slug,"slugslugslugslug");
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}${FILTER}?${slug}`, fetcher);
 
   return {

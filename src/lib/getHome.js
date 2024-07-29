@@ -1,4 +1,4 @@
-import { FILTER, HOME } from "@/constants/apiRoutes";
+import { FILTER, HOME, SINGLE_PRODUCT } from "@/constants/apiRoutes";
 import strapiFetch from "@/utils/strapiFetch";
 
 const options = {
@@ -46,4 +46,11 @@ export async function getFilter(slug) {
         console.error("Error:");
       }
   
+}
+
+
+export async function getSingleProduct(slug) {
+    const url = `${SINGLE_PRODUCT}/${slug}`
+    const data = await strapiFetch(url, options);
+    return data;
 }

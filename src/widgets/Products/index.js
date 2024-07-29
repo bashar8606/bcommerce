@@ -12,11 +12,13 @@ import ProductCard from "@/components/ProductCard";
 import Image from "next/image";
 import FilterSideBar from "@/components/FilterSideBar";
 import useCategories from "./useCategories";
+import useProducts from "./useProducts";
 
 
-export default function Products({slug}) {
-    const { categories, isLoading, isError } = useCategories({slug});
-    console.log(categories,"categoriescategories");
+export default function Products({ slug }) {
+  const { categories, isLoading, isError } = useCategories({ slug });
+  const { products } = useProducts({ slug });
+  console.log(products, "categoriescategories");
 
   return (
     <section className="">
@@ -40,7 +42,7 @@ export default function Products({slug}) {
         </Breadcrumb>
         <div className="flex">
           <div className="flex-col-auto w-[260px] border-e">
-          {isLoading?<div>Loading...</div>:""}
+            {isLoading ? <div>Loading...</div> : ""}
             <FilterSideBar />
           </div>
           <div className="flex-grow">
@@ -50,21 +52,13 @@ export default function Products({slug}) {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-4 px-4">
-              <div className="">
-                <ProductCard />
-              </div>
-              <div className="">
-                <ProductCard />
-              </div>
-              <div className="">
-                <ProductCard />
-              </div>
-              <div className=" ">
-                <ProductCard />
-              </div>
-              <div className=" ">
-                <ProductCard />
-              </div>
+              {products?.products?.data?.map((product, index) => {
+                return (
+                  <div className="" key={index}>
+                    <ProductCard data={product}  />
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>

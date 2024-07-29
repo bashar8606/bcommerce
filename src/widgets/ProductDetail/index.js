@@ -6,7 +6,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import Image from "next/image";
 import ProductThumbSlider from "../ProductThumbSlider";
 import Counter from "@/components/Counter";
 import PaymetnIcons from "@/components/PaymentIcons";
@@ -15,9 +14,12 @@ import AddToCart from "@/components/AddToCart";
 import { VariantCheckbox } from "@/components/variant-checkbox";
 import { IoCardOutline } from "react-icons/io5";
 import EmiComponent from "@/components/EmiComponent";
+import Link from "next/link";
+import Image from "@/components/Image";
 
 
-export default function ProductDetail() {
+export default function ProductDetail({ data }) {
+  console.log(data, "asdasd");
   return (
     <section className="">
       <div className="container">
@@ -29,12 +31,12 @@ export default function ProductDetail() {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink href="/docs/components">
-                Components
+                Jalabiyas
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+              <BreadcrumbPage> {data?.product?.product_name}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -44,7 +46,7 @@ export default function ProductDetail() {
           </div>
           <div className="col-span-12 lg:col-span-5 lg:px-5">
             <h1 className=" text-stone-950 text-xl font-semibold mb-3">
-              Lace elegance pintex abaya Lace elegance pintex abaya Printed XL
+              {data?.product?.language_product?.name}
             </h1>
             <div className="text-sm">Model Number : IE3021</div>
             <div className="py-4 border-b border-gray-200">
@@ -61,16 +63,15 @@ export default function ProductDetail() {
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
               <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-3 lg:col-span-2">
-                  <div className="aspect-[490/625] w-full relative">
-                    <Image
-                      src={"/images/34.png"}
-                      fill
-                      className="object-cover"
-                      alt="logo"
-                    />
-                  </div>
-                </div>
+                {data?.product?.related?.map((item, i) => {
+                  return (
+                    <Link key={i} href={`/en/products/${item?.slug}`} className="block col-span-3 lg:col-span-2">
+                      <div className="aspect-[490/625] w-full relative" key={i}>
+                        <Image src={item?.thumbnail?.original_image} fill className="object-cover" alt="logo" />
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
 
@@ -83,8 +84,8 @@ export default function ProductDetail() {
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
               <p className="text-stone-950 text-base font-semibold mb-3">Size: XL</p>
-
-              <VariantCheckbox />
+              {data?.product?.attribute_values &&
+                <VariantCheckbox data={data?.product?.attribute_values} />}
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
@@ -145,8 +146,8 @@ export default function ProductDetail() {
               <BuyNow />
               <PaymetnIcons />
 
-              <EmiComponent type="tabby"/>
-              <EmiComponent type="tamara"/>
+              <EmiComponent type="tabby" />
+              <EmiComponent type="tamara" />
 
               <div className="justify-start items-center gap-3 inline-flex">
                 <div className="h-9 w-9 border-solid-neutral-200  rounded-full border flex items-center justify-center">
