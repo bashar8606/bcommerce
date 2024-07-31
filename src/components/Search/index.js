@@ -8,9 +8,9 @@ export default function Search() {
       <Input
         type="text"
         placeholder="what are you looking for?"
-        className="pl-4 pr-10"
+        className="pl-4 pr-10 bg-stone-50  border border-gray-200 placeholder:text-neutral-400"
       />
-      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-400">
         <BiSearch/>
         {/* <SearchIcon className="h-5 w-5 text-muted-foreground" /> */}
       </div>

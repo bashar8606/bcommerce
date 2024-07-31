@@ -8,7 +8,7 @@ export default async function Home() {
   const products = await getHomeProducts()
   // console.log(categories,"categories");
   return (
-    <main className="min-h-screen pt-[70px]">
+    <main className="min-h-screen pt-[58px] lg:pt-[70px]">
       <BannerSlider/>
       {/* <CategoriesSlider data={categories}/> */}
       <ProductsSlider data={products?.components["flash_products-4"]} flashSale={true} />

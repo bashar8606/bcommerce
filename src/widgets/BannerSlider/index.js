@@ -19,11 +19,11 @@ export default function BannerSlider({}) {
     <section className={`overflow-hidden bg-slate-50`}>
       <Slider className={""} customSettings={customSettings}>
         <SwiperSlide>
-        <div className="aspect-[1728/500] w-full relative">
+        <div className="aspect-[395/345] lg:aspect-[1728/500] w-full relative">
               <Image
                 src={"/images/b1.png"}
                 fill
-                className="object-fit-cover"
+                className="object-cover"
                 alt="logo"
               />
             </div>
