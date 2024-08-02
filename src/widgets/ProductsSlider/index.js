@@ -22,31 +22,6 @@ export default function ProductsSlider({ flashSale, data }) {
                     <div className=""><ProductCard  /></div>
                     <div className=""><ProductCard  /></div>
                     <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
-                    <div className=""><ProductCard  /></div>
                 </div>
             </div>
         </section>

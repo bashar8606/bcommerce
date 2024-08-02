@@ -1,6 +1,8 @@
 import { getCategories, getHomeProducts } from "@/lib/getHome";
 import BannerSlider from "@/widgets/BannerSlider";
+import BudgetWidget from "@/widgets/BudgetWidget";
 import CategoriesSlider from "@/widgets/CategoriesSlider";
+import OfferBanner from "@/widgets/OfferBanner";
 import ProductsSlider from "@/widgets/ProductsSlider";
 
 export default async function Home() {
@@ -12,9 +14,9 @@ export default async function Home() {
       <BannerSlider/>
       {/* <CategoriesSlider data={categories}/> */}
       <ProductsSlider data={products?.components["flash_products-4"]} flashSale={true} />
+      <OfferBanner/>
       <ProductsSlider />
-      <ProductsSlider />
-      <ProductsSlider />
+      <BudgetWidget/>
     </main>
   );
 }
