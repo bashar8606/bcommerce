@@ -54,3 +54,15 @@ export async function getSingleProduct(slug) {
     const data = await strapiFetch(url, options);
     return data;
 }
+
+
+
+export async function getSearchProducts(id, keywords, lang) {
+    const url = new URL(`https://api.themoviedb.org/3/discover/movie`);
+    id && url.searchParams.set('with_genres', id)
+    keywords && url.searchParams.set('with_keywords', keywords)
+    lang&&url.searchParams.set('language', lang)
+
+    const data = await fetchMovie(url);
+    return data;
+}
