@@ -62,11 +62,13 @@ const CartWidget = () => {
               </h2>
         <div className="flex flex-wrap -mx-4">
           <div className="flex-col-auto w-100 lg:w-[75%] px-4">
-            
-            <CartItem  />
-            <CartItem />
-            <CartItem  />
-
+{console.log(cart,"cartcartcartcart")}
+            {cart?.items?.map((item, i)=>{
+              return(
+                <CartItem data={item}  key={i} />
+              )
+            })}
+   
 
             {/* {cart.items.map((item) => (
               <CartItem key={item.id} />

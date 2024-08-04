@@ -2,13 +2,14 @@ import Counter from "../Counter";
 import Image from "../Image/image";
 
 export default function CartItem({ data }) {
+    console.log(data,"datadatadatadatadatadata");
   return (
     <>
       <div className="flex  space-x-3 mb-4 p-4 rounded border border-neutral-200">
         <div className="flex-col-auto w-auto">
           <div className="aspect-[490/625] w-[90px]  relative">
             <Image
-              src={"/images/34.png"}
+              src={data?.image_190x230}
               fill
               className="object-cover"
               alt="logo"
@@ -20,7 +21,7 @@ export default function CartItem({ data }) {
             <div className="flex-1 flex flex-col justify-between">
               <div>
                 <h3 className=" text-stone-950 text-sm font-normal  leading-tight">
-                  Floral Folds with RED color Modest Dress
+                  {data?.product_name}
                   <span className="px-1 py-1 bg-red-50 rounded inline-block text-red-500 text-xs font-bold">
                     10% Off
                   </span>

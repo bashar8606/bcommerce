@@ -1,21 +1,25 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from '../Image/image'
+import { useCartWidget } from '@/widgets/CartWidget/useCartWidget'
 
 export default function ProductCard({data}) {
+    const {addItem} =useCartWidget()
+
+    const offerPerc = Math.round((data?.discount_percentage/data?.price)*100)
     return (
         <div>
             <Link href={`/en/products/${data?.slug}`} className='aspect-portrait block relative bg-slate-50 overflow-hidden rounded-sm'>
                 <div className='inline-block absolute top-2 font-semibold start-2 bg-red-600 text-white rounded-sm text-[10px] z-10 px-2 py-1'>BEST SELLING</div>
                 <div className='w-[32.22px] h-[32.22px] border-gray-50 flex-col justify-center items-center  inline-flex absolute top-2 font-semibold end-2 bg-white text-white rounded-full z-10 px-2 py-1'></div>
-                <span className='text-xs absolute bottom-0 left-0 font-semibold  px-2 py-[2px] text-[#F2432D] bg-[#FCEFEE] inline-block z-10'>48% Off</span>
+                <span className='text-xs absolute bottom-0 left-0 font-semibold  px-2 py-[2px] text-[#F2432D] bg-[#FCEFEE] inline-block z-10'>{data?.special_discount_type} {offerPerc}% Off</span>
                 <Image src={data?.image_190x230} className="object-cover" fill alt="sdfsdf" />
             </Link>
             <div className='py-2'>
                 <h4 className='text-sm font-normal line-clamp-2 mb-2'>{data?.product_name}</h4>
-                <p className=' text-base font-semibold mb-1 '>{data?.price} SAR<span className='text-neutral-400 text-xs font-semibold line-through ml-1'>AED 8.00</span></p>
+                <p className=' text-base font-semibold mb-1 '>{data?.discount_percentage} SAR<span className='text-neutral-400 text-xs font-semibold line-through ml-1'>SAR {data?.price}</span></p>
                 <div className='pt-4'>
-                    <Link href={'#'} className='btn btn-outline-secondary'>Add to cart</Link>
+                    <button onClick={()=>addItem(data)} className='btn btn-outline-secondary'>Add to Bag</button>
                 </div>
             </div>
         </div>

@@ -1,12 +1,16 @@
 import useSWR from 'swr';
 import { useRecoilState } from 'recoil';
 import { cartState } from '@/recoil/atoms';
+import { useEffect } from 'react';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export const useCartWidget = () => {
   const { data, error } = useSWR('/api/cart', fetcher);
   const [cart, setCart] = useRecoilState(cartState);
+  
+
+  const isAuthenticated = false
 
   const addItem = (item) => {
     const updatedCart = {
@@ -14,8 +18,10 @@ export const useCartWidget = () => {
       items: [...cart.items, item],
       total: cart.total + item.price,
     };
+    console.log(updatedCart, "updatedCartupdatedCartupdatedCart");
+    console.log(cartState,cart,"updatedCartupdatedCartupdatedCart");
     setCart(updatedCart);
-    if (data.isAuthenticated) {
+    if (isAuthenticated) {
       // https://www.ikkxa.com/user/addToCart
       fetch('/api/cart', {
         method: 'POST',
@@ -49,6 +55,17 @@ export const useCartWidget = () => {
       localStorage.setItem('cart', JSON.stringify(updatedCart));
     }
   };
+
+
+  useEffect(() => {
+    // Sync cart from localStorage for guest users
+    if (!isAuthenticated) {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        setCart(JSON.parse(savedCart));
+      }
+    }
+  }, [isAuthenticated, setCart]);
 
   return {
     cart: cart,

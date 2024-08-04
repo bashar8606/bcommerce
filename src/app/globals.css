@@ -115,6 +115,22 @@ html {
   @apply outline-none ring-2 ring-blue-500 ring-opacity-50;
 }
 
+.range-slider {
+  @apply w-full h-2 bg-gray-200 rounded-lg cursor-pointer;
+}
+
+.range-slider-track {
+  @apply bg-red-500 h-2 rounded-lg;
+}
+
+.range-slider-thumb {
+  @apply w-2 h-2 bg-blue-500 rounded-full cursor-pointer;
+}
+
+.range-slider-thumb-active {
+  @apply w-4 h-4 bg-blue-700 rounded-full cursor-pointer;
+}
+
 @layer base {
   * {
     @apply border-border;

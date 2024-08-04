@@ -2,12 +2,14 @@
 import FilterCheckBox from "../FilterCheckBox";
 import FilterPriceRange from "../FilterPriceRange";
 
-export default function FilterSideBar({ data, catId }) {
+export default function FilterSideBar({ data, catId, handleFilterChange, filters, handlePriceChange }) {
   console.log(data, "asdasdad");
+  
   return (
     <div className="">
-      <h2 className="text-md font-semibold">FILTERS {catId}</h2>
-      <FilterPriceRange />
+      <h2 className="text-md font-semibold">FILTERS</h2>
+      
+      <FilterPriceRange filter={filters}  handleFilterChange={handleFilterChange} handlePriceChange={handlePriceChange} />
       {data?.attributes?.map((item, i) => {
         return <FilterCheckBox key={i} data={item} />;
       })}
