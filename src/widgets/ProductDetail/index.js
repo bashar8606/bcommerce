@@ -50,7 +50,7 @@ export default function ProductDetail({ data }) {
             <h1 className=" text-stone-950 text-xl font-semibold mb-3">
               {data?.product?.language_product?.name}
             </h1>
-            <div className="text-sm">Model Number : IE3021</div>
+            <div className="text-sm">SKU : IE3021</div>
             <div className="py-4 border-b border-gray-200">
               <p className="text-xl font-bold mb-2">
                 73.35 SAR
@@ -157,7 +157,7 @@ export default function ProductDetail({ data }) {
           </div>
           <div className="col-span-12 lg:col-span-3 ">
             <div className="sticky top-24">
-              <AddToCart />
+              <AddToCart data={data} />
               <BuyNow />
               <PaymetnIcons />
 
