@@ -42,10 +42,19 @@ export function LangSwitcher() {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem>
-            d<span>United arab emirates</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            d<span>Saudi arabia</span>
+            <button className="w-full relative flex items-center ">
+              <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
+                <img
+                  className="w-[22.30px] h-[16.87px]"
+                  src={"/images/saudi.png"}
+                />
+              </div>
+              <div className=" text-black text-sm font-medium ps-3">Saudi</div>
+
+              <div className="w-4 h-4 rounded-full border border-orange-600 relative ml-auto">
+                <div className="w-full h-full top-0 left-0 absolute bg-orange-600 rounded-full scale-75" />
+              </div>
+            </button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -87,7 +96,7 @@ export function LangSwitcher() {
                     <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
                       <img
                         className="w-[22.30px] h-[16.87px]"
-                        src="https://via.placeholder.com/22x17"
+                        src={"/images/saudi.png"}
                       />
                     </div>
                     <div className=" text-black text-sm font-medium ps-3">
@@ -103,7 +112,7 @@ export function LangSwitcher() {
                     <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
                       <img
                         className="w-[22.30px] h-[16.87px]"
-                        src="https://via.placeholder.com/22x17"
+                        src={"/images/saudi.png"}
                       />
                     </div>
                     <div className=" text-black text-sm font-medium ps-3">
@@ -119,7 +128,7 @@ export function LangSwitcher() {
                     <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
                       <img
                         className="w-[22.30px] h-[16.87px]"
-                        src="https://via.placeholder.com/22x17"
+                        src={"/images/saudi.png"}
                       />
                     </div>
                     <div className=" text-black text-sm font-medium ps-3">

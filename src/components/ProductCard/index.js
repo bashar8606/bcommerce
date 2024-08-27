@@ -3,6 +3,7 @@ import React from "react";
 import Image from "../Image/image";
 import { useCartWidget } from "@/widgets/CartWidget/useCartWidget";
 import { GoHeart, GoHeartFill } from "react-icons/go";
+import AddToCart from "../AddToCart";
 
 export default function ProductCard({ data }) {
   const { addItem } = useCartWidget();
@@ -40,12 +41,7 @@ export default function ProductCard({ data }) {
           </span>
         </p>
         <div className="pt-4">
-          <button
-            onClick={() => addItem(data)}
-            className="btn btn-outline-secondary"
-          >
-            Add to Bag
-          </button>
+         <AddToCart data={data}/>
         </div>
       </div>
     </div>
