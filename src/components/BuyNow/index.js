@@ -34,13 +34,13 @@ export default function BuyNow() {
             </div>
           </div>
           <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 lg:col-span-8 ">
+            <div class="col-span-12 lg:col-span-7 ">
               <p className=" text-stone-950 text-base font-semibold ">
                 Shipping address{" "}
               </p>
               <div></div>
             </div>
-            <div class="col-span-12 lg:col-span-4 ">
+            <div class="col-span-12 lg:col-span-5 ">
               <OrderSummary/>
             </div>
           </div>

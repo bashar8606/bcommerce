@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function Counter() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const increment = () => {
     setCount(count + 1);
   };
@@ -87,3 +87,4 @@ function XIcon(props) {
     </svg>
   );
 }
+
