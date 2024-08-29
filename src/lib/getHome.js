@@ -23,9 +23,7 @@ export async function getCategories() {
 
 export async function getHomeProducts() {
     const url = `${HOME}`;
-    const urlParamsObject = {
-        page: 2,
-    };
+    const urlParamsObject = null
     const data = await strapiFetch(url, urlParamsObject, options);
     return data;
 }

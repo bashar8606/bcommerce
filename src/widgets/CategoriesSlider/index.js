@@ -50,8 +50,8 @@ export default function CategoriesSlider({ data }) {
       <div className="container">
         <h2 className="text-[18px] lg:text-xl font-semibold mb-4">All Categories</h2>
         <Slider className={""} customSettings={customSettings} >
-          {datas.length > 0 &&
-            datas.map((item, i) => {
+          {data.length > 0 &&
+            data.map((item, i) => {
               return (
                 <SwiperSlide key={i}><CategoryCard data={item}  /></SwiperSlide>
                );
@@ -61,6 +61,3 @@ export default function CategoriesSlider({ data }) {
     </section>
   );
 }
-
-
-const datas =[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]

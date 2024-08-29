@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function PaymetnIcons() {
   return (
-    <div className="justify-start items-start gap-1 inline-flex mb-5">
+    <div className="justify-start items-start gap-1 inline-flex">
       {payments?.map((item, i) => {
         return (
           <div

@@ -1,14 +1,16 @@
+"use client"
 import Block from "./block";
+
 
 const WidgetBlocks = ({
   widgets = [],
-  slug,
+  // slug,
 }) => {
-  const child = widgets.map((widget) => (
+  const child = widgets.map((widget, i) => (
     <Block
-      key={widget.id}
+      key={i}
       widget={widget}
-      slug={slug}
+      // slug={slug}
     />
   ));
   return child;
