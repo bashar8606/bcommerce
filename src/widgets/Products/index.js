@@ -17,10 +17,12 @@ import CategoryInnerSlider from "./CategoryInnerSlider";
 import LoadMoreTrigger from "@/components/LoadmoreTrigger";
 import { BsSliders } from "react-icons/bs";
 import { BsSortDown } from "react-icons/bs";
+import MobileFilter from "./MobileFiter";
 
 export default function Products({ slug }) {
   const { categories, isLoading, isError } = useCategories({ slug });
-  const { products, filters, handleFilterChange, handlePriceChange, loadMore } = useProducts({ slug });
+  const { products, filters, handleFilterChange, handlePriceChange, loadMore } =
+    useProducts({ slug });
   console.log(products, "categoriescategories");
 
   return (
@@ -57,28 +59,22 @@ export default function Products({ slug }) {
                   {slug} {products?.products?.total}
                 </h2>
               </div>
-              <div className="fixed bg-white bottom-0 left-0 w-full z-50 border-b py-1" >
+              <div className="fixed bg-white bottom-0 left-0 w-full z-50 border-b py-1">
                 <div className="grid grid-cols-2">
                   <div>
-                  <button className="w-full text-center text-sm font-medium py-2 inline-flex items-center justify-center border-e border-[#e4e4e4]">
-                    <span className="inline-block mr-3 text-base "><BsSliders /></span>
-                     Filter </button>
+                    <MobileFilter />
                   </div>
                   <div>
-                  <div>
-                  <button className="w-full text-center text-sm font-medium py-2 inline-flex items-center justify-center">
-                    <span className="inline-block mr-3  text-base">
-              
-              
-                    <BsSortDown />
-                    </span>
-                    
-                     Sort by </button>
-                  </div>
+                    <div>
+                      <button className="w-full text-center text-sm font-medium py-2 inline-flex items-center justify-center">
+                        <span className="inline-block mr-3  text-base">
+                          <BsSortDown />
+                        </span>
+                        Sort by{" "}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              
-
               </div>
               <div className="hidden lg:block">
                 <select

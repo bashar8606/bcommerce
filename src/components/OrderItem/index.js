@@ -1,10 +1,11 @@
 import Counter from "../Counter";
 import Image from "../Image/image";
+import Link from "../Link";
 
 export default function OrderItem({ data }) {
   return (
     <>
-      <div className="mb-4 p-4 rounded border border-neutral-200">
+      <button  className="block w-full mb-4 p-4 rounded border border-neutral-200">
         <div className="justify-between items-center flex w-full flex-1 mb-4">
           <span className="px-2 py-1 bg-zinc-100 rounded-sm text-black text-xs font-medium inline-block">
             ORDER ID: #785489876
@@ -47,7 +48,7 @@ export default function OrderItem({ data }) {
             </div>
           </div>
         </div>
-      </div>
+      </button>
       {/* <div className="p-4 rounded border border-neutral-200">
         <div className="grid grid-cols-12 gap-4">
           <div className="grid-flow-col auto-cols-auto">

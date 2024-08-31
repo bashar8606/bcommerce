@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import LinkNext from "next/link";
-import { checkLocale } from "@/hooks/checkLocale";
+import { checkIsBaseUrlIncludes } from "@/hooks/checkIsBaseUrlIncludes";
 
 const Link= (props, ref) => {
   const { href, ...rest } = props;
@@ -13,7 +13,7 @@ const Link= (props, ref) => {
 
   return (
     <LinkNext
-      href={checkLocale(href)}
+      href={checkIsBaseUrlIncludes(href)}
       {...rest}
       ref={ref}
     />

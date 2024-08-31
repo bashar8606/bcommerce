@@ -17,8 +17,11 @@ export default function BudgetWidget({ data }) {
                 slidesPerView: 3,
             },
             992: {
-                slidesPerView: 5,
+                slidesPerView: 4,
             },
+            1400:{
+                slidesPerView: 5,
+            }
         },
         navigation: {
             prevEl: `.swiper-button-prev`,
