@@ -6,9 +6,14 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'test.ikkxa.com',
                 port: '',
+            },{
+                protocol: 'https',
+                hostname: 'www.ikkxa.com',
+                port: '',
             },
+            
         ],
-        formats: ['image/avif', 'image/webp'],
+        formats: ['image/webp'],
     },
 };
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { AddressModal } from "../AddressModal";
+
 export default function AddressItem() {
   return (
     <div className="p-6 rounded border border-gray-200 flex space-x-3 mb-4">
@@ -30,7 +32,8 @@ export default function AddressItem() {
             <button className="btn btn-outline-secondary btn-sm me-3">
               Remove
             </button>
-            <button className="btn btn-outline-secondary btn-sm">Edit</button>
+            <AddressModal/>
+           
           </div>
           <div className="text-black text-sm font-normal">Default address</div>
         </div>
