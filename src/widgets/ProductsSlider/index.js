@@ -17,7 +17,7 @@ export default function ProductsSlider({ flashSale, data }) {
         slidesPerView: 3,
       },
       992: {
-        slidesPerView: 5,
+        slidesPerView: 6,
       },
     },
     navigation: {
@@ -34,16 +34,20 @@ export default function ProductsSlider({ flashSale, data }) {
           </div>
         </div>
 
-        {/* <Slider className={""} customSettings={customSettings}>
-          {data?.map((item, i) => {
-            return (
-              <SwiperSlide key={i}>
-                {" "}
-                <ProductCard data={item} />{" "}
-              </SwiperSlide>
-            );
-          })}
-        </Slider> */}
+        <Slider className={""} customSettings={customSettings}>
+          {Array.isArray(data) ? (
+            data?.map((item, i) => {
+              return (
+                <SwiperSlide key={i}>
+                  {" "}
+                  <ProductCard data={item} />{" "}
+                </SwiperSlide>
+              );
+            })
+          ) : (
+            <div>No items available</div>
+          )}
+        </Slider>
       </div>
     </section>
   );

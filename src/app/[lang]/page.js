@@ -20,7 +20,7 @@ export default async function Home() {
       <ProductsSlider />
       <BudgetWidget/> */}
       <WidgetBlocks widgets={products?.results?.components}/>
-      <OfferBanner/>
+      {/* <OfferBanner/> */}
       <BudgetWidget/>
 
     </main>
