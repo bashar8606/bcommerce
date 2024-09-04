@@ -21,9 +21,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { LoginModal } from "../LoginModal";
+import {useTranslations} from 'next-intl'
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
+  const t = useTranslations('Index')
 
   const session = useSession();
   console.log(session, "sessionsession");
@@ -80,7 +82,8 @@ export default function Header() {
                             href="/"
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
-                            Jalabiyas
+                            {/* Jalabiyas */}
+                            {t('title')}
                           </Link>
                         </li>
                         <li>
@@ -243,7 +246,8 @@ export default function Header() {
                   <BsBag />
                 </span>
                 <span className="block text-xs leading-none  font-semibold">
-                  Bag
+                  {/* Bag */}
+                  {t('title')}
                 </span>
               </Link>
               <LoginModal />
