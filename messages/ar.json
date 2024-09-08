@@ -1,5 +1,31 @@
 {
-    "Index": {
-      "title": "مرحبا بالعالم sfd"
-    }
+  "Index": {
+    "title": "مرحبا بالعالم!",
+    "GRABYOUR": "احصل على",
+    "ITEMNOW": "العنصر الآن",
+    "SIGNUP": "التسجيل",
+    "LOGIN": "تسجيل الدخول",
+    "HiUsername": "مرحبًا، اسم المستخدم",
+    "Abayas": "عبايات",
+    "Kids": "أطفال",
+    "ContactUs": "اتصل بنا",
+    "Stores": "المتاجر",
+    "Orders": "الطلبات",
+    "Address": "العنوان",
+    "DownloadIKKXAAppNow": "قم بتنزيل تطبيق IKKXA الآن",
+    "GetExclusiveDeals": "احصل على عروض حصرية",
+    "Wishlist": "قائمة الأمنيات",
+    "Bag": "الحقيبة",
+    "Jalabiyas": "جلابيات",
+    "NewBorn": "مواليد جدد",
+    "Lingerie": "لانجري",
+    "searchPlaceHolder": "ماذا تبحث عنه؟",
+    "WelcomeBack": "مرحبا بعودتك",
+    "signInHeader": "سجل الدخول إلى حسابك",
+    "Name": "الاسم",
+    "Username": "اسم المستخدم",
+    "LogInWithGoogle": "تسجيل الدخول باستخدام Google",
+    "DontHaveAnAccount": "لا تملك حسابًا؟",
+    "SignUp": "التسجيل"
   }
+}

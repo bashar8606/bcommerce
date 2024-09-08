@@ -1,5 +1,31 @@
 {
     "Index": {
-      "title": "Hello world!"
+      "title": "Hello world!",
+      "GRABYOUR":"GRAB YOUR",
+      "ITEMNOW":"ITEM NOW",
+      "SIGNUP":"SIGN UP",
+      "LOGIN":"LOGIN",
+      "HiUsername":"Hi Username",
+      "Abayas":"Abayas",
+      "Kids":"Kids",
+      "ContactUs":"Contact Us",
+      "Stores":"Stores",
+      "Orders":"Orders",
+      "Address":"Address",
+      "DownloadIKKXAAppNow":"Download IKKXA app now",
+      "GetExclusiveDeals":"Get exclusive deals",
+      "Wishlist":"Wishlist",
+      "Bag":"Bag",
+      "Jalabiyas":"Jalabiyas",
+      "NewBorn":"New born",
+      "Lingerie":"Lingerie",
+      "searchPlaceHolder":"what are you looking for?",
+      "WelcomeBack":"Welcome back",
+      "signInHeader":"Sign in to your account",
+      "Name":"Name",
+      "Username":"Username",
+      "LogInWithGoogle":"Log in with Google",
+      "DontHaveAnAccount":"Don’t have an account? ",
+      "SignUp":"Sign up"
     }
   }

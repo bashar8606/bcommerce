@@ -53,12 +53,12 @@ export default function Header() {
                       />
                       <div className="relative w-[50%] ml-auto">
                         <div className=" text-neutral-950 text-lg font-bold uppercase leading-[18px] mb-2">
-                          GRAB YOUR
+                          {t('GRABYOUR')}
                           <br />
-                          ITEM NOW
+                          {t('ITEMNOW')}
                         </div>
                         <div className=" text-orange-400 text-xs font-medium uppercase leading-3">
-                          SIGN UP/LOGIN
+                          {t('SIGNUP')}/{t('LOGIN')}
                         </div>
                       </div>
                     </div>
@@ -67,10 +67,10 @@ export default function Header() {
                       <div className="w-9 h-9 bg-zinc-100 rounded-[110px] justify-center items-center gap-2.5 flex" />
                       <div className="relative">
                         <div className=" text-neutral-950 text-base font-normal  capitalize leading-none tracking-tight mb-1">
-                          Hi Username
+                          {t('HiUsername')}
                         </div>
                         <div className=" text-orange-400 text-xs font-medium capitalize leading-3">
-                          View Profile
+                          {t('ViewProfile')}
                         </div>
                       </div>
                     </div>
@@ -83,7 +83,7 @@ export default function Header() {
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
                             {/* Jalabiyas */}
-                            {t('title')}
+                            {t('Jalabiyas')}
                           </Link>
                         </li>
                         <li>
@@ -91,7 +91,7 @@ export default function Header() {
                             href="/"
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
-                            Abayas
+                            {t('Abayas')}
                           </Link>
                         </li>
                         <li>
@@ -99,7 +99,7 @@ export default function Header() {
                             href="/"
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
-                            Kids
+                            {t('Kids')}
                           </Link>
                         </li>
                       </ul>
@@ -109,7 +109,7 @@ export default function Header() {
                             href="/"
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
-                            Contact Us
+                            {t('ContactUs')}
                           </Link>
                         </li>
 
@@ -118,7 +118,7 @@ export default function Header() {
                             href="/"
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
-                            Stores
+                            {t('Stores')}
                           </Link>
                         </li>
                         <li>
@@ -126,7 +126,7 @@ export default function Header() {
                             href="/"
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
-                            Orders
+                            {t('Orders')}
                           </Link>
                         </li>
                         <li>
@@ -134,7 +134,7 @@ export default function Header() {
                             href="/"
                             className="flex justify-between py-2 text-zinc-800 text-sm font-semibold "
                           >
-                            Address
+                            {t('Address')}
                           </Link>
                         </li>
                       </ul>
@@ -152,10 +152,10 @@ export default function Header() {
                           </div>
                           <div className="grow shrink basis-0 py-2 flex-col justify-center items-start gap-[3px] inline-flex">
                             <div className="text-zinc-800 text-xs font-semibold ">
-                              Download IKKXA app now{" "}
+                              {t('DownloadIKKXAAppNow')}{" "}
                             </div>
                             <div className="text-black/40 text-[10px] font-normal ">
-                              Get exclusive deals
+                              {t('GetExclusiveDeals')}
                             </div>
                           </div>
                         </div>
@@ -212,7 +212,7 @@ export default function Header() {
                     className="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
                     prefetch={false}
                   >
-                    {link?.title}
+                    {t(`${link?.title}`)}
                   </Link>
                 );
               })}
@@ -231,7 +231,7 @@ export default function Header() {
                   <BsHeart />{" "}
                 </span>
                 <span className="block text-xs leading-none font-semibold">
-                  Wishlist
+                  {t('Wishlist')}
                 </span>
               </Link>
               <Link
@@ -247,7 +247,7 @@ export default function Header() {
                 </span>
                 <span className="block text-xs leading-none  font-semibold">
                   {/* Bag */}
-                  {t('title')}
+                  {t('Bag')}
                 </span>
               </Link>
               <LoginModal />
@@ -271,7 +271,7 @@ const links = [
     title: "Kids",
   },
   {
-    title: "New born",
+    title: "NewBorn",
   },
   {
     title: "Lingerie",
