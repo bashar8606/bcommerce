@@ -19,8 +19,36 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useState } from "react";
+import {useParams} from 'next/navigation';
+import {useTransition} from 'react';
+import {usePathname, useRouter} from '@/i18n/routing';
+import { useLocale } from "next-intl";
 
 export function LangSwitcher() {
+  const locale = useLocale();
+  const [selectedLanguage, setSelectedLanguage] = useState(locale); // Default to English
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const pathname = usePathname();
+  const params = useParams();
+
+  const handleLanguageChange = (lang) => {
+    setSelectedLanguage(lang);
+    onSelectChange(lang)
+  };
+
+  const onSelectChange = (lang) => {
+    const nextLocale = lang;
+    
+    startTransition(() => {
+      router.replace(
+        // Adjust this line according to your routing logic
+        { pathname, params },
+        { locale: nextLocale }
+      );
+    });
+  }
   return (
     <>
       <DropdownMenu>
@@ -41,7 +69,7 @@ export function LangSwitcher() {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <button className="w-full relative flex items-center ">
               <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
                 <img
@@ -55,8 +83,63 @@ export function LangSwitcher() {
                 <div className="w-full h-full top-0 left-0 absolute bg-orange-600 rounded-full scale-75" />
               </div>
             </button>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
+          </DropdownMenuItem> */}
+          <DropdownMenuItem>
+        <label className="flex items-center w-full cursor-pointer">
+          <input
+            type="radio"
+            name="language"
+            value="sa"
+            checked={selectedLanguage === 'ar'}
+            onChange={() => handleLanguageChange('ar')}
+            className="hidden"
+          />
+          <div className="flex items-center w-full">
+            <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
+              <img
+                className="w-[22.30px] h-[16.87px]"
+                src="/images/saudi.png"
+                alt="Saudi Arabia"
+              />
+            </div>
+            <div className="text-black text-sm font-medium ps-3">Saudi</div>
+            <div className="w-4 h-4 rounded-full border border-orange-600 relative ml-auto">
+              {selectedLanguage === 'ar' && (
+                <div className="w-full h-full top-0 left-0 absolute bg-orange-600 rounded-full scale-75" />
+              )}
+            </div>
+          </div>
+        </label>
+      </DropdownMenuItem>
+
+      <DropdownMenuItem>
+        <label className="flex items-center w-full cursor-pointer">
+          <input
+            type="radio"
+            name="language"
+            value="en"
+            checked={selectedLanguage === 'en'}
+            onChange={() => handleLanguageChange('en')}
+            className="hidden"
+          />
+          <div className="flex items-center w-full">
+            <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
+              <img
+                className="w-[22.30px] h-[16.87px]"
+                src="/images/english.png"
+                alt="English"
+              />
+            </div>
+            <div className="text-black text-sm font-medium ps-3">English</div>
+            <div className="w-4 h-4 rounded-full border border-orange-600 relative ml-auto">
+              {selectedLanguage === 'en' && (
+                <div className="w-full h-full top-0 left-0 absolute bg-orange-600 rounded-full scale-75" />
+              )}
+            </div>
+          </div>
+        </label>
+      </DropdownMenuItem>
+      </DropdownMenuContent>
       </DropdownMenu>
 
       <Drawer>
