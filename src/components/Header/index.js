@@ -21,6 +21,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { LoginModal } from "../LoginModal";
+import { ProfileDropdown } from "./ProfileDropdown";
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
@@ -248,7 +249,8 @@ export default function Header() {
                   Bag
                 </span>
               </Link>
-              {isLogined ?  <button onClick={signOut}>Logout</button> : <LoginModal />}
+              {isLogined ? <ProfileDropdown/>  : <LoginModal />}
+              {/* <button onClick={signOut}>Logout</button> */}
             </nav>
           </div>
         </div>
