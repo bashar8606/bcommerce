@@ -172,6 +172,7 @@ export function LoginModal() {
                         </p>
                       </div>
                       <div className="space-y-4">
+                        
                         <InputOTP
                           maxLength={6}
                           value={values.otp}
