@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/sheet";
 import { LoginModal } from "../LoginModal";
 import {useTranslations} from 'next-intl'
+import { ProfileDropdown } from "./ProfileDropdown";
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
@@ -29,6 +30,8 @@ export default function Header() {
 
   const session = useSession();
   console.log(session, "sessionsession");
+
+  const isLogined = session?.status === "authenticated";
   return (
     <>
       <header
@@ -223,7 +226,7 @@ export default function Header() {
               <LangSwitcher />
 
               <Link
-                href={`/`}
+                href={`/wishlist`}
                 className="rounded-md px-1 py-2 text-lg text-center "
               >
                 <span className="flex justify-center mb-2">
@@ -250,7 +253,8 @@ export default function Header() {
                   {t('Bag')}
                 </span>
               </Link>
-              <LoginModal />
+              {isLogined ? <ProfileDropdown/>  : <LoginModal />}
+              {/* <button onClick={signOut}>Logout</button> */}
             </nav>
           </div>
         </div>
