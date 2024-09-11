@@ -1,38 +1,66 @@
 import useSWR from 'swr';
 import { useRecoilState } from 'recoil';
 import { cartState } from '@/recoil/atoms';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useLogin } from '../LoginWidget/useLogin';
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+// const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export const useCartWidget = () => {
-  const { data, error } = useSWR('/api/cart', fetcher);
+  const { session } = useLogin({})
+  // const { data, error } = useSWR('/api/cart', fetcher);
   const [cart, setCart] = useRecoilState(cartState);
+  const [isOpen, setIsOpen] = useState(false);
   
+  // const isAuthenticated = false
 
-  const isAuthenticated = false
+  const submitCartData = async (itemData) => {
+    const formData = new FormData();
+    const authToken = ""
 
-  const addItem = (item) => {
-    const updatedCart = {
-      ...cart,
-      items: [...cart.items, item],
-      total: cart.total + item.price,
-    };
-    console.log(updatedCart, "updatedCartupdatedCartupdatedCart");
-    console.log(cartState,cart,"updatedCartupdatedCartupdatedCart");
-    setCart(updatedCart);
-    if (isAuthenticated) {
-      // https://www.ikkxa.com/user/addToCart
-      fetch('/api/cart', {
+    for (const [key, value] of Object.entries(itemData)) {
+      formData.append(key, value);
+    }
+    
+    try {
+      const response = await fetch('https://test.ikkxa.com/web-api/cart-store', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
         },
-        body: JSON.stringify(updatedCart),
+        body: formData,
       });
+  
+      if (!response.ok) {
+        console.error(`Cart api: ${response.status}`);
+        return
+      }
+
+      const data = await response.json();
+      console.log('Success:', data);
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }
+
+  const addItem = async (item) => {
+    const newItem = { ...item, quantity: 1, token: true };
+    if(session?.status === "unauthenticated"){
+      const existingCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      const itemExists = existingCartItems.some(cartItem => cartItem.product_id === newItem.product_id);
+
+      if(!itemExists){
+        existingCartItems.push(newItem);
+        localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+        setIsOpen(true)
+        setCart(existingCartItems)
+      }
     } else {
-      // Store in local storage for guest users
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      const res = await submitCartData(newItem);
+      console.log("API response:", res);
     }
   };
 
@@ -57,21 +85,22 @@ export const useCartWidget = () => {
   };
 
 
-  useEffect(() => {
-    // Sync cart from localStorage for guest users
-    if (!isAuthenticated) {
-      const savedCart = localStorage.getItem('cart');
-      if (savedCart) {
-        setCart(JSON.parse(savedCart));
-      }
-    }
-  }, [isAuthenticated, setCart]);
+  // useEffect(() => {
+  //   // Sync cart from localStorage for guest users
+  //   if (!isAuthenticated) {
+  //     const savedCart = localStorage.getItem('cart');
+  //     if (savedCart) {
+  //       setCart(JSON.parse(savedCart));
+  //     }
+  //   }
+  // }, [isAuthenticated, setCart]);
 
   return {
     cart: cart,
-    isLoading: !error && !data,
-    isError: error,
+    // isLoading: !error && !data,
+    // isError: error,
     addItem,
     removeItem,
+    isOpen, setIsOpen
   };
 };

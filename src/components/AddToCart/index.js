@@ -14,9 +14,9 @@ import {
 import { useState } from "react";
 
 export default function AddToCart({ data, size }) {
-  const { addItem } = useCartWidget();
+  const { addItem, isOpen, setIsOpen } = useCartWidget();
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   const productItem = {};
   return (
@@ -27,7 +27,7 @@ export default function AddToCart({ data, size }) {
             <button
               className="w-full btn btn-grad btn-lg mb-3 "
               // onClick={() => addItem(data)}
-              onClick={() => setIsOpen(true)}
+              onClick={() => {addItem({product_id:data?.id})}}
             >
               Add to Bag
             </button>
@@ -35,7 +35,7 @@ export default function AddToCart({ data, size }) {
             <button
               // onClick={() => addItem(data)}
               className="btn btn-outline-secondary"
-              onClick={() => setIsOpen(true)}
+              onClick={() => {addItem({product_id:data?.id})}}
             >
               Add to Bag
             </button>
@@ -55,7 +55,9 @@ export default function AddToCart({ data, size }) {
             </DrawerHeader>
             <div className="  px-3 grid grid-cols-2 gap-2 ">
               <button className="btn btn-grad w-full">Checkout</button>
-              <button className="btn btn-outline-secondary w-full">
+              <button className="btn btn-outline-secondary w-full"
+                onClick={()=> setIsOpen(false)}
+              >
                 Continue shopping
               </button>
             </div>
