@@ -26,8 +26,10 @@ import { useState } from "react";
 import Image from "@/components/Image";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
+import { useTranslations } from "next-intl";
 
 export function LoginModal() {
+  const t = useTranslations('Index')
   const {
     sendOtp,
     handleSubmit,
@@ -39,7 +41,6 @@ export function LoginModal() {
     expired,
     setIsOtpSent,
   } = useLogin({});
-
   const handleGoogleSignIn = () => {
     signIn("google", { callbackUrl: "/" });
   };
