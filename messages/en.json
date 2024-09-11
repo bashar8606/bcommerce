@@ -1,8 +1,7 @@
 {
     "Index": {
       "title": "Hello world!",
-      "GRABYOUR":"GRAB YOUR",
-      "ITEMNOW":"ITEM NOW",
+      "GRABYOUR_ITEM NOW":"GRAB YOUR <br /> ITEM NOW",
       "SIGNUP":"SIGN UP",
       "LOGIN":"LOGIN",
       "HiUsername":"Hi Username",

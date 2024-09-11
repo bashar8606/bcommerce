@@ -56,9 +56,9 @@ export default function Header() {
                       />
                       <div className="relative w-[50%] ml-auto">
                         <div className=" text-neutral-950 text-lg font-bold uppercase leading-[18px] mb-2">
-                          {t('GRABYOUR')}
-                          <br />
-                          {t('ITEMNOW')}
+                          {t('GRABYOUR_ITEM NOW')}
+                          {/* <br />
+                          {t('ITEMNOW')} */}
                         </div>
                         <div className=" text-orange-400 text-xs font-medium uppercase leading-3">
                           {t('SIGNUP')}/{t('LOGIN')}
