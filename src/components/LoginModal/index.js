@@ -27,9 +27,11 @@ import Image from "@/components/Image";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { useTranslations } from "next-intl";
+import useGetDeviceType from "@/hooks/useGetDeviceType";
 
 export function LoginModal() {
-  const t = useTranslations('Index')
+  const t = useTranslations("Index");
+  const {width} = useGetDeviceType()
   const {
     sendOtp,
     handleSubmit,
@@ -65,12 +67,14 @@ export function LoginModal() {
   };
 
   return (
-    <Dialog  open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button className="btn btn-grad btn-lg"  onClick={() => setIsOpen(true)}>{t('LOGIN')}</button>
+        <button className="btn btn-grad btn-lg" onClick={() => setIsOpen(true)}>
+          {t("LOGIN")}
+        </button>
       </DialogTrigger>
-      <DialogContent className="h-screen md:h-auto sm:max-w-[410px]  px-4 lg:p-10 rounded-1">
-        <div>
+      <DialogContent className="h-screen md:h-auto sm:max-w-[410px] p-0  rounded-1">
+        <div className=" ">
           {session?.status === "authenticated" ? (
             <button onClick={signOut}>Logout</button>
           ) : (
@@ -97,128 +101,155 @@ export function LoginModal() {
                 errors,
                 touched,
               }) => (
+                
                 <Form onSubmit={handleSubmit}>
-                  {!isOtpSent ? (
-                    <div className="">
-                      <div className="text-left mb-7">
-                        <p className=" text-black text-sm font-medium ">
-                          Welcome back!
-                        </p>
-                        <h3 className=" text-black text-2xl font-semibold ">
-                          Sign in to your account
-                        </h3>
+                  {width<992&&
+                  <div className="px-4 py-[10px] lg:p-10 bg-white border-b border-black border-opacity-5">
+                    <div className="aspect-[126/52] w-[84px] md:w-[126px] relative me-5 lg:hidden">
+                      <Image
+                        src={"/images/logo.png"}
+                        fill
+                        className="object-fit-cover"
+                        alt="logo"
+                      />
+                    </div>
+                  </div>}
+
+                  <div className="px-4 lg:p-10 pt-5">
+                    {!isOtpSent ? (
+                      <div className="">
+                        <div className="text-left mb-7">
+                          <p className=" text-black text-sm font-medium ">
+                            Welcome back!
+                          </p>
+                          <h3 className=" text-black text-2xl font-semibold ">
+                            Sign in to your account
+                          </h3>
+                        </div>
+                        <div className="space-y-4">
+                          <div>
+                            <div>
+                              <div className=" p-0.5 bg-gray-200 rounded-3xl justify-start items-start inline-flex mb-7">
+                                <button className="px-6 py-1.5 bg-black rounded-3xl text-white text-xs font-medium ">
+                                  Phone{" "}
+                                </button>
+                                <button className="px-6 py-1.5 bg-gray-200 rounded-3xl text-black text-xs font-medium ">
+                                  E mail
+                                </button>
+                              </div>
+                            </div>
+                            <Label htmlFor="name">E-mail</Label>
+                            <Input id="username" defaultValue="@peduarte" />
+
+                            <Label htmlFor="name">Phone</Label>
+                            <PhoneInput
+                              international
+                              countryCallingCodeEditable={false}
+                              defaultCountry="SA"
+                              value={phoneValue}
+                              onChange={(value) =>
+                                handlePhoneChange(value, setFieldValue)
+                              }
+                              className={`mt-1 block w-full p-3 rounded-md border ${
+                                errors.phoneNumber && touched.phoneNumber
+                                  ? "border-red-500"
+                                  : "border-gray-300"
+                              }`}
+                            />
+                            {expired && (
+                              <div className="text-red-600 text-xs mt-2">
+                                Retry attempts over. Try after 1 hour
+                              </div>
+                            )}
+                            {errors.phoneNumber && touched.phoneNumber ? (
+                              <div className="text-red-600 text-xs mt-2">
+                                {errors.phoneNumber}
+                              </div>
+                            ) : null}
+
+                            {/* <ErrorMessage name="countryCode" component="div" className="text-red-600 text-xs" /> */}
+                          </div>
+
+                          <button
+                            type="submit"
+                            className="btn btn-lg btn-primary w-full"
+                          >
+                            Send OTP
+                          </button>
+                          <button
+                            onClick={handleGoogleSignIn}
+                            className="btn btn-lg border w-full flex justify-center items-center"
+                          >
+                            <span className="me-2 text-xl">
+                              <FcGoogle />
+                            </span>
+                            Sign in with Google
+                          </button>
+                          <div className="text-center">
+                            <p className="text-xs mt-5 text-[#565656]">
+                              By continuing, you agree to Voizzit’s{" "}
+                              <Link href="/">Terms of Service</Link> and{" "}
+                              <Link href="/">Privacy Policy</Link>
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="space-y-4">
-                        <div>
-                          <Label htmlFor="name">Phone</Label>
-                          <PhoneInput
-                            international
-                            countryCallingCodeEditable={false}
-                            defaultCountry="SA"
-                            value={phoneValue}
+                    ) : (
+                      <div className="">
+                        <div className="mb-8">
+                          <h3 className=" text-black text-2xl font-semibold ">
+                            Verify OTP
+                          </h3>
+                          <p>
+                            Code has been sent to {values?.countryCode}&nbsp;
+                            {values?.phoneNumber}
+                          </p>
+                        </div>
+                        <div className="space-y-4">
+                          <InputOTP
+                            maxLength={6}
+                            value={values.otp}
                             onChange={(value) =>
-                              handlePhoneChange(value, setFieldValue)
+                              handleChange({ target: { name: "otp", value } })
                             }
-                            className={`mt-1 block w-full p-3 rounded-md border ${
-                              errors.phoneNumber && touched.phoneNumber
-                                ? "border-red-500"
-                                : "border-gray-300"
-                            }`}
+                          >
+                            <InputOTPGroup className="justify-between gap-2 mb-0">
+                              {[...Array(6)].map((_, index) => (
+                                <InputOTPSlot
+                                  className="text-3xl h-[60px]"
+                                  key={index}
+                                  index={index}
+                                />
+                              ))}
+                            </InputOTPGroup>
+                          </InputOTP>
+                          <ErrorMessage
+                            name="otp"
+                            component="div"
+                            className="text-red-600 text-xs"
                           />
-                          {expired && (
-                            <div className="text-red-600 text-xs mt-2">
-                              Retry attempts over. Try after 1 hour
-                            </div>
+                          {inValid && (
+                            <p className="text-red-700 text-xs">Invalid OTP</p>
                           )}
-                          {errors.phoneNumber && touched.phoneNumber ? (
-                            <div className="text-red-600 text-xs mt-2">
-                              {errors.phoneNumber}
-                            </div>
-                          ) : null}
 
-                          {/* <ErrorMessage name="countryCode" component="div" className="text-red-600 text-xs" /> */}
-                        </div>
-
-                        <button
-                          type="submit"
-                          className="btn btn-lg btn-primary w-full"
-                        >
-                          Send OTP
-                        </button>
-                        <button
-                          onClick={handleGoogleSignIn}
-                          className="btn btn-lg border w-full flex justify-center items-center"
-                        >
-                          <span className="me-2 text-xl">
-                            <FcGoogle />
-                          </span>
-                          Sign in with Google
-                        </button>
-                        <div className="text-center">
-                          <p className="text-xs mt-5 text-[#565656]">
-                            By continuing, you agree to Voizzit’s{" "}
-                            <Link href="/">Terms of Service</Link> and{" "}
-                            <Link href="/">Privacy Policy</Link>
-                          </p>
+                          <button
+                            type="submit"
+                            className="btn btn-lg btn-primary w-full"
+                          >
+                            Verify OTP
+                          </button>
+                          <div className="text-center">
+                            <p className="text-xs mt-5 text-[#565656]">
+                              Didn&apos;t get OTP Code{" "}
+                              <button onClick={() => setIsOtpSent(false)}>
+                                Resend OTP
+                              </button>{" "}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div className="">
-                      <div className="mb-8">
-                        <h3 className=" text-black text-2xl font-semibold ">
-                          Verify OTP
-                        </h3>
-                        <p>
-                          Code has been sent to {values?.countryCode}&nbsp;
-                          {values?.phoneNumber}
-                        </p>
-                      </div>
-                      <div className="space-y-4">
-                        
-                        <InputOTP
-                          maxLength={6}
-                          value={values.otp}
-                          onChange={(value) =>
-                            handleChange({ target: { name: "otp", value } })
-                          }
-                        >
-                          <InputOTPGroup className="justify-between gap-2 mb-0">
-                            {[...Array(6)].map((_, index) => (
-                              <InputOTPSlot
-                                className="text-3xl h-[60px]"
-                                key={index}
-                                index={index}
-                              />
-                            ))}
-                          </InputOTPGroup>
-                        </InputOTP>
-                        <ErrorMessage
-                          name="otp"
-                          component="div"
-                          className="text-red-600 text-xs"
-                        />
-                        {inValid && (
-                          <p className="text-red-700 text-xs">Invalid OTP</p>
-                        )}
-
-                        <button
-                          type="submit"
-                          className="btn btn-lg btn-primary w-full"
-                        >
-                          Verify OTP
-                        </button>
-                        <div className="text-center">
-                          <p className="text-xs mt-5 text-[#565656]">
-                            Didn&apos;t get OTP Code{" "}
-                            <button onClick={() => setIsOtpSent(false)}>
-                              Resend OTP
-                            </button>{" "}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </Form>
               )}
             </Formik>
