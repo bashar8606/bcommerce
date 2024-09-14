@@ -1,11 +1,11 @@
 {
   "Index": {
     "title": "مرحبا بالعالم!",
-    "GRABYOUR": "احصل على",
-    "ITEMNOW": "العنصر الآن",
+    "GRABYOUR_ITEM NOW": "احصل على <br /> العنصر الآن",
     "SIGNUP": "التسجيل",
     "LOGIN": "تسجيل الدخول",
     "HiUsername": "مرحبًا، اسم المستخدم",
+     "ViewProfile": "عرض الملف الشخصي",
     "Abayas": "عبايات",
     "Kids": "أطفال",
     "ContactUs": "اتصل بنا",

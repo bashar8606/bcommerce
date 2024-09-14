@@ -1,11 +1,11 @@
 {
     "Index": {
       "title": "Hello world!",
-      "GRABYOUR":"GRAB YOUR",
-      "ITEMNOW":"ITEM NOW",
+      "GRABYOUR_ITEM NOW":"GRAB YOUR <br /> ITEM NOW",
       "SIGNUP":"SIGN UP",
       "LOGIN":"LOGIN",
       "HiUsername":"Hi Username",
+      "ViewProfile":"View Profile",
       "Abayas":"Abayas",
       "Kids":"Kids",
       "ContactUs":"Contact Us",
