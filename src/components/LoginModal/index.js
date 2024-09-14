@@ -38,6 +38,8 @@ export function LoginModal() {
     session,
     validationSchema,
     inValid,
+    setIsOpen,
+    isOpen,
     expired,
     setIsOtpSent,
   } = useLogin({});
@@ -63,9 +65,9 @@ export function LoginModal() {
   };
 
   return (
-    <Dialog>
+    <Dialog  open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button className="btn btn-grad btn-lg">{t('LOGIN')}</button>
+        <button className="btn btn-grad btn-lg"  onClick={() => setIsOpen(true)}>{t('LOGIN')}</button>
       </DialogTrigger>
       <DialogContent className="h-screen md:h-auto sm:max-w-[410px]  px-4 lg:p-10 rounded-1">
         <div>
@@ -184,7 +186,7 @@ export function LoginModal() {
                           <InputOTPGroup className="justify-between gap-2 mb-0">
                             {[...Array(6)].map((_, index) => (
                               <InputOTPSlot
-                                className="w-[60px] text-3xl h-[60px]"
+                                className="text-3xl h-[60px]"
                                 key={index}
                                 index={index}
                               />

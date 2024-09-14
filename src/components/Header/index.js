@@ -23,6 +23,8 @@ import {
 import { LoginModal } from "../LoginModal";
 import {useTranslations} from 'next-intl'
 import { ProfileDropdown } from "./ProfileDropdown";
+import { useRecoilState } from "recoil";
+import { loginIsOpen } from "@/recoil/atoms";
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
@@ -32,6 +34,8 @@ export default function Header() {
   console.log(session, "sessionsession");
 
   const isLogined = session?.status === "authenticated";
+
+  const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
   return (
     <>
       <header
@@ -49,6 +53,17 @@ export default function Header() {
                 </SheetTrigger>
                 <SheetContent side={"left"} className="px-0 h-full pt-0">
                   <div className="flex flex-col h-full">
+                    {isLogined?      <div className="py-4 px-3  rounded-md justify-start items-center gap-2.5 flex">
+                      <div className="w-9 h-9 bg-zinc-100 rounded-[110px] justify-center items-center gap-2.5 flex" />
+                      <div className="relative">
+                        <div className=" text-neutral-950 text-base font-normal  capitalize leading-none tracking-tight mb-1">
+                          {t('HiUsername')}
+                        </div>
+                        <div className=" text-orange-400 text-xs font-medium capitalize leading-3">
+                          {t('ViewProfile')}
+                        </div>
+                      </div>
+                    </div>:
                     <div className="px-2.5 py-10 relative overflow-hidden bg-gradient-to-br from-stone-200 to-amber-100 rounded-md justify-end items-start gap-[23px] inline-flex">
                       <img
                         className="w-[93px] left-6 absolute rounded-md shadow"
@@ -60,23 +75,13 @@ export default function Header() {
                           <br />
                           {t('ITEMNOW')}
                         </div>
-                        <div className=" text-orange-400 text-xs font-medium uppercase leading-3">
+                        <div onClick={() => setIsOpen(true)} className=" text-orange-400 text-xs font-medium uppercase leading-3">
                           {t('SIGNUP')}/{t('LOGIN')}
                         </div>
                       </div>
                     </div>
-
-                    <div className="py-4 px-3  rounded-md justify-start items-center gap-2.5 flex">
-                      <div className="w-9 h-9 bg-zinc-100 rounded-[110px] justify-center items-center gap-2.5 flex" />
-                      <div className="relative">
-                        <div className=" text-neutral-950 text-base font-normal  capitalize leading-none tracking-tight mb-1">
-                          {t('HiUsername')}
-                        </div>
-                        <div className=" text-orange-400 text-xs font-medium capitalize leading-3">
-                          {t('ViewProfile')}
-                        </div>
-                      </div>
-                    </div>
+                  }
+              
 
                     <div className="px-3 ">
                       <ul className="border-b border-zinc-100 pb-2">

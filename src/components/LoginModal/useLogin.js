@@ -6,20 +6,22 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
 import { OTP_SENT } from "@/constants/apiRoutes";
+import { useRecoilState } from "recoil";
+import { loginIsOpen } from "@/recoil/atoms";
 
 
 export const useLogin = ({ }) => {
     const router = useRouter();
     const session = useSession();
 
-
+    const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
 
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [inValid, setInvalid] = useState(false);
     const [expired, setExpired] = useState(false);
 
    
-
+   
     const validationSchema = Yup.object().shape({
         countryCode: Yup.string().required("Country code is required"),
         phoneNumber: Yup.string()
@@ -87,6 +89,7 @@ export const useLogin = ({ }) => {
         handleSubmit,
         signOut,
         isOtpSent,
+        isOpen, setIsOpen,
         session,
         validationSchema,
         inValid, 

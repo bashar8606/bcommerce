@@ -13,17 +13,17 @@ export default function Counter() {
   return (
     <div className="inline-flex items-stretch">
       <button 
-        className=" px-2 py-1 rounded-tl rounded-bl border bg-neutral-100"
+        className=" px-2  rounded-tl rounded-bl border bg-neutral-100"
         onClick={decrement}
       >
-        <MinusIcon className="w-5 h-5" />
+        <MinusIcon className="w-4 h-4 md:w-5 md:h-5" />
       </button>
-      <div className="text-base border-t border-b border-zinc-300 font-medium  px-3 py-2">{count}</div>
+      <div className="text-base border-t border-b border-zinc-300 font-medium  px-3 py-1">{count}</div>
       <button 
-        className="px-2 py-1  rounded-tr  rounded-br border bg-neutral-100"
+        className="px-2 rounded-tr  rounded-br border bg-neutral-100"
         onClick={increment}
       >
-        <PlusIcon className="w-5 h-5" />
+        <PlusIcon className="w-4 h-4 md:w-5 md:h-5" />
       </button>
     </div>
   );
