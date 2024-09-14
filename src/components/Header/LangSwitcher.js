@@ -66,7 +66,14 @@ export function LangSwitcher() {
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <div className="self-stretch gap-1 flex mb-3">
+                  <button className="text-white text-xs font-medium  w-full px-3.5 py-2 bg-black rounded">
+                    English
+                  </button>
+                  <button className="text-black text-xs font-medium w-full px-3.5 py-[9px] bg-gray-200 rounded">
+                    العربية
+                  </button>
+                </div>
           <DropdownMenuSeparator />
 
           {/* <DropdownMenuItem>
