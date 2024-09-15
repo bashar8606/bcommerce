@@ -2,7 +2,7 @@ import { Input } from "../ui/input";
 
 export default function OrderSummary() {
   return (
-    <div className="p-6 bg-stone-50 rounded border border-gray-200 ">
+    <div className="p-6 bg-stone-50 md:rounded border border-gray-200 ">
       <h4 className=" text-black text-lg font-semibold mb-3">Order Summary</h4>
       <div className="flex items-center space-x-2 pb-5">
         <div className="grid flex-1 gap-2">

@@ -34,14 +34,20 @@ export default function OrderItem({ data }) {
           <div className="flex space-x-3">
             <div className="flex-1 flex flex-col justify-between">
               <div>
-                <h3 className=" text-stone-950 text-sm font-normal  leading-tight">
+                <h3 className=" text-stone-950 text-sm font-normal  leading-tight mb-2">
                   Floral Folds with RED color Modest Dress
                 </h3>
-                <p>
+                <p className=" mb-2">
                   <span className="text-stone-950 text-sm">Size:</span>
                   <span className="text-stone-950 text-sm font-semibold">
                     {" "}
                     XL
+                  </span>
+                </p>
+                <p className=" mb-2">
+                  <span className="text-stone-950 text-sm">Qty: </span>
+                  <span className="text-stone-950 text-sm font-semibold">
+                    1
                   </span>
                 </p>
               </div>

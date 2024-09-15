@@ -39,6 +39,9 @@ export default function ProductCard({ data }) {
           <span className="text-neutral-400 text-xs font-semibold line-through ml-1">
             SAR {data?.price}
           </span>
+          <span className="text-xs  px-2 py-[2px] text-[#F2432D]  inline-block z-10">
+         {offerPerc}% Off
+        </span>
         </p>
         <div className="pt-4">
          <AddToCart data={data}/>

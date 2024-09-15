@@ -33,7 +33,7 @@ export default function BudgetWidget({ data }) {
             <div className="container">
                 <div className="grid grid-cols-2 mb-4">
                     <div>
-                        <h2 className="text-xl font-semibold">Value deals</h2>
+                        <h2 className="text-lg lg:text-xl  font-semibold">Value deals</h2>
                     </div>
                 </div>
 

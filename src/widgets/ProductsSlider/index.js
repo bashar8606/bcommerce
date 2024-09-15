@@ -1,6 +1,7 @@
 "use client";
 import ProductCard from "@/components/ProductCard";
 import Slider from "@/components/Slider";
+import Link from "next/link";
 import { SwiperSlide } from "swiper/react";
 
 export default function ProductsSlider({ flashSale, data }) {
@@ -30,7 +31,17 @@ export default function ProductsSlider({ flashSale, data }) {
       <div className="container">
         <div className="grid grid-cols-2 mb-4">
           <div>
-            <h2 className="text-xl font-semibold">Deals of the day</h2>
+            <h2 className="text-lg lg:text-xl   font-semibold">
+              Deals of the day
+            </h2>
+          </div>
+          <div className="text-end">
+            <Link
+              href={`/`}
+              className="text-black inline-flex text-base font-medium"
+            >
+              View all
+            </Link>
           </div>
         </div>
 

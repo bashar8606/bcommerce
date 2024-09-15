@@ -23,9 +23,10 @@ export default function ProfileWidget() {
           Account Information
         </h3>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-9">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 xl:gap-8">
           <div className="">
             <div className="flex justify-between items-end mb-2">
+             
               <Label className="mb-0" htmlFor="email">
                 Email address
               </Label>
