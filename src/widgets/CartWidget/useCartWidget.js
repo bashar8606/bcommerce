@@ -68,6 +68,7 @@ export const useCartWidget = () => {
       setIsOpen(true)
       toast({
         title: "Scheduled: Catch up",
+        variant: "destructive",
         description: "Friday, February 10, 2023 at 5:57 PM",
       })
       console.log("API response:", res);
