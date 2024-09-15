@@ -12,7 +12,7 @@ module.exports = {
     aspectRatio: {
       '4/3': '4 / 3',
       '1/1': '1 / 1',
-      'portrait': '100 / 135',
+      'portrait': '214 / 320',
     },
     flex: {
       'col-auto': '0 0 auto'

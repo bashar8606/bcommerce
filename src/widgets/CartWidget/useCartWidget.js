@@ -3,15 +3,17 @@ import { useRecoilState } from 'recoil';
 import { cartState } from '@/recoil/atoms';
 import { useEffect, useState } from 'react';
 import { useLogin } from '../LoginWidget/useLogin';
-
+import { useToast } from '@/hooks/use-toast';
+import { loginIsOpen } from "@/recoil/atoms";
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export const useCartWidget = () => {
   const { session } = useLogin({})
+  const { toast } = useToast()
   // const { data, error } = useSWR('/api/cart', fetcher);
   const [cart, setCart] = useRecoilState(cartState);
   const [isOpen, setIsOpen] = useState(false);
-  
+  const [openLogin, setOpenLogin] =  useRecoilState(loginIsOpen);
   // const isAuthenticated = false
 
   const submitCartData = async (itemData) => {
@@ -47,19 +49,27 @@ export const useCartWidget = () => {
 
   const addItem = async (item) => {
     const newItem = { ...item, quantity: 1, token: true };
+ 
+    
     if(session?.status === "unauthenticated"){
-      const existingCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      // const existingCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      setOpenLogin(true)
+      // const itemExists = existingCartItems.some(cartItem => cartItem.product_id === newItem.product_id);
 
-      const itemExists = existingCartItems.some(cartItem => cartItem.product_id === newItem.product_id);
-
-      if(!itemExists){
-        existingCartItems.push(newItem);
-        localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
-        setIsOpen(true)
-        setCart(existingCartItems)
-      }
+      // if(!itemExists){
+      //   existingCartItems.push(newItem);
+      //   localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      //   setIsOpen(true)
+      //   setCart(existingCartItems)
+      // }
+      
     } else {
       const res = await submitCartData(newItem);
+      setIsOpen(true)
+      toast({
+        title: "Scheduled: Catch up",
+        description: "Friday, February 10, 2023 at 5:57 PM",
+      })
       console.log("API response:", res);
     }
   };
