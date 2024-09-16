@@ -4,7 +4,7 @@ import { cartState } from '@/recoil/atoms';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { loginIsOpen, cartCountState } from "@/recoil/atoms";
-import { addCartItem, removeCartItem } from '@/lib/getHome';
+import { addCartItem, removeCartItem, updateCartItemQty } from '@/lib/getHome';
 import { useSession } from 'next-auth/react';
 
 export const useCartWidget = () => {
@@ -58,6 +58,31 @@ export const useCartWidget = () => {
     }
   };
 
+  const updateItem = async (id, quantity) => {
+    try {
+      if(session?.status === "unauthenticated"){
+        setOpenLogin(true)
+      } else {
+        const res = await updateCartItemQty(id, quantity, authToken);
+        if(res.success){
+          toast({ 
+            title: "Cart item updated",
+            variant: "destructive",
+            description: "Friday, February 10, 2023 at 5:57 PM",
+          })
+        } else{
+          toast({ 
+            title: "Cart item not updated",
+            variant: "destructive",
+            description: "Friday, February 10, 2023 at 5:57 PM",
+          })
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // useEffect(() => {
   //   // Sync cart from localStorage for guest users
   //   if (!isAuthenticated) {
@@ -76,5 +101,6 @@ export const useCartWidget = () => {
     removeItem,
     isOpen, 
     setIsOpen,
+    updateItem
   };
 };

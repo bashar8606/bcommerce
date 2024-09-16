@@ -3,9 +3,13 @@ import Counter from "../Counter";
 import Image from "../Image/image";
 import { MdClose } from "react-icons/md";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
+import { useCartWidget } from "@/widgets/CartWidget/useCartWidget";
 
 export default function CartItem({ data }) {
   const { width } = useGetDeviceType();
+  const { removeItem, updateItem } = useCartWidget();
+
+
   return (
     <>
       <div className=" lg:mb-4 px-4 py-3 lg:p-4 lg:rounded border-b-8 lg:border border-gray-200 lg:border-neutral-200">

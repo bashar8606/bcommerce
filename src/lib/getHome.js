@@ -118,3 +118,14 @@ export async function removeCartItem(id,token) {
     const data = await deleteFetcher(url, null, postOptions);
     return data;
 }
+
+export async function updateCartItemQty(id, quantity, token) {
+
+    const formData = new FormData();
+    formData.append('quantity', quantity);
+
+    const url = `${UPDATE_CART}/${id}`;
+    const postOptions = getPostOptions(token); // Token is needed
+    const data = await postFetcher(url, formData, postOptions);
+    return data;
+}

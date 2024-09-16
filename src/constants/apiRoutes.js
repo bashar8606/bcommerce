@@ -13,6 +13,7 @@ export const REFRESH_TOKEN = "/auth/refresh_tokens";
 
 //Post method
 export const ADD_CART = "cart-store"
+export const UPDATE_CART = "cart-update"
 
 //Delete method
 export const DELETE_CART = "cart-delete"

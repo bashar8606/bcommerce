@@ -44,7 +44,26 @@ const postFetcher = async (url, data, headers) => {
     }
 };
 
+
 const deleteFetcher = async (url, data = null, options = {}) => {
+    try {
+        const { token } = options;
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        
+        const config = {
+            headers,
+            ...(data && { data }) // Only add `data` if it exists
+        };
+        
+        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, config);
+        return res.data;
+    } catch (err) {
+        console.error("Error in POST request:", err);
+        return err.response.data;
+    }
+};
+
+const updateFetcher = async (url, data = null, options = {}) => {
     try {
         const { token } = options;
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
@@ -54,7 +73,7 @@ const deleteFetcher = async (url, data = null, options = {}) => {
             ...(data && { data }) // Only add `data` if it exists
           };
 
-        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, config);
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, config);
         return res.data;
     } catch (err) {
         console.error("Error in POST request:", err);
@@ -63,4 +82,4 @@ const deleteFetcher = async (url, data = null, options = {}) => {
 };
 
 export default fetcher
-export {postFetcher, fetcherWithToken, deleteFetcher}
+export {postFetcher, fetcherWithToken, deleteFetcher, updateFetcher }
