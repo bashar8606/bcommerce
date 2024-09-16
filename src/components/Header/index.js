@@ -24,7 +24,7 @@ import { LoginModal } from "../LoginModal";
 import {useTranslations} from 'next-intl'
 import { ProfileDropdown } from "./ProfileDropdown";
 import { useRecoilState } from "recoil";
-import { loginIsOpen } from "@/recoil/atoms";
+import { loginIsOpen, cartCountState } from "@/recoil/atoms";
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
@@ -34,7 +34,7 @@ export default function Header() {
   console.log(session, "sessionsession");
 
   const isLogined = session?.status === "authenticated";
-
+  const [cartCount, setCartCount] = useRecoilState(cartCountState);
   const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
   return (
     <>
@@ -246,9 +246,12 @@ export default function Header() {
                 href={`/en/cart`}
                 className="rounded-md px-1 py-2 text-lg text-center relative"
               >
-                <span className="absolute -top-[2px] -right-[2px] text-white text-xs font-medium  px-1 bg-stone-900 rounded-2xl border border-white flex-col justify-center items-center gap-2 inline-flex">
-                  3
-                </span>
+                { isLogined &&
+                  <span className="absolute -top-[2px] -right-[2px] text-white text-xs font-medium  px-1 bg-stone-900 rounded-2xl border border-white flex-col justify-center items-center gap-2 inline-flex">
+                    {cartCount}
+                  </span>
+                  
+                }
                 <span className="flex justify-center mb-2">
                   {" "}
                   <BsBag />
