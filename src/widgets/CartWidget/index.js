@@ -17,8 +17,6 @@ const CartWidget = () => {
   const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
   const { width } = useGetDeviceType();
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (isError) return <div>Error loading cart</div>;
 
   return (
     <section className="">
