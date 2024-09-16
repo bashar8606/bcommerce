@@ -61,7 +61,6 @@ export function LangSwitcher() {
               العربية
             </button>
           </div>
-        <DropdownMenuSeparator />
 
           {/* <DropdownMenuItem>
             <button className="w-full relative flex items-center ">

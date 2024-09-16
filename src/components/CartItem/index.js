@@ -5,7 +5,6 @@ import { MdClose } from "react-icons/md";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 
 export default function CartItem({ data }) {
-  console.log(data, "datadatadatadatadatadata");
   const { width } = useGetDeviceType();
   return (
     <>
@@ -14,7 +13,7 @@ export default function CartItem({ data }) {
         <div className="flex-col-auto w-auto">
           <div className="aspect-[490/625] w-[84px] md:w-[90px] relative">
             <Image
-              src={data?.image_190x230}
+              src={data?.product_image}
               fill
               className="object-cover"
               alt="logo"
@@ -83,3 +82,56 @@ export default function CartItem({ data }) {
     </>
   );
 }
+
+
+// discount
+// : 
+// "120"
+// formatted_discount
+// : 
+// "120"
+// formatted_price
+// : 
+// "239"
+// formatted_sub_total
+// : 
+// "238"
+// id
+// : 
+// 3002
+// minimum_order_quantity
+// : 
+// 1
+// price
+// : 
+// "239"
+// product_id
+// : 
+// 236
+// product_image
+// : 
+// "https://test.ikkxa.com/public/images/20240416162755image_72x72_media_54.jpg"
+// product_name
+// : 
+// "Crystal embroidered Jalabiya IK1212 SkyBlue"
+// quantity
+// : 
+// 2
+// seller_id
+// : 
+// 1
+// shop_image
+// : 
+// ""
+// shop_name
+// : 
+// ""
+// stock
+// : 
+// 6
+// sub_total
+// : 
+// "238"
+// variant
+// : 
+// "M"

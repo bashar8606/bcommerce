@@ -12,10 +12,39 @@ import {
 import PaymetnIcons from "@/components/PaymentIcons";
 import OrderSummary from "@/components/OrderSummary";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
+import { CART_LIST } from "@/constants/apiRoutes";
+import axios from "axios";
+
+
 
 const CartWidget = () => {
   const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
   const { width } = useGetDeviceType();
+
+  const session = useSession();
+  const token = session?.data?.accessToken
+
+  const fetcher = async (url) => {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+    return response.data;
+  };
+  
+console.log(token, "tokennn");
+  const { data, error } = useSWR(
+    token ? `${process.env.NEXT_PUBLIC_BASE_URL}${CART_LIST}?token=true` : null, fetcher);
+
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data) return <div>Loading...</div>;
+  
+
+  console.log(data,"datadatadatadata");
 
 
   return (
@@ -67,8 +96,7 @@ const CartWidget = () => {
       <div className="container px-0 lg:px-3">
         <div className="flex flex-wrap lg:-mx-4">
           <div className="flex-col-auto w-full lg:w-[72%] lg:px-4">
-            {console.log(cart, "cartcartcartcart")}
-            {cart?.items?.map((item, i) => {
+            {data?.data?.carts?.map((item, i) => {
               return <CartItem data={item} key={i} />;
             })}
 
@@ -77,7 +105,7 @@ const CartWidget = () => {
             ))} */}
           </div>
           <div className="flex-col-auto w-full lg:w-[28%] lg:px-4">
-            <OrderSummary />
+            <OrderSummary data={data?.data?.calculations} />
             {/* <p>Total: ${cart.total}</p>
             <button onClick={() => addItem({ id: 'new-item', name: 'New Item', price: 10 })}>
               Add Item
