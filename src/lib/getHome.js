@@ -1,5 +1,5 @@
-import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART } from "@/constants/apiRoutes";
-import { postFetcher } from "@/utils/fetcher";
+import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART, DELETE_CART } from "@/constants/apiRoutes";
+import { deleteFetcher, postFetcher } from "@/utils/fetcher";
 import strapiFetch from "@/utils/strapiFetch";
 import { useSession, signOut, signIn } from "next-auth/react";
 
@@ -17,6 +17,22 @@ const options = {
 const getPostOptions = (token = null) => {
     const options = {
         method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    };
+
+    // Only add the Authorization header if the token is provided
+    if (token) {
+        options.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return options;
+};
+
+const getDaleteOptions = (token = null) => {
+    const options = {
+        method: 'DLETE',
         headers: {
             'Content-Type': 'multipart/form-data',
         },
@@ -93,5 +109,12 @@ export async function addCartItem(id, quantity, token) {
     const url = `${ADD_CART}`;
     const postOptions = getPostOptions(token); // Token is needed
     const data = await postFetcher(url, formData, postOptions);
+    return data;
+}
+
+export async function removeCartItem(id,token) {
+    const url = `${DELETE_CART}/${id}`;
+    const postOptions = getDaleteOptions(token); // Token is needed
+    const data = await deleteFetcher(url, null, postOptions);
     return data;
 }

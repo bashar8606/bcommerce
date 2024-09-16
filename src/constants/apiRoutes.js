@@ -6,9 +6,6 @@ export const FILTER_PRODUCTS = "home/filtered_products"
 export const SINGLE_PRODUCT = "home/product-details"
 export const GET_CART = "carts"
 
-export const CART_LIST = "carts";
-
-
 //auth
 export const OTP_SENT = "get-register-login-otp";
 export const OTP_VERIFY = "verify-register-login-otp";
@@ -16,3 +13,6 @@ export const REFRESH_TOKEN = "/auth/refresh_tokens";
 
 //Post method
 export const ADD_CART = "cart-store"
+
+//Delete method
+export const DELETE_CART = "cart-delete"
