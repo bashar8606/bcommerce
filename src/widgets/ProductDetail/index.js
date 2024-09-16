@@ -62,29 +62,33 @@ export default function ProductDetail({ data }) {
                 140.76 SAR
               </p>
             </div>
-            {data?.product?.related?.length>0&&
-            <div className="py-3 lg:py-4 border-b border-gray-200">
-              <div className="grid grid-cols-12 gap-2">
-                {data?.product?.related?.map((item, i) => {
-                  return (
-                    <Link
-                      key={i}
-                      href={`/en/products/${item?.slug}`}
-                      className="block col-span-3 lg:col-span-2"
-                    >
-                      <div className="aspect-[490/625] w-full relative" key={i}>
-                        <Image
-                          src={item?.thumbnail?.image_190x230}
-                          fill
-                          className="object-cover"
-                          alt={item?.product_name}
-                        />
-                      </div>
-                    </Link>
-                  );
-                })}
+            {data?.product?.related?.length > 0 && (
+              <div className="py-3 lg:py-4 border-b border-gray-200">
+                <div className="grid grid-cols-12 gap-2">
+                  {data?.product?.related?.map((item, i) => {
+                    return (
+                      <Link
+                        key={i}
+                        href={`/en/products/${item?.slug}`}
+                        className="block col-span-3 lg:col-span-2"
+                      >
+                        <div
+                          className="aspect-[490/625] w-full relative"
+                          key={i}
+                        >
+                          <Image
+                            src={item?.thumbnail?.image_190x230}
+                            fill
+                            className="object-cover"
+                            alt={item?.product_name}
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
-            </div>}
+            )}
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
               <div className="flex items-center gap-4">
@@ -157,10 +161,11 @@ export default function ProductDetail({ data }) {
           </div>
           <div className="col-span-12 lg:col-span-3 ">
             <div className="sticky top-24">
-              <AddToCart data={data} />
+              <AddToCart size={"lg"} data={data} />
               <BuyNow />
-              <PaymetnIcons />
-
+              <div className="mb-3">
+                <PaymetnIcons />
+              </div>
               <EmiComponent type="tabby" />
               <EmiComponent type="tamara" />
 

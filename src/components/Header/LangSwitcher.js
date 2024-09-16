@@ -22,33 +22,14 @@ import {
 import { useState } from "react";
 import {useParams} from 'next/navigation';
 import {useTransition} from 'react';
-import {usePathname, useRouter} from '@/i18n/routing';
+import {usePathname, useRouter, Link} from '@/i18n/routing';
 import { useLocale } from "next-intl";
+import { useHeader } from "./useHeader";
 
 export function LangSwitcher() {
   const locale = useLocale();
-  const [selectedLanguage, setSelectedLanguage] = useState(locale); // Default to English
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const pathname = usePathname();
-  const params = useParams();
+  const { onSelectChange } = useHeader()
 
-  const handleLanguageChange = (lang) => {
-    setSelectedLanguage(lang);
-    onSelectChange(lang)
-  };
-
-  const onSelectChange = (lang) => {
-    const nextLocale = lang;
-    
-    startTransition(() => {
-      router.replace(
-        // Adjust this line according to your routing logic
-        { pathname, params },
-        { locale: nextLocale }
-      );
-    });
-  }
   return (
     <>
       <DropdownMenu>
@@ -66,8 +47,21 @@ export function LangSwitcher() {
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
+          <div className="self-stretch gap-1 flex mb-3">
+            <button 
+              className={`text-white text-xs font-medium  w-full px-3.5 py-2 ${locale === 'en' ? 'bg-black' : 'bg-gray-200'} rounded`}
+              onClick={() => onSelectChange('en')}
+            >
+              English
+            </button>
+            <button 
+              className={`text-white text-xs font-medium  w-full px-3.5 py-2 ${locale === 'ar' ? 'bg-black' : 'bg-gray-200'} rounded`}
+              onClick={() => onSelectChange('ar')}
+            >
+              العربية
+            </button>
+          </div>
+        <DropdownMenuSeparator />
 
           {/* <DropdownMenuItem>
             <button className="w-full relative flex items-center ">
@@ -90,8 +84,7 @@ export function LangSwitcher() {
             type="radio"
             name="language"
             value="sa"
-            checked={selectedLanguage === 'ar'}
-            onChange={() => handleLanguageChange('ar')}
+            // checked="sa"
             className="hidden"
           />
           <div className="flex items-center w-full">
@@ -104,41 +97,12 @@ export function LangSwitcher() {
             </div>
             <div className="text-black text-sm font-medium ps-3">Saudi</div>
             <div className="w-4 h-4 rounded-full border border-orange-600 relative ml-auto">
-              {selectedLanguage === 'ar' && (
-                <div className="w-full h-full top-0 left-0 absolute bg-orange-600 rounded-full scale-75" />
-              )}
+              <div className="w-full h-full top-0 left-0 absolute bg-orange-600 rounded-full scale-75" />
             </div>
           </div>
         </label>
       </DropdownMenuItem>
 
-      <DropdownMenuItem>
-        <label className="flex items-center w-full cursor-pointer">
-          <input
-            type="radio"
-            name="language"
-            value="en"
-            checked={selectedLanguage === 'en'}
-            onChange={() => handleLanguageChange('en')}
-            className="hidden"
-          />
-          <div className="flex items-center w-full">
-            <div className="border border-neutral-200 flex-col justify-start items-start gap-[8.76px] inline-flex">
-              <img
-                className="w-[22.30px] h-[16.87px]"
-                src="/images/english.png"
-                alt="English"
-              />
-            </div>
-            <div className="text-black text-sm font-medium ps-3">English</div>
-            <div className="w-4 h-4 rounded-full border border-orange-600 relative ml-auto">
-              {selectedLanguage === 'en' && (
-                <div className="w-full h-full top-0 left-0 absolute bg-orange-600 rounded-full scale-75" />
-              )}
-            </div>
-          </div>
-        </label>
-      </DropdownMenuItem>
       </DropdownMenuContent>
       </DropdownMenu>
 

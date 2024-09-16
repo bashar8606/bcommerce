@@ -1,9 +1,9 @@
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import React from "react";
 
 
-export default function SidebarAccount({data, pathname}) {
+export default function SidebarAccount({data, path}) {
   return (
     <div>
       <div className="p-6 bg-white rounded border border-stone-200 ">
@@ -19,7 +19,12 @@ export default function SidebarAccount({data, pathname}) {
             <div className="mb-6">
                 {data?.map((item, i)=>{
                     return(
-                        <Link key={i} href={`/en/${item?.url}`} className={`${item?.url===pathname?`bg-black text-white border-transparent`:`text-black border-gray-200 `} px-2 py-4  border-b rounded font-medium  gap-1.5 flex`}>{item?.title}</Link>
+                      <>
+                        {console.log(item?.url, path,"pathname")}
+                        <Link key={i} href={`${item?.url}`} className={`${item?.url?.startsWith(path) ? 
+    'bg-black text-white border-transparent' : 
+    'text-black border-gray-200'}  px-2 py-4  border-b rounded font-medium  gap-1.5 flex`}>{item?.title}</Link>
+                        </>
                     )
                 })}
             </div>

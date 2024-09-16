@@ -1,9 +1,10 @@
+import OrderSingleWidget from "@/components/OrderSingleWidget";
 
 export default function Page() {
 
     return (
         <main>
-            Order Single
+            <OrderSingleWidget/>
         </main>
     )
 }

@@ -10,6 +10,12 @@ export const headerClassAtom = atom({
   default: "first",
 });
 
+
+export const loginIsOpen = atom({
+  key: `r_${getUniqueKey()}`,
+  default: false,
+});
+
 export const cartState = atom({
   key: `cart_${getUniqueKey()}`,
   default: {

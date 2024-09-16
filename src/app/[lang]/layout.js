@@ -5,6 +5,7 @@ import GlobalProviders from "@/components/GlobalProviders";
 import Footer from "@/components/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import {getMessages} from 'next-intl/server';
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -25,6 +26,7 @@ export default async function RootLayout({
             <Header />
             {children}
             <Footer/>
+            <Toaster />
         </GlobalProviders>
         </NextIntlClientProvider>
       </body>

@@ -20,7 +20,7 @@ export default function CategoriesSlider({ data }) {
   return (
     <section className="py-10">
       <div className="container">
-        <h2 className="text-xl font-semibold mb-4">All Categories</h2>
+        <h2 className="text-lg lg:text-xl   font-semibold mb-4">All Categories</h2>
         <Slider className={""} customSettings={customSettings}>
           {data?.categories?.length > 0 &&
             data?.categories?.map((item, i) => {
