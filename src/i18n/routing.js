@@ -8,7 +8,7 @@ export const routing = ({
     '/': '/',
     '/pathnames': {
       en: '/pathnames',
-      ar: '/pfadnamen'
+      ar: '/pathnames'
     }
   }
 });

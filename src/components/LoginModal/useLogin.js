@@ -13,12 +13,9 @@ export const useLogin = ({ }) => {
     const session = useSession();
 
 
-
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [inValid, setInvalid] = useState(false);
     const [expired, setExpired] = useState(false);
-
-   
 
     const validationSchema = Yup.object().shape({
         countryCode: Yup.string().required("Country code is required"),

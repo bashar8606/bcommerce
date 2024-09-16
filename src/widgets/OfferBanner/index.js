@@ -37,7 +37,7 @@ export default function OfferBanner({}) {
           <Slider className={""} customSettings={customSettings}>
             {data?.data?.offers?.map((item, i) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={i}>
                   <div
                     className="w-full relative"
                     style={{ aspectRatio: `${data?.aspectRatio}` }}
@@ -57,7 +57,7 @@ export default function OfferBanner({}) {
           <div className="grid grid-cols-2 gap-6">
             {data?.data?.offers?.map((item, i) => {
               return (
-                <div>
+                <div key={i}>
                   <div
                     className="w-full relative"
                     style={{ aspectRatio: `${data?.aspectRatio}` }}

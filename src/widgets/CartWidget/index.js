@@ -11,13 +11,26 @@ import {
 } from "@/components/ui/breadcrumb";
 import PaymetnIcons from "@/components/PaymentIcons";
 import OrderSummary from "@/components/OrderSummary";
+import useAuthRequest from "@/hooks/useAuthRequest";
+import { useEffect } from "react";
 
 
 const CartWidget = () => {
   const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
+  const { fetchWithAuth, loading, error } = useAuthRequest();
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        // Example GET request
+        const data = await fetchWithAuth('https://test.ikkxa.com/web-api/carts?token=true');
+        console.log('GET request success:', data);
+      } catch (err) {
+        console.error('GET request failed:', err);
+      }
+    };
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (isError) return <div>Error loading cart</div>;
+    makeRequest();
+  }, []);
 
   return (
     <section className="">

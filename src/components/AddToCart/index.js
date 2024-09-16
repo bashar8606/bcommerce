@@ -21,9 +21,7 @@ export default function AddToCart({ data, size }) {
   const productItem = {};
   return (
     <>
-      <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerTrigger asChild>
-          {size === "lg" ? (
+     {size === "lg" ? (
             <button
               className="w-full btn btn-grad btn-lg mb-3 "
               // onClick={() => addItem(data)}
@@ -40,6 +38,9 @@ export default function AddToCart({ data, size }) {
               Add to Bag
             </button>
           )}
+      <Drawer open={isOpen} onOpenChange={setIsOpen}>
+        <DrawerTrigger asChild>
+         
         </DrawerTrigger>
         <DrawerContent className="pb-4">
           <div className="mx-auto w-full max-w-sm">
