@@ -19,6 +19,9 @@ export default function ProductsSlider({ flashSale, data }) {
       },
       992: {
         slidesPerView: 5,
+      }, 
+      1600: {
+        slidesPerView: 6,
       },
     },
     navigation: {
