@@ -1,4 +1,5 @@
 import axios from "axios";
+
 // const fetcher = async url => {
 //     const res = await fetch(url)
 
@@ -18,4 +19,30 @@ import axios from "axios";
 //   }
 
 const fetcher = url => axios.get(url).then(res => res.data);
+
+const fetcherWithToken = async (url, options = {}) => {
+    const { token } = options;
+  
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  
+    try {
+        const res = await axios.get(url, { headers });
+        return res.data;
+    } catch (error) {
+        console.error('Fetcher error:', error);
+        throw error;
+    }
+  };
+
+const postFetcher = async (url, data, headers) => {
+    try {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, data, { headers });
+        return res.data;
+    } catch (err) {
+        console.error("Error in POST request:", err);
+        return err.response.data;
+    }
+};
+
 export default fetcher
+export {postFetcher, fetcherWithToken}

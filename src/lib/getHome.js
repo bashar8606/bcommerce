@@ -1,5 +1,7 @@
-import { FILTER, HOME, SINGLE_PRODUCT } from "@/constants/apiRoutes";
+import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART } from "@/constants/apiRoutes";
+import { postFetcher } from "@/utils/fetcher";
 import strapiFetch from "@/utils/strapiFetch";
+import { useSession, signOut, signIn } from "next-auth/react";
 
 const options = {
     method: 'GET',
@@ -10,6 +12,22 @@ const options = {
     next: {
         revalidate: 60 * 60 * 24, // data will be cached for 1 day
     }
+};
+
+const getPostOptions = (token = null) => {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    };
+
+    // Only add the Authorization header if the token is provided
+    if (token) {
+        options.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return options;
 };
 
 export async function getCategories() {
@@ -62,5 +80,18 @@ export async function getSearchProducts(id, keywords, lang) {
     lang&&url.searchParams.set('language', lang)
 
     const data = await fetchMovie(url);
+    return data;
+}
+
+
+export async function addCartItem(id, quantity, token) {
+    const formData = new FormData();
+    formData.append('product_id', id);
+    formData.append('quantity', quantity);
+    formData.append('token', true);
+
+    const url = `${ADD_CART}`;
+    const postOptions = getPostOptions(token); // Token is needed
+    const data = await postFetcher(url, formData, postOptions);
     return data;
 }

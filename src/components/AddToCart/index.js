@@ -39,7 +39,7 @@ export default function AddToCart({ data, size }) {
           className="w-full btn btn-grad btn-lg  mb-3 "
           // onClick={() => addItem(data)}
           onClick={() => {
-            addItem({ product_id: data?.id });
+            addItem(data?.id);
           }}
         >
           Add to Bag
@@ -49,7 +49,7 @@ export default function AddToCart({ data, size }) {
           // onClick={() => addItem(data)}
           className="btn btn-outline-secondary"
           onClick={() => {
-            addItem({ product_id: data?.id });
+            addItem(data?.id);
           }}
         >
           Add to Bag
