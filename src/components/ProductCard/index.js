@@ -4,6 +4,7 @@ import Image from "../Image/image";
 import { useCartWidget } from "@/widgets/CartWidget/useCartWidget";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import AddToCart from "../AddToCart";
+import { SlHandbag } from "react-icons/sl";
 
 export default function ProductCard({ data }) {
   const { addItem } = useCartWidget();
@@ -34,15 +35,20 @@ export default function ProductCard({ data }) {
         <h4 className="text-sm font-normal line-clamp-2 mb-2">
           {data?.product_name}
         </h4>
-        <p className=" text-base font-semibold mb-1 ">
-          {data?.discount_percentage} SAR
+        <p className=" text-base font-semibold mb-2 ">
+         <span className="text-neutral-800 font-normal text-xs">SAR</span> {data?.discount_percentage} 
           <span className="text-neutral-400 text-xs font-semibold line-through ml-1">
-            SAR {data?.price}
+            {data?.price}
           </span>
-          <span className="text-xs  px-2 py-[2px] text-[#F2432D]  inline-block z-10">
+          <span className="text-xs  px-2 py-[2px] text-[#38ae04]  inline-block z-10">
          {offerPerc}% Off
         </span>
         </p>
+        <p className=" text-[10px] font-semibold flex items-center ">
+          <span className="text-xs text-[#F2432D] me-1">
+          <SlHandbag />
+          </span>
+Only {data?.current_stock} left in stock</p>
         <div className="pt-4">
          <AddToCart data={data}/>
         </div>
