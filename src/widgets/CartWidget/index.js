@@ -14,38 +14,37 @@ import OrderSummary from "@/components/OrderSummary";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
-import { CART_LIST } from "@/constants/apiRoutes";
 import axios from "axios";
-
+import { GET_CART } from '@/constants/apiRoutes';
+import { swrFetcher } from '@/utils/fetcher';
+import useSWRFetcher from "@/hooks/swrFetcher";
 
 
 const CartWidget = () => {
   const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
   const { width } = useGetDeviceType();
 
-  const session = useSession();
-  const token = session?.data?.accessToken
+  // const session = useSession();
+  // const token = session?.data?.accessToken
 
-  const fetcher = async (url) => {
-    const response = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  // const fetcher = async (url) => {
+  //   const response = await axios.get(url, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
   
-    return response.data;
-  };
+  //   return response.data;
+  // };
   
-console.log(token, "tokennn");
-  const { data, error } = useSWR(
-    token ? `${process.env.NEXT_PUBLIC_BASE_URL}${CART_LIST}?token=true` : null, fetcher);
+  // const { data, error } = useSWR(
+  //   token ? `${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}?token=true` : null, fetcher);
+
+
+const { data, error } = useSWRFetcher(`${GET_CART}?token=true`, true); 
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
-  
-
-  console.log(data,"datadatadatadata");
-
 
   return (
     <section className="">
