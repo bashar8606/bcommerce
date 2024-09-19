@@ -108,6 +108,7 @@ export async function addCartItem(id, quantity, token) {
 
     const url = `${ADD_CART}`;
     const postOptions = getPostOptions(token); // Token is needed
+    console.log(postOptions,'postOptionspostOptionspostOptions');
     const data = await postFetcher(url, formData, postOptions);
     return data;
 }
