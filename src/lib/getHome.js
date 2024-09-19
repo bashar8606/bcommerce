@@ -1,5 +1,5 @@
 import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART, DELETE_CART } from "@/constants/apiRoutes";
-import { deleteFetcher, postFetcher } from "@/utils/fetcher";
+import { deleteFetcher, apiFetcher } from "@/utils/fetcher";
 import strapiFetch from "@/utils/strapiFetch";
 import { useSession, signOut, signIn } from "next-auth/react";
 
@@ -14,11 +14,11 @@ const options = {
     }
 };
 
-const getPostOptions = (token = null) => {
+const getPostOptions = (method, token = null) => {
     const options = {
-        method: 'POST',
+        method: method,
         headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
         },
     };
 
@@ -101,14 +101,16 @@ export async function getSearchProducts(id, keywords, lang) {
 
 
 export async function addCartItem(id, quantity, token) {
-    const formData = new FormData();
-    formData.append('product_id', id);
-    formData.append('quantity', quantity);
-    formData.append('token', true);
+
+    const formData = {
+        'product_id': id,
+        'quantity': quantity,
+        'token': true
+    }
 
     const url = `${ADD_CART}`;
-    const postOptions = getPostOptions(token); // Token is needed
-    const data = await postFetcher(url, formData, postOptions);
+    const postOptions = getPostOptions("POST",token); // Token is needed
+    const data = await apiFetcher(url, formData, postOptions);
     return data;
 }
 
@@ -126,6 +128,6 @@ export async function updateCartItemQty(id, quantity, token) {
 
     const url = `${UPDATE_CART}/${id}`;
     const postOptions = getPostOptions(token); // Token is needed
-    const data = await postFetcher(url, formData, postOptions);
+    const data = await apiFetcher(url, formData, postOptions);
     return data;
 }

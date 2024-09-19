@@ -34,9 +34,13 @@ const fetcherWithToken = async (url, options = {}) => {
     }
   };
 
-const postFetcher = async (url, data, headers) => {
+const apiFetcher = async (url, data=null, options) => {
+
+    const method = options?.method?.toLowerCase();
+    const headers = options?.headers;
+
     try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, data, { headers });
+        const res = await axios[method](`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, data !== null ? data : {}, { headers });
         return res.data;
     } catch (err) {
         console.error("Error in POST request:", err);
@@ -82,4 +86,4 @@ const updateFetcher = async (url, data = null, options = {}) => {
 };
 
 export default fetcher
-export {postFetcher, fetcherWithToken, deleteFetcher, updateFetcher }
+export {apiFetcher, fetcherWithToken, deleteFetcher, updateFetcher }
