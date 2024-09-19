@@ -239,7 +239,7 @@ export function LoginModal() {
                             <InputOTPGroup className="justify-between gap-2 mb-0">
                               {[...Array(6)].map((_, index) => (
                                 <InputOTPSlot
-                                  className="text-3xl h-[60px]"
+                                  className="text-2xl h-[50px]"
                                   key={index}
                                   index={index}
                                 />

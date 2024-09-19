@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Noto_Kufi_Arabic } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header";
 import GlobalProviders from "@/components/GlobalProviders";
@@ -6,7 +6,16 @@ import Footer from "@/components/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import {getMessages} from 'next-intl/server';
 import { Toaster } from "@/components/ui/toaster";
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] ,
+  weight: ['300', '400', '500', '600', '700']});
+
+const fontArab = Noto_Kufi_Arabic({
+  subsets: ['arabic'],
+  variable: '--ff-primary',
+  weight: ['300', '400', '500', '600', '700']
+});
+
+
 
 export const metadata = {
   title: "Create Next App",
