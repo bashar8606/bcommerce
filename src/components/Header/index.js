@@ -24,7 +24,10 @@ import { LoginModal } from "../LoginModal";
 import {useTranslations} from 'next-intl'
 import { ProfileDropdown } from "./ProfileDropdown";
 import { useRecoilState } from "recoil";
-import { loginIsOpen, cartCountState } from "@/recoil/atoms";
+import { loginIsOpen, cartCountState, cartState } from "@/recoil/atoms";
+import { useEffect, useRef } from "react";
+import { GET_CART } from "@/constants/apiRoutes";
+import { fetcherWithToken } from "@/utils/fetcher";
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
@@ -32,10 +35,29 @@ export default function Header() {
 
   const session = useSession();
   console.log(session, "sessionsession");
-
+  const authToken = session?.data?.accessToken
   const isLogined = session?.status === "authenticated";
   const [cartCount, setCartCount] = useRecoilState(cartCountState);
+  const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
   const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
+  const hasFetchedCart = useRef(false);
+
+  useEffect(() => {
+    console.log("-----session-------->");
+    const fetchCartData = async () => {
+      if (isLogined && cartStateItem?.length === 0 && !hasFetchedCart.current) {
+        hasFetchedCart.current = true;
+      try {
+        const data = await fetcherWithToken(`${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}?token=true`,{ token: authToken });
+        setCartStateItem(data?.data?.carts);
+        setCartCount(data?.data?.carts?.length);
+      } catch (error) {
+        console.error('Failed to fetch cart data:', error);
+      }
+    }};
+    fetchCartData();
+  },[isLogined, authToken, cartStateItem ])
+
   return (
     <>
       <header

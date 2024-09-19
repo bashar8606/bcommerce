@@ -1,4 +1,4 @@
-import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART, DELETE_CART } from "@/constants/apiRoutes";
+import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART, DELETE_CART, GET_CART } from "@/constants/apiRoutes";
 import { deleteFetcher, apiFetcher } from "@/utils/fetcher";
 import strapiFetch from "@/utils/strapiFetch";
 import { useSession, signOut, signIn } from "next-auth/react";
@@ -129,5 +129,13 @@ export async function updateCartItemQty(id, quantity, token) {
     const url = `${UPDATE_CART}/${id}`;
     const postOptions = getPostOptions(token); // Token is needed
     const data = await apiFetcher(url, formData, postOptions);
+    return data;
+}
+
+export async function getCart(token) {
+   
+    const url = `${GET_CART}?token=true`;
+    const postOptions = getPostOptions("GET", token); // Token is needed
+    const data = await apiFetcher(url, null, postOptions);
     return data;
 }
