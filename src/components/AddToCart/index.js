@@ -25,7 +25,7 @@ import { useState } from "react";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 
 export default function AddToCart({ data, size }) {
-  const { addItem, isOpen, setIsOpen } = useCartWidget();
+  const { addItem, isOpen, setIsOpen, isLoading } = useCartWidget();
 
   const { width } = useGetDeviceType();
 
@@ -41,8 +41,9 @@ export default function AddToCart({ data, size }) {
           onClick={() => {
             addItem(data?.id);
           }}
+          disabled={isLoading}
         >
-          Add to Bag
+          {isLoading ? 'Loading...' : 'Add to Bag'}
         </button>
       ) : (
         <button
@@ -51,8 +52,9 @@ export default function AddToCart({ data, size }) {
           onClick={() => {
             addItem(data?.id);
           }}
+          disabled={isLoading}
         >
-          Add to Bag
+          {isLoading ? 'Loading...' : 'Add to Bag'}
         </button>
       )}
       {width >= 992 ? (

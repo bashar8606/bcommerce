@@ -16,10 +16,12 @@ export const useCartWidget = () => {
   // const { data, error } = useSWR('/api/cart', fetcher);
   const [cart, setCart] = useRecoilState(cartState);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const [openLogin, setOpenLogin] =  useRecoilState(loginIsOpen);
   const [cartCount, setCartCount] = useRecoilState(cartCountState);
 
   const addItem = async (item) => {
+    setIsLoading(true)
     try {
       if(session?.status === "unauthenticated"){
         setOpenLogin(true)
@@ -52,6 +54,8 @@ export const useCartWidget = () => {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -118,6 +122,7 @@ export const useCartWidget = () => {
     removeItem,
     isOpen, 
     setIsOpen,
-    updateItem
+    updateItem,
+    isLoading
   };
 };
