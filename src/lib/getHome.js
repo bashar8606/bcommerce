@@ -16,7 +16,7 @@ const options = {
 
 const getPostOptions = (method, token = null) => {
     const options = {
-        method: method,
+        method: method, //['POST' or 'PUT' or 'GET' or 'DELETE' ]
         headers: {
             'Content-Type': 'application/json',
         },

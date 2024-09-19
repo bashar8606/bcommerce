@@ -9,14 +9,14 @@ import { cn } from "@/lib/utils"
 const InputOTP = React.forwardRef(({ className, containerClassName, ...props }, ref) => (
   <OTPInput
     ref={ref}
-    containerClassName={cn("flex items-center gap-2 has-[:disabled]:opacity-50", containerClassName)}
+    containerClassName={cn("flex w-full items-center gap-2 has-[:disabled]:opacity-50", containerClassName)}
     className={cn("disabled:cursor-not-allowed", className)}
     {...props} />
 ))
 InputOTP.displayName = "InputOTP"
 
 const InputOTPGroup = React.forwardRef(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex items-center", className)} {...props} />
+  <div ref={ref} className={cn("flex w-full items-center", className)} {...props} />
 ))
 InputOTPGroup.displayName = "InputOTPGroup"
 
@@ -28,7 +28,7 @@ const InputOTPSlot = React.forwardRef(({ index, className, ...props }, ref) => {
     (<div
       ref={ref}
       className={cn(
-        "relative flex h-10 w-full flex-col-auto items-center justify-center border border-input text-sm transition-all rounded-md ",
+        "relative flex h-10 w-full flex-grow items-center justify-center border border-input text-sm transition-all rounded-md ",
         isActive && "z-10 ring-2 ring-ring ring-offset-background",
         className
       )}

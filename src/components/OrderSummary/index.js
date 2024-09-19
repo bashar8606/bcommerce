@@ -48,7 +48,7 @@ export default function OrderSummary({data}) {
         <p className="text-black text-base font-semibold"> {data?.formatted_total} SAR</p>
       </div>
       <div className="fixed lg:static bottom-0 left-0 w-full z-10 bg-white py-3 lg:py-0 px-4 lg:px-0 lg:shadow-none shadow-sm">
-        <button className="w-full btn btn-grad btn-lg mb-3 ">
+        <button className="w-full btn btn-grad btn-lg lg:mb-3 ">
           Proceed to Checkout
         </button>
       </div>

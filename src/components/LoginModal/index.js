@@ -31,7 +31,7 @@ import useGetDeviceType from "@/hooks/useGetDeviceType";
 
 export function LoginModal() {
   const t = useTranslations("Index");
-  const {width} = useGetDeviceType()
+  const { width } = useGetDeviceType();
   const {
     sendOtp,
     handleSubmit,
@@ -48,6 +48,8 @@ export function LoginModal() {
   const handleGoogleSignIn = () => {
     signIn("google", { callbackUrl: "/" });
   };
+
+  const [isPhone, setIsPhone] = useState(true);
 
   const [phoneValue, setPhoneValue] = useState("");
 
@@ -101,19 +103,19 @@ export function LoginModal() {
                 errors,
                 touched,
               }) => (
-                
                 <Form onSubmit={handleSubmit}>
-                  {width<992&&
-                  <div className="px-4 py-[10px] lg:p-10 bg-white border-b border-black border-opacity-5">
-                    <div className="aspect-[126/52] w-[84px] md:w-[126px] relative me-5 lg:hidden">
-                      <Image
-                        src={"/images/logo.png"}
-                        fill
-                        className="object-fit-cover"
-                        alt="logo"
-                      />
+                  {width < 992 && (
+                    <div className="px-4 py-[10px] lg:p-10 bg-white border-b border-black border-opacity-5">
+                      <div className="aspect-[126/52] w-[84px] md:w-[126px] relative me-5 lg:hidden">
+                        <Image
+                          src={"/images/logo.png"}
+                          fill
+                          className="object-fit-cover"
+                          alt="logo"
+                        />
+                      </div>
                     </div>
-                  </div>}
+                  )}
 
                   <div className="px-4 lg:p-10 pt-5">
                     {!isOtpSent ? (
@@ -130,32 +132,53 @@ export function LoginModal() {
                           <div>
                             <div>
                               <div className=" p-0.5 bg-gray-200 rounded-3xl justify-start items-start inline-flex mb-7">
-                                <button className="px-6 py-1.5 bg-black rounded-3xl text-white text-xs font-medium ">
+                                <div
+                                  className={`px-6 py-1.5 cursor-pointer rounded-3xl  text-xs font-medium ${
+                                    isPhone
+                                      ? "bg-black text-white"
+                                      : " bg-gray-200  text-black"
+                                  }`}
+                                  onClick={() => setIsPhone(true)}
+                                >
                                   Phone{" "}
-                                </button>
-                                <button className="px-6 py-1.5 bg-gray-200 rounded-3xl text-black text-xs font-medium ">
+                                </div>
+                                <div
+                                  className={`px-6 py-1.5 cursor-pointer rounded-3xl  text-xs font-medium ${
+                                    isPhone
+                                      ? "bg-gray-200  text-black"
+                                      : " bg-black text-white"
+                                  }`}
+                                  onClick={() => setIsPhone(false)}
+                                >
                                   E mail
-                                </button>
+                                </div>
                               </div>
                             </div>
-                            <Label htmlFor="name">E-mail</Label>
-                            <Input id="username" defaultValue="@peduarte" />
+                            {isPhone ? (
+                              <>
+                                <Label htmlFor="name">Phone</Label>
+                                <PhoneInput
+                                  international
+                                  countryCallingCodeEditable={false}
+                                  defaultCountry="SA"
+                                  value={phoneValue}
+                                  onChange={(value) =>
+                                    handlePhoneChange(value, setFieldValue)
+                                  }
+                                  className={`mt-1 block w-full p-3 rounded-md border ${
+                                    errors.phoneNumber && touched.phoneNumber
+                                      ? "border-red-500"
+                                      : "border-gray-300"
+                                  }`}
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <Label htmlFor="name">E-mail</Label>
+                                <Input id="username" defaultValue="" />
+                              </>
+                            )}
 
-                            <Label htmlFor="name">Phone</Label>
-                            <PhoneInput
-                              international
-                              countryCallingCodeEditable={false}
-                              defaultCountry="SA"
-                              value={phoneValue}
-                              onChange={(value) =>
-                                handlePhoneChange(value, setFieldValue)
-                              }
-                              className={`mt-1 block w-full p-3 rounded-md border ${
-                                errors.phoneNumber && touched.phoneNumber
-                                  ? "border-red-500"
-                                  : "border-gray-300"
-                              }`}
-                            />
                             {expired && (
                               <div className="text-red-600 text-xs mt-2">
                                 Retry attempts over. Try after 1 hour
@@ -216,7 +239,7 @@ export function LoginModal() {
                             <InputOTPGroup className="justify-between gap-2 mb-0">
                               {[...Array(6)].map((_, index) => (
                                 <InputOTPSlot
-                                  className="text-3xl h-[60px]"
+                                  className="text-2xl h-[50px]"
                                   key={index}
                                   index={index}
                                 />

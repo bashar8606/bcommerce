@@ -6,6 +6,8 @@ import { useToast } from '@/hooks/use-toast';
 import { loginIsOpen, cartCountState } from "@/recoil/atoms";
 import { addCartItem, removeCartItem, updateCartItemQty } from '@/lib/getHome';
 import { useSession } from 'next-auth/react';
+import { ADD_CART } from '@/constants/apiRoutes';
+import axios from 'axios';
 
 export const useCartWidget = () => {
   const session = useSession();
@@ -23,6 +25,21 @@ export const useCartWidget = () => {
         setOpenLogin(true)
       } else {
         const res = await addCartItem(item, 1, authToken);
+
+        // const res = await axios.post(
+        //  `${process.env.NEXT_PUBLIC_BASE_URL}${ADD_CART}`,  
+        //   {
+        //     product_id: item,  
+        //     quantity: 1,
+        //     token: true,
+        //   },
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${authToken}`,  
+        //       'Content-Type': 'application/json',
+        //     },
+        //   }
+        // );
         if(res.success){
           setCartCount(cartCount + 1)
           setIsOpen(true);
