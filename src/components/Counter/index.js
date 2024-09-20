@@ -1,14 +1,25 @@
 "use client";
 
+import { useCartWidget } from "@/widgets/CartWidget/useCartWidget";
 import { useState } from "react";
 
-export default function Counter() {
-  const [count, setCount] = useState(1);
+export default function Counter({data}) {
+  
+  const { updateItem } = useCartWidget();
+  const [count, setCount] = useState(data?.quantity);
   const increment = () => {
-    setCount(count + 1);
+    const increasedCount = count + 1
+    const res = updateItem(data.id,increasedCount)
+    if(res){
+      setCount(count + 1);
+    }
   };
   const decrement = () => {
-    setCount(count - 1);
+    const decreasedCount = count - 1
+    const res = updateItem(data.id, decreasedCount)
+    if(res){
+      setCount(count - 1);
+    }
   };
   return (
     <div className="inline-flex items-stretch">

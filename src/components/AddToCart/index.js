@@ -23,10 +23,17 @@ import {
 
 import { useState } from "react";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
+import { useRecoilState } from "recoil";
+import { cartState } from "@/recoil/atoms";
+import { useRouter } from "@/i18n/routing";
 
 export default function AddToCart({ data, size }) {
-  const { addItem, isOpen, setIsOpen } = useCartWidget();
+  const { addItem, isOpen, setIsOpen, isLoading } = useCartWidget();
+  const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
 
+  const router = useRouter();
+  
+  const isIncluded = cartStateItem.some(item => item.product_id === data?.id)
   const { width } = useGetDeviceType();
 
   // const [isOpen, setIsOpen] = useState(false);
@@ -39,20 +46,22 @@ export default function AddToCart({ data, size }) {
           className="w-full btn btn-grad btn-lg  mb-3 "
           // onClick={() => addItem(data)}
           onClick={() => {
-            addItem(data?.id);
+            !isIncluded? addItem(data?.id): router.push('/cart');
           }}
+          disabled={isLoading}
         >
-          Add to Bag
+          {isLoading ? 'Loading...' : (isIncluded ? 'Go to Cart' : 'Add to Bag')}
         </button>
       ) : (
         <button
           // onClick={() => addItem(data)}
           className="btn btn-outline-secondary"
           onClick={() => {
-            addItem(data?.id);
+            !isIncluded? addItem(data?.id): router.push('/cart');
           }}
+          disabled={isLoading}
         >
-          Add to Bag
+          {isLoading ? 'Loading...' : (isIncluded ? 'Go to Cart' : 'Add to Bag')}
         </button>
       )}
       {width >= 992 ? (

@@ -1,18 +1,23 @@
 import { atom } from "recoil";
 
 
-const sessionStorageEffect = (key) => ({ setSelf, onSet }) => {
-  if (typeof window !== 'undefined' && sessionStorage) {
-    const savedValue = sessionStorage.getItem(key);
+const localStorageEffect = (key) => ({ setSelf, onSet }) => {
+  if (typeof window !== 'undefined') {
+    // Get the initial value from localStorage
+    const savedValue = localStorage.getItem(key);
+
     if (savedValue != null) {
-      setSelf(JSON.parse(savedValue));
+      setSelf(JSON.parse(savedValue));  // Initialize state from localStorage
     }
 
+    // Update localStorage whenever the Recoil state changes
     onSet((newValue) => {
-      sessionStorage.setItem(key, JSON.stringify(newValue));
+      localStorage.setItem(key, JSON.stringify(newValue));
+      console.log('Updated localStorage:', localStorage.getItem(key));  // Log after setting
     });
   }
 };
+
 
 export const getUniqueKey = () => {
   const time = new Date().getTime();
@@ -21,9 +26,9 @@ export const getUniqueKey = () => {
 
 
 export const cartCountState = atom({
-  key: `cartCount_${getUniqueKey()}`,
+  key: 'cartCount',
   default: 0,
-  effects_UNSTABLE: [sessionStorageEffect('cartCount')],
+  effects_UNSTABLE: [localStorageEffect('cartCount')],
 });
 
 
@@ -38,9 +43,7 @@ export const loginIsOpen = atom({
 });
 
 export const cartState = atom({
-  key: `cart_${getUniqueKey()}`,
-  default: {
-    items: [],
-    total: 0,
-  },
+  key: 'cartState',
+  default: [], 
+  // effects_UNSTABLE: [localStorageEffect('cartState')],
 });
