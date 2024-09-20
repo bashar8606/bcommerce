@@ -91,12 +91,14 @@ export const useCartWidget = () => {
             variant: "destructive",
             description: "Friday, February 10, 2023 at 5:57 PM",
           })
+          return true
         } else{
           toast({ 
             title: "Cart item not updated",
             variant: "destructive",
             description: "Friday, February 10, 2023 at 5:57 PM",
           })
+          return fasle
         }
       }
     } catch (error) {

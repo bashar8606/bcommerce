@@ -50,7 +50,7 @@ export default function CartItem({ data }) {
             <div>
               <div className="flex items-end justify-between">
                 <div className="flex items-center">
-                  {width >= 992 && <Counter />}
+                  {width >= 992 && <Counter data={data} />}
                   <div className="lg:ml-3 text-zinc-800 text-sm lg:text-base font-semibold ">
                     73.35 SAR
                     <span className="ml-1 text-gray-400 text-sm font-semibold line-through">
@@ -73,7 +73,7 @@ export default function CartItem({ data }) {
           </div>
         </div>
         </div>
-        {width < 992 && <div className="w-full flex mt-5"><Counter />
+        {width < 992 && <div className="w-full flex mt-5"><Counter data={data} />
         
           <button className="text-black w-full text-xs font-semibold inline-flex items-center justify-center">
                       <span className="text-lg me-2">
