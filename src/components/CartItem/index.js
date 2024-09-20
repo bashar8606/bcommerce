@@ -18,6 +18,7 @@ export default function CartItem({ data }) {
           <div className="aspect-[490/625] w-[84px] md:w-[90px] relative">
             <Image
               src={data?.product_image}
+              sizes="100vw"
               fill
               className="object-cover"
               alt="logo"

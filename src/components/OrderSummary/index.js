@@ -1,11 +1,11 @@
 import { Input } from "../ui/input";
 
-export default function OrderSummary({data}) {
+export default function OrderSummary({ data }) {
   return (
     <div className="p-6 bg-stone-50 md:rounded border border-gray-200 ">
       <h4 className=" text-black text-lg font-semibold mb-3">Order Summary</h4>
       <div className="flex items-center space-x-2 pb-5">
-        <div className="grid flex-1 gap-2">
+        <div className="grid flex-1 w-full gap-2">
           <Input id="link" defaultValue="ONE" placeholder="Enter voucher" />
         </div>
         <button type="submit" className="btn btn-primary">
@@ -25,7 +25,10 @@ export default function OrderSummary({data}) {
       <div className="py-5 border-t border-b">
         <div className="flex justify-between mb-2">
           <p className="text-black text-sm">Subtotal (2items)</p>
-          <p className="text-black text-sm "> {data?.formatted_sub_total} SAR</p>
+          <p className="text-black text-sm ">
+            {" "}
+            {data?.formatted_sub_total} SAR
+          </p>
         </div>
 
         <div className="flex justify-between mb-2">
@@ -40,23 +43,32 @@ export default function OrderSummary({data}) {
 
         <div className="flex justify-between ">
           <p className="text-black text-sm">Shipping charge</p>
-          <p className="text-black text-sm ">{data?.formatted_shipping_cost} SAR</p>
+          <p className="text-black text-sm ">
+            {data?.formatted_shipping_cost === "0" ? (
+              <span className="text-sm text-[#00b553]">FREE</span>
+            ) : (
+              <span>{data?.formatted_shipping_cost} SAR</span>
+            )}
+          </p>
         </div>
       </div>
       <div className="flex justify-between py-4 ">
         <p className="text-black text-base font-semibold">Total</p>
-        <p className="text-black text-base font-semibold"> {data?.formatted_total} SAR</p>
+        <p className="text-black text-base font-semibold">
+          {" "}
+          {data?.formatted_total} SAR
+        </p>
       </div>
       <div className="fixed lg:static bottom-0 left-0 w-full z-10 bg-white py-3 lg:py-0 px-4 lg:px-0 lg:shadow-none shadow-sm">
         <button className="w-full btn btn-grad btn-lg lg:mb-3 ">
           Proceed to Checkout
         </button>
       </div>
-      <div className="px-3 py-2 bg-green-100 rounded-sm border ">
-        <div className=" text-emerald-500 text-xs font-semibold ">
+      {data?.formatted_shipping_cost !== "0" && (
+        <div className="px-3 py-2 bg-green-100 rounded-sm border text-emerald-500 text-xs font-semibold">
           Get free shipping for purchases over 500 SAR!
         </div>
-      </div>
+      )}
     </div>
   );
 }

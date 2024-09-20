@@ -223,9 +223,9 @@ export function LoginModal() {
                           <h3 className=" text-black text-2xl font-semibold ">
                             Verify OTP
                           </h3>
-                          <p>
+                          <p className="text-zinc-500 text-base">
                             Code has been sent to {values?.countryCode}&nbsp;
-                            {values?.phoneNumber}
+                            {values?.phoneNumber} <span className="text-teal-500 text-base font-medium underline ">change</span>
                           </p>
                         </div>
                         <div className="space-y-4">
