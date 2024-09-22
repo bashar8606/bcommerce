@@ -45,12 +45,14 @@ export const useCartWidget = () => {
         if(res.success){
           setCartCount(cartCount + 1)
           setIsOpen(true);
+        } else {
+          toast({
+            // title: "Prod",
+            variant: "destructive",
+            description: "Product is out of stock",
+          })
         }
-        toast({
-          title: "Scheduled: Catch up",
-          variant: "destructive",
-          description: "Friday, February 10, 2023 at 5:57 PM",
-        })
+       
       }
     } catch (error) {
       console.error(error);

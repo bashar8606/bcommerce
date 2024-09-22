@@ -1,3 +1,4 @@
+"use client"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -104,7 +105,7 @@ export default function ProductDetail({ data }) {
                 Size: XL
               </p>
               {data?.product?.attribute_values && (
-                <VariantCheckbox data={data?.product?.attribute_values} />
+                <VariantCheckbox stock={data?.product?.stock} data={data?.product?.attribute_values} />
               )}
             </div>
 

@@ -13,6 +13,15 @@ import {
 } from "@/components/ui/drawer";
 
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -32,8 +41,8 @@ export default function AddToCart({ data, size }) {
   const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
 
   const router = useRouter();
-  
-  const isIncluded = cartStateItem.some(item => item.product_id === data?.id)
+
+  const isIncluded = cartStateItem.some((item) => item.product_id === data?.id);
   const { width } = useGetDeviceType();
 
   // const [isOpen, setIsOpen] = useState(false);
@@ -41,27 +50,28 @@ export default function AddToCart({ data, size }) {
   const productItem = {};
   return (
     <>
+    
       {size === "lg" ? (
         <button
           className="w-full btn btn-grad btn-lg  mb-3 "
           // onClick={() => addItem(data)}
           onClick={() => {
-            !isIncluded? addItem(data?.id): router.push('/cart');
+            !isIncluded ? addItem(data?.id) : router.push("/cart");
           }}
           disabled={isLoading}
         >
-          {isLoading ? 'Loading...' : (isIncluded ? 'Go to Cart' : 'Add to Bag')}
+          {isLoading ? "Loading..." : isIncluded ? "Go to Cart" : "Add to Bag"}
         </button>
       ) : (
         <button
-          // onClick={() => addItem(data)}
+          // onClick={() => addItem(data)}x
           className="btn btn-outline-secondary"
           onClick={() => {
-            !isIncluded? addItem(data?.id): router.push('/cart');
+            !isIncluded ? addItem(data?.id) : router.push("/cart");
           }}
           disabled={isLoading}
         >
-          {isLoading ? 'Loading...' : (isIncluded ? 'Go to Cart' : 'Add to Bag')}
+          {isLoading ? "Loading..." : isIncluded ? "Go to Cart" : "Add to Bag"}
         </button>
       )}
       {width >= 992 ? (
