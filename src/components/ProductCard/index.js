@@ -10,7 +10,7 @@ import SelectVariantDialog from "../SelectVariantDialog";
 export default function ProductCard({ data }) {
   const { addItem } = useCartWidget();
 
-  const offerPerc = Math.round((data?.discount_percentage / data?.price) * 100);
+  const offerPerc = 100-(Math.round((data?.discount_percentage / data?.price) * 100));
   return (
     <div>
       <Link

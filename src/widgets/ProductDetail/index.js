@@ -107,6 +107,7 @@ export default function ProductDetail({ data }) {
               {data?.product?.attribute_values && (
                 <VariantCheckbox stock={data?.product?.stock} data={data?.product?.attribute_values} />
               )}
+              <p className="text-destructive font-semibold text-sm">Please select a size!</p>
             </div>
 
             <div className="py-3 lg:py-4 border-b border-gray-200">

@@ -35,7 +35,7 @@ export default function SelectVariantDialog({ stock }) {
   return (
     <>
       <Dialog>
-        <DialogTrigger>Open</DialogTrigger>
+        <DialogTrigger  className="btn btn-outline-secondary">Add to Bag</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>
