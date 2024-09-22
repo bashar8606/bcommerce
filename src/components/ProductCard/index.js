@@ -15,20 +15,20 @@ export default function ProductCard({ data }) {
   const offerPerc =
     100 - Math.round((data?.discount_percentage / data?.price) * 100);
   return (
-    <div>
+    <div className="group">
       <div className="relative overflow-hidden">
-        <RadioGroup className="flex items-center space-x-2 absolute bottom-0 left-0 w-full z-10">
+        <RadioGroup className="border transition-all  duration-500 translate-y-4 opacity-0  transform group-hover:opacity-100  group-hover:translate-y-0 inline-flex px-1 rounded-md items-center py-1 justify-center space-x-[4px] absolute bottom-[4px] -translate-x-[50%] left-[50%] w-auto  z-50  gap-0 bg-white ">
           {data?.stock?.map((option) => (
             <Label
               key={option.stock_variant}
               htmlFor={`${data?.id}${option.stock_variant}`}
-              className={`flex cursor-pointer relative overflow-hidden items-center rounded-lg  border-2 border-muted bg-popover [&:has([data-disabled])]:bg-zinc-100 p-4 hover:bg-accent hover:text-accent-foreground border-zinc-300 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-white [&:has([data-disabled])]:text-slate-500 `}
+              className={`flex mb-0 cursor-pointer text-[14px] justify-center relative overflow-hidden items-center rounded-full min-w-[20px]  border-1 border-muted bg-popover [&:has([data-disabled])]:bg-zinc-100 px-2 py-[2px] hover:bg-accent hover:text-accent-foreground border-zinc-300 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-white [&:has([data-disabled])]:text-slate-500 `}
             >
               {option?.current_stock === 0 && (
                 <div className="w-16 bottom-0 left-0 h-px origin-bottom-left rotate-[-44.24deg] border border-zinc-300 absolute"></div>
               )}
               {option?.current_stock > 0 && option?.current_stock < 2 && (
-                <div className="w-2 h-2 top-[4px] right-[4px] bg-destructive rounded-full  absolute"></div>
+                <div className="w-2 h-2 top-[0px] right-[0px] bg-destructive rounded-full  absolute"></div>
               )}
               <RadioGroupItem
                 value={option.stock_variant}
