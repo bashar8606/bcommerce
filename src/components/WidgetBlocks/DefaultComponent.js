@@ -4,7 +4,7 @@ const DefaultComponent = () => {
   return (
     <section className="">
       <div className="container">
-       No comppnent 
+       {/* No comppnent  */}
       </div>
     </section >
 
