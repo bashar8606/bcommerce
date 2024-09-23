@@ -1,13 +1,13 @@
 import useSWR, { mutate } from 'swr';
 import { useRecoilState } from 'recoil';
-import { cartState } from '@/recoil/atoms';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { loginIsOpen, cartCountState } from "@/recoil/atoms";
+import { loginIsOpen, cartCountState, cartState, selectedVariantState, errorMessageProductCard } from "@/recoil/atoms";
 import { addCartItem, removeCartItem, updateCartItemQty } from '@/lib/getHome';
 import { useSession } from 'next-auth/react';
 import { ADD_CART } from '@/constants/apiRoutes';
 import axios from 'axios';
+import { apiFetcher } from '@/utils/fetcher';
 
 export const useCartWidget = () => {
   const session = useSession();
@@ -17,31 +17,74 @@ export const useCartWidget = () => {
   const [cart, setCart] = useRecoilState(cartState);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessages, setErrorMessages] = useRecoilState(errorMessageProductCard);
+  const [selectedVariant, setSelectedVariant] = useRecoilState(selectedVariantState);
+
+
   const [openLogin, setOpenLogin] =  useRecoilState(loginIsOpen);
   const [cartCount, setCartCount] = useRecoilState(cartCountState);
 
-  const addItem = async (item) => {
+  const getPostOptions = (method, token = null) => {
+    const options = {
+        method: method, //['POST' or 'PUT' or 'GET' or 'DELETE' ]
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    // Only add the Authorization header if the token is provided
+    if (token) {
+        options.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return options;
+  };
+
+  const findProductInSelectedVariant = (productId) => {
+    return selectedVariant?.find(item => item.productID === productId);
+  };
+
+
+  const findProductInCart = (productId, variant) => {
+    // Ensure cart is defined and is an array
+    if (!Array.isArray(cart)) {
+      console.error('cartState is not an array:', cart); // Debugging line
+      return null; // or false
+    }
+  
+    // Find the product in the cart
+    const product = cart.find(item => item.product_id === productId && item.variant === variant);
+    
+    // Return the found product or null if not found
+    return product || null; // or return false;
+  };
+  
+  const isStockAvailable = (cartProduct, selectedProduct) => {
+    return cartProduct.quantity < selectedProduct.stock;
+  };
+
+  const addCartItem = async (id, quantity, token, variant, variants_ids=null) => {
+    const formData = {
+        'product_id': id,
+        'quantity': quantity,
+        'token': true,
+        'variants_name':variant,
+        'variants_ids':variants_ids
+    }
+    const url = `${ADD_CART}`;
+    const postOptions = getPostOptions("POST",token); // Token is needed
+    const data = await apiFetcher(url, formData, postOptions);
+    return data;
+  }
+  
+
+  const addItem = async (item, variant=null) => {
     setIsLoading(true)
     try {
       if(session?.status === "unauthenticated"){
         setOpenLogin(true)
       } else {
-        const res = await addCartItem(item, 1, authToken);
-
-        // const res = await axios.post(
-        //  `${process.env.NEXT_PUBLIC_BASE_URL}${ADD_CART}`,  
-        //   {
-        //     product_id: item,  
-        //     quantity: 1,
-        //     token: true,
-        //   },
-        //   {
-        //     headers: {
-        //       Authorization: `Bearer ${authToken}`,  
-        //       'Content-Type': 'application/json',
-        //     },
-        //   }
-        // );
+        const res = await addCartItem(item, 1, authToken, variant, null);
         if(res.success){
           setCartCount(cartCount + 1)
           setIsOpen(true);
@@ -108,6 +151,45 @@ export const useCartWidget = () => {
     }
   };
 
+  const addToBag = (productId) => {
+    // Check if the selected variant state has this productId
+    const selectedProduct = findProductInSelectedVariant(productId);
+    if (!selectedProduct) {
+      // Set an error message if no variant is selected
+      setErrorMessages({
+        [productId]: "Please select a variant for this product."
+      });
+      return;
+    }
+  
+    const { variant, stock } = selectedProduct; // Assuming single variant selection
+    // Check if the product with this variant exists in the cart
+    const cartProduct = findProductInCart(productId, variant);
+  
+    if (cartProduct) {
+      if (isStockAvailable(cartProduct, selectedProduct)) {
+        addItem(productId, variant);
+        // Clear the error message if adding succeeds
+        setErrorMessages((prevErrors) => ({
+          ...prevErrors,
+          [productId]: ""
+        }));
+      } else {
+        // Set an error message for out-of-stock scenario
+        setErrorMessages({
+          [productId]: "Out of stock for this variant."
+        });
+      }
+    } else {
+      // Add product to cart if it doesn't exist
+      addItem(productId, variant);
+      // Clear any previous error message
+      setErrorMessages({
+        [productId]: ""
+      });
+    }
+  };
+  
   // useEffect(() => {
   //   // Sync cart from localStorage for guest users
   //   if (!isAuthenticated) {
@@ -127,6 +209,9 @@ export const useCartWidget = () => {
     isOpen, 
     setIsOpen,
     updateItem,
-    isLoading
+    isLoading,
+    addToBag,
+    findProductInSelectedVariant,
+    errorMessages
   };
 };

@@ -1,16 +1,20 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Image from "../Image/image";
-import { useCartWidget } from "@/widgets/CartWidget/useCartWidget";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import AddToCart from "../AddToCart";
 import { SlHandbag } from "react-icons/sl";
 import SelectVariantDialog from "../SelectVariantDialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import useProductCard from "./useProductCard";
+import { useRecoilState } from "recoil";
+import { errorMessageProductCard } from "@/recoil/atoms";
+
 
 export default function ProductCard({ data }) {
-  const { addItem } = useCartWidget();
+  const { selectVariant } = useProductCard();
+  const [errorMessages, setErrorMessages] = useRecoilState(errorMessageProductCard);
 
   const offerPerc =
     100 - Math.round((data?.discount_percentage / data?.price) * 100);
@@ -18,10 +22,11 @@ export default function ProductCard({ data }) {
     <div className="group">
       <div className="relative overflow-hidden">
         <RadioGroup className="border transition-all  duration-500 translate-y-4 opacity-0  transform group-hover:opacity-100  group-hover:translate-y-0 inline-flex px-1 rounded-md items-center py-1 justify-center space-x-[4px] absolute bottom-[4px] -translate-x-[50%] left-[50%] w-auto  z-50  gap-0 bg-white ">
-          {data?.stock?.map((option) => (
+          {data&& data?.stock?.map((option) => (
             <Label
               key={option.stock_variant}
               htmlFor={`${data?.id}${option.stock_variant}`}
+              onClick={() => {selectVariant(data?.id, option.stock_variant, option.current_stock, null), setErrorMessages({})}}
               className={`flex mb-0 cursor-pointer text-[14px] justify-center relative overflow-hidden items-center rounded-full min-w-[20px]  border-1 border-muted bg-popover [&:has([data-disabled])]:bg-zinc-100 px-2 py-[2px] hover:bg-accent hover:text-accent-foreground border-zinc-300 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-white [&:has([data-disabled])]:text-slate-500 `}
             >
               {option?.current_stock === 0 && (
@@ -35,6 +40,7 @@ export default function ProductCard({ data }) {
                 id={`${data?.id}${option.stock_variant}`}
                 disabled={option?.current_stock === 0}
                 className="sr-only "
+                
               />
               <div className="flex-1 ">{option.stock_variant}</div>
             </Label>
@@ -81,12 +87,15 @@ export default function ProductCard({ data }) {
           </span>
           Only {data?.current_stock} left in stock
         </p>
+        {errorMessages[data.id] && (
+          <p style={{ color: 'red' }}>{errorMessages[data.id]}</p>
+        )}
         <div className="pt-4">
-          {data?.has_variant ? (
+          {/* {data?.has_variant ? (
             <SelectVariantDialog stock={data?.stock} />
-          ) : (
+          ) : ( */}
             <AddToCart data={data} />
-          )}
+          {/* // )} */}
         </div>
       </div>
     </div>

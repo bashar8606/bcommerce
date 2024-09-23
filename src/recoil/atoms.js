@@ -47,3 +47,13 @@ export const cartState = atom({
   default: [], 
   // effects_UNSTABLE: [localStorageEffect('cartState')],
 });
+
+export const selectedVariantState = atom({
+  key: "selectedVariantState",
+  default: [],
+});
+
+export const errorMessageProductCard = atom({
+  key: 'errorMessagesState',
+  default: {},
+});

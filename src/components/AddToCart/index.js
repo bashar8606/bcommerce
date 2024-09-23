@@ -37,12 +37,12 @@ import { cartState } from "@/recoil/atoms";
 import { useRouter } from "@/i18n/routing";
 
 export default function AddToCart({ data, size }) {
-  const { addItem, isOpen, setIsOpen, isLoading } = useCartWidget();
+  const { addItem, isOpen, setIsOpen, isLoading, addToBag } = useCartWidget();
   const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
 
   const router = useRouter();
 
-  const isIncluded = cartStateItem.some((item) => item.product_id === data?.id);
+  const isIncluded = cartStateItem.some((item) => item.product_id === data.id);
   const { width } = useGetDeviceType();
 
   // const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +56,7 @@ export default function AddToCart({ data, size }) {
           className="w-full btn btn-grad btn-lg  mb-3 "
           // onClick={() => addItem(data)}
           onClick={() => {
-            !isIncluded ? addItem(data?.id) : router.push("/cart");
+            data?.has_variant ? addToBag(data?.id) : addItem(data?.id, null);
           }}
           disabled={isLoading}
         >
@@ -67,7 +67,7 @@ export default function AddToCart({ data, size }) {
           // onClick={() => addItem(data)}x
           className="btn btn-outline-secondary"
           onClick={() => {
-            !isIncluded ? addItem(data?.id) : router.push("/cart");
+            data?.has_variant ? addToBag(data?.id) : addItem(data?.id, null);
           }}
           disabled={isLoading}
         >
