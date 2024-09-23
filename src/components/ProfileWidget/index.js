@@ -13,20 +13,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import AppBack from "../AppBack";
 
 export default function ProfileWidget() {
   const [date, setDate] = useState();
   return (
     <>
-      <div className="p-6 bg-white rounded border border-stone-200 mb-4">
+      <AppBack />
+
+      <div className="md:p-6 md:bg-white md:rounded md:border md:border-stone-200 mb-4">
         <h3 className=" text-black text-lg font-semibold mb-5 leading-relaxed">
           Account Information
         </h3>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 xl:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 xl:gap-8">
           <div className="">
             <div className="flex justify-between items-end mb-2">
-             
               <Label className="mb-0" htmlFor="email">
                 Email address
               </Label>
@@ -56,12 +58,12 @@ export default function ProfileWidget() {
         </div>
       </div>
 
-      <div className="p-6 bg-white rounded border border-stone-200">
+      <div className="md:p-6 md:bg-white md:rounded md:border md:border-stone-200 md:mb-4">
         <h3 className=" text-black text-lg font-semibold mb-5 leading-relaxed">
           My profile
         </h3>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-9">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-9">
           <div className="">
             <Label htmlFor="currentPassword">First name</Label>
             <Input type="email" id="currentPassword" placeholder="Enter here" />
