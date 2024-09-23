@@ -15,9 +15,9 @@ const AccountLayout = ({ children }) => {
   const pathname = usePathname();
 
   return (
-    <main className={`min-h-screen pt-20 bg-stone-50`}>
+    <main className={`min-h-screen pt-20 bg-white md:bg-stone-50`}>
       <div className="container ">
-        <Breadcrumb className="mb-8">
+        <Breadcrumb className="mb-8 hidden lg:flex">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -30,8 +30,8 @@ const AccountLayout = ({ children }) => {
           </BreadcrumbList>
         </Breadcrumb>
         <div class=" w-full max-w-5xl mx-auto ">
-          <div className="flex space-x-5 col-span-12">
-            <div className="flex-col-auto w-[280px]">
+          <div className="flex md:space-x-5 col-span-12">
+            <div className="flex-col-auto w-[280px] hidden md:block">
               <SidebarAccount path={pathname} data={links} />
             </div>
             <div className="flex-1 flex flex-col w-full">{children}</div>
