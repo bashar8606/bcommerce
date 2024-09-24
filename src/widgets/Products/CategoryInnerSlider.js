@@ -31,6 +31,7 @@ export default function CategoryInnerSlider({ data }) {
 
   return (
     <section className="py-[10px] w-full">
+      <div className="px-3">
     
         <Slider className={""} customSettings={customSettings}>
           {datas?.map((item, i)=>{
@@ -57,7 +58,7 @@ export default function CategoryInnerSlider({ data }) {
          
      
         </Slider>
- 
+        </div>
     </section>
   );
 }

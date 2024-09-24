@@ -10,7 +10,7 @@ export default function FilterSideBar({ data, catId, handleFilterChange, filters
       <h2 className="text-md font-semibold">FILTERS</h2>
       
       <FilterPriceRange filter={filters}  handleFilterChange={handleFilterChange} handlePriceChange={handlePriceChange} />
-      {data?.attributes?.map((item, i) => {
+      {data?.results?.attributes?.map((item, i) => {
         return <FilterCheckBox key={i} data={item} />;
       })}
     </div>

@@ -60,14 +60,14 @@ const handlePriceChange = useDebouncedCallback((value) => {
       }));
     }
   }, [pages]);
-
+  // ?route=product.by.category&sort=newest&paginate=10&slug=abayas&page=1
   const query = qs.stringify(
     {
       slug: slug,
       sort: filters?.sort,
       paginate: paginate,
       page: 1,
-      price: `{"min":${debouncedMinPrice},"max":${debouncedMaxPrice}}`,
+      // price: `{"min":${debouncedMinPrice},"max":${debouncedMaxPrice}}`,
       route: "product.by.category",
     },
     {
@@ -75,6 +75,7 @@ const handlePriceChange = useDebouncedCallback((value) => {
     }
   );
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}${FILTER_PRODUCTS}?${query}`,fetcher);
+  console.log(data,"datadatadatadatadatadatadata");
 
   return {
     products: data,

@@ -17,3 +17,5 @@ export const UPDATE_CART = "cart-update"
 
 //Delete method
 export const DELETE_CART = "cart-delete"
+
+export const WISHLIST = "user/wishlists"

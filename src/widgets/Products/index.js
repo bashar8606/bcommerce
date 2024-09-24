@@ -23,7 +23,7 @@ export default function Products({ slug }) {
   const { categories, isLoading, isError } = useCategories({ slug });
   const { products, filters, handleFilterChange, handlePriceChange, loadMore } =
     useProducts({ slug });
-  console.log(products, "categoriescategories");
+  console.log(categories, "categoriescategories");
 
   return (
     <section className="">
@@ -92,7 +92,7 @@ export default function Products({ slug }) {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-2 lg:gap-4 lg:px-4">
-              {products?.products?.data?.map((product, index) => {
+              {products?.results?.products?.data?.map((product, index) => {
                 return (
                   <div className="" key={index}>
                     <ProductCard data={product} />
