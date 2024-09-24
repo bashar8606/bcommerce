@@ -17,9 +17,11 @@ import { IoCardOutline } from "react-icons/io5";
 import EmiComponent from "@/components/EmiComponent";
 import Link from "next/link";
 import Image from "@/components/Image";
+import { useProductDetail } from "./useProductDetail";
 
 export default function ProductDetail({ data }) {
   console.log(data, "asdasd");
+  const {productDetail, setProductDetail}=useProductDetail({data})
   return (
     <section className="">
       <div className="container">
@@ -51,7 +53,7 @@ export default function ProductDetail({ data }) {
             <h1 className=" text-stone-950 text-xl font-semibold mb-3">
               {data?.product?.language_product?.name}
             </h1>
-            <div className="text-sm">SKU : IE3021</div>
+            <div className="text-sm">SKU : {productDetail?.sku}</div>
             <div className="py-4 border-b border-gray-200">
               <p className="text-xl font-bold mb-2">
                 73.35 SAR
@@ -102,10 +104,10 @@ export default function ProductDetail({ data }) {
 
             <div className="py-3 lg:py-4 border-b border-gray-200">
               <p className="text-stone-950 text-base font-semibold mb-3">
-                Size: XL
+                Size: {productDetail?.size}
               </p>
               {data?.product?.attribute_values && (
-                <VariantCheckbox stock={data?.product?.stock} data={data?.product?.attribute_values} />
+                <VariantCheckbox setProductDetail={setProductDetail} stock={data?.product?.stock} data={data?.product?.attribute_values} />
               )}
               <p className="text-destructive font-semibold text-sm">Please select a size!</p>
             </div>

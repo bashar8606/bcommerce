@@ -4,11 +4,25 @@ import { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export function VariantCheckbox({ data, stock }) {
-  console.log(data,"logsss");
+export function VariantCheckbox({ data, stock, setProductDetail }) {
+  const handleChange =(e)=>{
+    console.log(e,"changed");
+    const stockItem = stock.find(item => item.name === e);
+  
+    // if (stockItem) {
+    //   return stockItem.sku;
+    // } else {
+    //   return `No SKU found for name: ${name}`;
+    // }
+
+    setProductDetail({
+      sku:stockItem.sku,
+      size:e
+    })
+  }
   return (
     <>
-     <RadioGroup className="flex items-center space-x-2" >
+     <RadioGroup className="flex items-center space-x-2" onValueChange={(e)=>handleChange(e)}>
         {stock?.map((option) => (
           <Label
             key={option.id}
