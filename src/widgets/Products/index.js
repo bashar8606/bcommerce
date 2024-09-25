@@ -23,7 +23,8 @@ export default function Products({ slug }) {
   const { categories, isLoading, isError } = useCategories({ slug });
   const { products, filters, handleFilterChange, handlePriceChange, loadMore } =
     useProducts({ slug });
-  console.log(categories, "categoriescategories");
+  console.log(categories, "catego");
+  console.log(products, "categoriescategories");
 
   return (
     <section className="">
@@ -52,7 +53,7 @@ export default function Products({ slug }) {
             />
           </div>
           <div className="flex-col-auto w-full lg:w-[calc(100%-260px)]">
-            <CategoryInnerSlider />
+            <CategoryInnerSlider data={products?.results?.page?.categories} />
             <div className="flex justify-between mb-4 border-b lg:px-4 py-3">
               <div className="">
                 <h2 className="text-sm lg:text-xl font-semibold">

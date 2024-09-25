@@ -1,5 +1,5 @@
 import { Checkbox } from "../ui/checkbox";
-export default function FilterCheckBox({data}) {
+export default function FilterCheckBox({data, handleFilterChange}) {
     console.log(data,"datadatadata");
     return (
         <div className="border-b  pt-5 pb-3">
@@ -7,7 +7,7 @@ export default function FilterCheckBox({data}) {
             {data?.attribute_value?.map((item, i)=>{
                 return(
                     <div className="flex items-center space-x-2 mb-[18px]" key={i}>
-                    <Checkbox id={item?.id} />
+                    <Checkbox id={item?.id} onChange={(e)=>handleFilterChange(e)}/>
                     <label htmlFor={item?.id}  className="text-sm  leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{item?.value}<span className="text-black opacity-50">(64)</span></label>
                 </div>
                 )

@@ -2,14 +2,14 @@
 import Image from "@/components/Image";
 import Slider from "@/components/Slider";
 import useGetInnerWidth from "@/hooks/useGetInnerWidth";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { SwiperSlide } from "swiper/react";
 
 export default function CategoryInnerSlider({ data }) {
   const {width}= useGetInnerWidth()
   const customSettings = {
     spaceBetween: 10,
-    slidesPerView: 5,
+    slidesPerView: 4,
     pagination: false,
     breakpoints: {
       640: {
@@ -31,16 +31,16 @@ export default function CategoryInnerSlider({ data }) {
 
   return (
     <section className="py-[10px] w-full">
-      <div className="px-3">
+      <div className="lg:px-3">
     
         <Slider className={""} customSettings={customSettings}>
-          {datas?.map((item, i)=>{
+          {data?.map((item, i)=>{
             return(
               <SwiperSlide key={i}>
-              <Link className="block" href={`/en/categories`}>
+              <Link className="block" href={`/categories/${item?.slug}`}>
                 <div className="aspect-1/1 relative bg-slate-50 overflow-hidden rounded-full">
                   <Image
-                    src={"/images/34.png"}
+                    src={item?.banner?.image_320x320}
                     fill
                     className="object-cover"
                     alt="logo"
@@ -48,7 +48,7 @@ export default function CategoryInnerSlider({ data }) {
                 </div>
                 <div className="pt-1">
                   <p className="text-xs text-center line-clamp-1">
-                  sdfsf
+                  {item?.slug}
                   </p>
                 </div>
               </Link>

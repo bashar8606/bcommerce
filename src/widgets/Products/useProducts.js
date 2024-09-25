@@ -24,6 +24,7 @@ const useProducts = ({ slug }) => {
   const [debouncedMaxPrice] = useDebounce(filters.maxPrice, 300);
 
   const handleFilterChange = (e) => {
+    console.log(e,"eee");
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -67,7 +68,7 @@ const handlePriceChange = useDebouncedCallback((value) => {
       sort: filters?.sort,
       paginate: paginate,
       page: 1,
-      // price: `{"min":${debouncedMinPrice},"max":${debouncedMaxPrice}}`,
+      price: `{"min":${debouncedMinPrice},"max":${debouncedMaxPrice}}`,
       route: "product.by.category",
     },
     {
