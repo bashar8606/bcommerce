@@ -16,6 +16,7 @@ const useProducts = ({ slug }) => {
     sort: 'newest',
     minPrice: 0,
     maxPrice: 899,
+    attribute_value_id: [],
   });
 
 
@@ -32,6 +33,22 @@ const useProducts = ({ slug }) => {
     }));
   };
   
+
+
+  const handleAttributeChange = (attributeId) => {
+    console.log(attributeId,"attributeId");
+    setFilters((prevFilters) => {
+      const updatedAttributes = prevFilters.attribute_value_id.includes(attributeId)
+        ? prevFilters.attribute_value_id.filter((id) => id !== attributeId)
+        : [...prevFilters.attribute_value_id, attributeId];
+      return {
+        ...prevFilters,
+        attribute_value_id: updatedAttributes,
+      };
+    });
+  };
+
+
 const handlePriceChange = useDebouncedCallback((value) => {
   if (value) {
     setFilters((prevFilters) => ({
@@ -68,11 +85,13 @@ const handlePriceChange = useDebouncedCallback((value) => {
       sort: filters?.sort,
       paginate: paginate,
       page: 1,
-      price: `{"min":${debouncedMinPrice},"max":${debouncedMaxPrice}}`,
+      // price: `{"min":${debouncedMinPrice},"max":${debouncedMaxPrice}}`,
+      "attribute_value_id": filters.attribute_value_id,
       route: "product.by.category",
     },
     {
       encodeValuesOnly: true,
+      arrayFormat: 'brackets' 
     }
   );
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}${FILTER_PRODUCTS}?${query}`,fetcher);
@@ -81,6 +100,7 @@ const handlePriceChange = useDebouncedCallback((value) => {
   return {
     products: data,
     handleFilterChange,
+    handleAttributeChange,
     handlePriceChange,
     filters,
     isLoading: !error && !data,

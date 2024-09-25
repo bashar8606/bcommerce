@@ -21,7 +21,9 @@ import { useProductDetail } from "./useProductDetail";
 
 export default function ProductDetail({ data }) {
   console.log(data, "asdasd");
-  const {productDetail, setProductDetail}=useProductDetail({data})
+  const datas = data?.results
+  
+  const {productDetail, setProductDetail}=useProductDetail({datas})
   return (
     <section className="">
       <div className="container">
@@ -41,17 +43,17 @@ export default function ProductDetail({ data }) {
             </li>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage> {data?.product?.product_name}</BreadcrumbPage>
+              <BreadcrumbPage> {datas?.product?.product_name}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-12 lg:col-span-4 ">
-            <ProductThumbSlider data={data?.product?.gallery} />
+            <ProductThumbSlider data={datas?.product?.gallery} />
           </div>
           <div className="col-span-12 lg:col-span-5 lg:px-5">
             <h1 className=" text-stone-950 text-xl font-semibold mb-3">
-              {data?.product?.language_product?.name}
+              {datas?.product?.language_product?.name}
             </h1>
             <div className="text-sm">SKU : {productDetail?.sku}</div>
             <div className="py-4 border-b border-gray-200">
@@ -65,10 +67,10 @@ export default function ProductDetail({ data }) {
                 140.76 SAR
               </p>
             </div>
-            {data?.product?.related?.length > 0 && (
+            {datas?.product?.related?.length > 0 && (
               <div className="py-3 lg:py-4 border-b border-gray-200">
                 <div className="grid grid-cols-12 gap-2">
-                  {data?.product?.related?.map((item, i) => {
+                  {datas?.product?.related?.map((item, i) => {
                     return (
                       <Link
                         key={i}
@@ -106,8 +108,8 @@ export default function ProductDetail({ data }) {
               <p className="text-stone-950 text-base font-semibold mb-3">
                 Size: {productDetail?.size}
               </p>
-              {data?.product?.attribute_values && (
-                <VariantCheckbox setProductDetail={setProductDetail} stock={data?.product?.stock} data={data?.product?.attribute_values} />
+              {datas?.product?.attribute_values && (
+                <VariantCheckbox setProductDetail={setProductDetail} stock={datas?.product?.stock} data={datas?.product?.attribute_values} />
               )}
               <p className="text-destructive font-semibold text-sm">Please select a size!</p>
             </div>
@@ -165,7 +167,7 @@ export default function ProductDetail({ data }) {
           </div>
           <div className="col-span-12 lg:col-span-3 ">
             <div className="sticky top-24">
-              <AddToCart size={"lg"} data={data} />
+              <AddToCart size={"lg"} data={datas} />
               <BuyNow />
               <div className="mb-3">
                 <PaymetnIcons />

@@ -19,7 +19,7 @@ export default function ProfileWidget() {
   const [date, setDate] = useState();
   return (
     <>
-      <AppBack />
+      {/* <AppBack /> */}
 
       <div className="md:p-6 md:bg-white md:rounded md:border md:border-stone-200 mb-4">
         <h3 className=" text-black text-lg font-semibold mb-5 leading-relaxed">

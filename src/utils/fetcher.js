@@ -23,7 +23,7 @@ const fetcher = url => axios.get(url).then(res => res.data);
 const fetcherWithToken = async (url, options = {}) => {
     const { token } = options;
   
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    const headers = token ? { Authorization: `Bearer ${token}`} : {};
   
     try {
         const res = await axios.get(url, { headers });

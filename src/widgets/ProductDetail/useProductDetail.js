@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 
-export const useProductDetail = ({ data }) => {
+export const useProductDetail = ({ datas }) => {
     const [productDetail, setProductDetail] = useState({
         id: null,
         name: "",
         price: "",
         size:"",
-        sku: data?.product?.product_stock?.sku
+        sku: datas?.product?.product_stock?.sku
     });
 
     return {

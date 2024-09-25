@@ -22,7 +22,7 @@ const handler = NextAuth({
             async authorize(credentials, req) {
                 try {
                     const verifyOtpResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${OTP_VERIFY}`, {
-                        // country_code: credentials.country_code,
+                        country_code: credentials.country_code,
                         phone: credentials.phone_number,
                         otp: credentials.otp
                     });

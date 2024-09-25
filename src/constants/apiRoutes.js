@@ -19,3 +19,9 @@ export const UPDATE_CART = "cart-update"
 export const DELETE_CART = "cart-delete"
 
 export const WISHLIST = "user/wishlists"
+
+
+
+export const ALL_ADDRESSES = "user/get-all-address"
+
+export const ALL_ORDERS ="user/order-list"

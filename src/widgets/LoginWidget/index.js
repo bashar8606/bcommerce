@@ -55,7 +55,7 @@ export default function LoginWidget() {
 
                                         <Formik
                                             initialValues={{
-                                                countryCode: "+91",
+                                                countryCode: "+966",
                                                 phoneNumber: "",
                                                 otp: "",
                                             }}

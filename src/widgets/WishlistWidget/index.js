@@ -40,11 +40,11 @@ export default function WishlistWidget({}) {
         <h2 className="text-stone-950 text-2xl font-medium mb-4">
           My Wishlist{" "}
           <span className="text-neutral-400 text-sm font-medium">
-            {data?.wishlist?.total} items
+            {data?.results?.wishlist?.total} items
           </span>
         </h2>
         <div className="grid grid-cols-5 gap-4 py-4">
-          {data?.wishlist?.data?.map((item, i) => {
+          {data?.results?.wishlist?.data?.map((item, i) => {
             return (
               <div key={i}>
                 <ProductCard data={item} isWishlist={true} />

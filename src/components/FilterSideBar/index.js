@@ -2,7 +2,7 @@
 import FilterCheckBox from "../FilterCheckBox";
 import FilterPriceRange from "../FilterPriceRange";
 
-export default function FilterSideBar({ data, catId, handleFilterChange, filters, handlePriceChange }) {
+export default function FilterSideBar({ data, catId, handleFilterChange,handleAttributeChange, filters, handlePriceChange }) {
   console.log(data, "asdasdad");
   
   return (
@@ -11,7 +11,7 @@ export default function FilterSideBar({ data, catId, handleFilterChange, filters
       
       <FilterPriceRange filter={filters}  handleFilterChange={handleFilterChange} handlePriceChange={handlePriceChange} />
       {data?.results?.attributes?.map((item, i) => {
-        return <FilterCheckBox key={i} data={item} handleFilterChange={handleFilterChange}/>;
+        return <FilterCheckBox key={i} data={item} handleAttributeChange={handleAttributeChange}/>;
       })}
     </div>
   );

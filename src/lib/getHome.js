@@ -10,7 +10,7 @@ const options = {
     //     Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
     // },
     next: {
-        revalidate: 60 * 60 * 24, // data will be cached for 1 day
+        revalidate: 0, // data will be cached for 1 day
     }
 };
 
