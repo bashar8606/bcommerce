@@ -80,4 +80,4 @@ const deleteFetcher = async (url, options = {}) => {
 // };
 
 export default fetcher
-export {apiFetcher, fetcherWithToken, deleteFetcher, updateFetcher }
+export {apiFetcher, fetcherWithToken, deleteFetcher }
