@@ -3,11 +3,13 @@ import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { loginIsOpen, cartCountState, cartState, selectedVariantState, errorMessageProductCard } from "@/recoil/atoms";
-import { addCartItem, removeCartItem, updateCartItemQty } from '@/lib/getHome';
+import { addCartItem, addToWishlist, removeCartItem, updateCartItemQty } from '@/lib/getHome';
 import { useSession } from 'next-auth/react';
-import { ADD_CART } from '@/constants/apiRoutes';
+import { ADD_CART, ADD_WISHLIST } from '@/constants/apiRoutes';
 import axios from 'axios';
 import { apiFetcher } from '@/utils/fetcher';
+import { fetcherWithToken } from "@/utils/fetcher";
+
 
 export const useCartWidget = () => {
   const session = useSession();
@@ -189,6 +191,24 @@ export const useCartWidget = () => {
       });
     }
   };
+
+  // const handleWishlist = async (id) => {
+  //   try {
+  //     if(authToken){
+  //       console.log(authToken,"authTokenauthTokenauthToken");
+  //       const res = await addToWishlist(id, authToken);
+      
+  //       console.log(res,"added to wish");
+  //       toast({ 
+  //         title: "Cart item not removed",
+  //         variant: "destructive",
+  //         description: "Friday, February 10, 2023 at 5:57 PM",
+  //       })
+  //     } 
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   
   // useEffect(() => {
   //   // Sync cart from localStorage for guest users

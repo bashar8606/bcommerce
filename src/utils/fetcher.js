@@ -38,7 +38,7 @@ const apiFetcher = async (url, data=null, options) => {
 
     const method = options?.method?.toLowerCase();
     const headers = options?.headers;
-
+    console.log(options, "is here");
     try {
         const res = await axios[method](`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, data !== null ? data : {}, { headers });
         return res.data;

@@ -1,7 +1,7 @@
-import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART, DELETE_CART, GET_CART, UPDATE_CART } from "@/constants/apiRoutes";
+import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART, DELETE_CART, GET_CART, UPDATE_CART, ADD_WISHLIST } from "@/constants/apiRoutes";
 import { deleteFetcher, apiFetcher } from "@/utils/fetcher";
 import strapiFetch from "@/utils/strapiFetch";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession} from "next-auth/react";
 
 const options = {
     method: 'GET',
@@ -134,6 +134,15 @@ export async function updateCartItemQty(id, quantity, token) {
 export async function getCart(token) {
    
     const url = `${GET_CART}?token=true`;
+    const postOptions = getPostOptions("GET", token); // Token is needed
+    const data = await apiFetcher(url, null, postOptions);
+    return data;
+}
+
+
+export async function addToWishlist(id, token) {
+    const url = `${ADD_WISHLIST}/${id}`;
+   
     const postOptions = getPostOptions("GET", token); // Token is needed
     const data = await apiFetcher(url, null, postOptions);
     return data;

@@ -14,7 +14,7 @@ import {
 
 export default function WishlistWidget({}) {
   const { width } = useGetDeviceType();
-  const { data, error } = useSWRFetcher(`${WISHLIST}`, true);
+  const { data, error, mutate } = useSWRFetcher(`${WISHLIST}`, true);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
@@ -47,7 +47,7 @@ export default function WishlistWidget({}) {
           {data?.results?.wishlist?.data?.map((item, i) => {
             return (
               <div key={i}>
-                <ProductCard data={item} isWishlist={true} />
+                <ProductCard data={item} isWishlist={true} mutate={mutate}/>
               </div>
             );
           })}

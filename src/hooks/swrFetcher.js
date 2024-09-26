@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { useSession } from 'next-auth/react';
 import fetcher, { fetcherWithToken } from '@/utils/fetcher';
 
@@ -11,7 +11,7 @@ const useSWRFetcher = (url, token) => {
             (url) => fetcherWithToken(url, { token: authToken })
         );
  
-        return { data, error };
+        return { data, error, mutate };
 
 };
 

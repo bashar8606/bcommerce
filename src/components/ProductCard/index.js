@@ -10,9 +10,12 @@ import { Label } from "@/components/ui/label";
 import useProductCard from "./useProductCard";
 import { useRecoilState } from "recoil";
 import { errorMessageProductCard } from "@/recoil/atoms";
+import { useWishlistWidget } from "@/widgets/WishlistWidget/useWishlistWidget";
 
-export default function ProductCard({ data, isWishlist }) {
+export default function ProductCard({ data, isWishlist, mutate }) {
   const { selectVariant } = useProductCard();
+  const pid=isWishlist?data?.product?.id:data?.id
+  const { handleWishlist, hasWishlist } = useWishlistWidget({data, isWishlist, mutate});
   const [errorMessages, setErrorMessages] = useRecoilState(
     errorMessageProductCard
   );
@@ -56,14 +59,17 @@ export default function ProductCard({ data, isWishlist }) {
             ))}
         </RadioGroup>
 
-        <Link
+        <div
+          className="relative bg-slate-50 overflow-hidden rounded-sm"
+        >
+          {/* <div className='inline-block absolute top-2 font-semibold start-2 bg-red-600 text-white rounded-sm text-[10px] z-10 px-2 py-1'>BEST SELLING</div> */}
+          <button onClick={()=>{handleWishlist(pid)}} className="w-[32.22px] h-[32.22px] border-gray-50 flex-col justify-center items-center  inline-flex absolute top-2 font-semibold end-2 bg-white text-[#C87739] rounded-full z-10 px-2 py-1">
+           {hasWishlist||isWishlist? <GoHeartFill />:  <GoHeart /> }
+          </button>
+          <Link
           href={`/en/products/${data?.slug}`}
           className="aspect-portrait block relative bg-slate-50 overflow-hidden rounded-sm"
         >
-          {/* <div className='inline-block absolute top-2 font-semibold start-2 bg-red-600 text-white rounded-sm text-[10px] z-10 px-2 py-1'>BEST SELLING</div> */}
-          <button className="w-[32.22px] h-[32.22px] border-gray-50 flex-col justify-center items-center  inline-flex absolute top-2 font-semibold end-2 bg-white text-[#C87739] rounded-full z-10 px-2 py-1">
-           {data?.user_wishlist||isWishlist? <GoHeartFill />:  <GoHeart /> }
-          </button>
           <span className="text-xs absolute bottom-0 left-0 font-semibold  px-2 py-[2px] text-[#F2432D] bg-[#FCEFEE] inline-block z-10">
             {data?.special_discount_type} {offerPerc}% Off
           </span>
@@ -83,6 +89,7 @@ export default function ProductCard({ data, isWishlist }) {
             />
           )}
         </Link>
+        </div>
       </div>
       <div className="py-2">
         <h4 className="text-sm font-normal line-clamp-2 mb-2">
