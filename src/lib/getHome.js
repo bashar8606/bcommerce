@@ -116,8 +116,7 @@ export async function addCartItem(id, quantity, token) {
 
 export async function removeCartItem(id,token) {
     const url = `${DELETE_CART}/${id}`;
-    const postOptions = getDaleteOptions(token); // Token is needed
-    const data = await deleteFetcher(url, null, postOptions);
+    const data = await deleteFetcher(url,{ token: token });
     return data;
 }
 

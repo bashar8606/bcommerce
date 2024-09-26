@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const BaseURL = process.env.NEXT_PUBLIC_BASE_URL
+
 // const fetcher = async url => {
 //     const res = await fetch(url)
 
@@ -22,25 +24,24 @@ const fetcher = url => axios.get(url).then(res => res.data);
 
 const fetcherWithToken = async (url, options = {}) => {
     const { token } = options;
-  
-    const headers = token ? { Authorization: `Bearer ${token}`} : {};
-  
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
     try {
-        const res = await axios.get(url, { headers });
+        const res = await axios.get(`${BaseURL}${url}`, { headers });
         return res.data;
     } catch (error) {
         console.error('Fetcher error:', error);
         throw error;
     }
-  };
+};
 
 const apiFetcher = async (url, data=null, options) => {
 
     const method = options?.method?.toLowerCase();
     const headers = options?.headers;
-    console.log(options, "is here");
+    
+    console.log(headers, "is here");
     try {
-        const res = await axios[method](`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, data !== null ? data : {}, { headers });
+        const res = await axios[method](`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, data !== null ? data : {}, { headers});
         return res.data;
     } catch (err) {
         console.error("Error in POST request:", err);
@@ -48,42 +49,35 @@ const apiFetcher = async (url, data=null, options) => {
     }
 };
 
-
-const deleteFetcher = async (url, data = null, options = {}) => {
-    try {
-        const { token } = options;
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        
-        const config = {
-            headers,
-            ...(data && { data }) // Only add `data` if it exists
-        };
-        
-        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, config);
-        return res.data;
-    } catch (err) {
-        console.error("Error in POST request:", err);
-        return err.response.data;
-    }
-};
-
-const updateFetcher = async (url, data = null, options = {}) => {
+const deleteFetcher = async (url, options = {}) => {
     try {
         const { token } = options;
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
-        const config = {
-            headers,
-            ...(data && { data }) // Only add `data` if it exists
-          };
-
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, config);
+        const res = await axios.delete(`${BaseURL}${url}`, {headers});
         return res.data;
     } catch (err) {
         console.error("Error in POST request:", err);
         return err.response.data;
     }
 };
+
+// const updateFetcher = async (url, data = null, options = {}) => {
+//     try {
+//         const { token } = options;
+//         const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+//         const config = {
+//             headers,
+//             ...(data && { data }) // Only add `data` if it exists
+//           };
+
+//         const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, config);
+//         return res.data;
+//     } catch (err) {
+//         console.error("Error in POST request:", err);
+//         return err.response.data;
+//     }
+// };
 
 export default fetcher
 export {apiFetcher, fetcherWithToken, deleteFetcher, updateFetcher }
