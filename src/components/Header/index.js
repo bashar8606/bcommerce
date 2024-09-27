@@ -48,7 +48,7 @@ export default function Header() {
       if (isLogined && cartStateItem?.length === 0 && !hasFetchedCart.current) {
         hasFetchedCart.current = true;
       try {
-        const data = await fetcherWithToken(`${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}?token=true`,{ token: authToken });
+        const data = await fetcherWithToken(`${GET_CART}?token=true`,{ token: authToken });
         setCartStateItem(data?.data?.carts);
         setCartCount(data?.data?.carts?.length);
       } catch (error) {

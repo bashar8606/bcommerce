@@ -26,7 +26,7 @@ export default function CartItem({ data }) {
           </div>
         </div>
         <div className=" flex-1 w-full h-full relative">
-          <button className="absolute top-0 right-0">
+          <button className="absolute top-0 right-0" onClick={() => removeItem(data?.id)}>
             <MdClose />
           </button>
           <div className="">

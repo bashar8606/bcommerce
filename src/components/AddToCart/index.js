@@ -60,7 +60,7 @@ export default function AddToCart({ data, size }) {
           }}
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : isIncluded ? "Go to Cart" : "Add to Bag"}
+          {isLoading ? "Loading..." : "Add to Bag"}
         </button>
       ) : (
         <button
@@ -71,7 +71,7 @@ export default function AddToCart({ data, size }) {
           }}
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : isIncluded ? "Go to Cart" : "Add to Bag"}
+          {isLoading ? "Loading..." : "Add to Bag"}
         </button>
       )}
       {width >= 992 ? (
