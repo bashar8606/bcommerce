@@ -23,8 +23,6 @@ export default function Products({ slug }) {
   const { categories, isLoading, isError } = useCategories({ slug });
   const { products, filters, handleFilterChange,handleAttributeChange, handlePriceChange, loadMore } =
     useProducts({ slug });
-  console.log(categories, "catego");
-  console.log(products, "categoriescategories");
 
   return (
     <section className="">

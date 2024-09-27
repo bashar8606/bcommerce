@@ -11,15 +11,24 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import useSWR, { mutate } from "swr";
 
 export default function WishlistWidget({}) {
   const { width } = useGetDeviceType();
-  const { data, error, mutate } = useSWRFetcher(`${WISHLIST}`, true);
+  // const { data, error, mutate } = useSWRFetcher(`${WISHLIST}`, true);
+
+
+
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}${WISHLIST}`);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
+  console.log(mutate,"datadatadatadatadatadatadata");
 
-  console.log(data, "data1");
+
+
+
+{console.log(data,"swr data");}
 
   return (
     <section className="pt-2 pb-10">

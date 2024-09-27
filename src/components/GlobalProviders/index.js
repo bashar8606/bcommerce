@@ -1,7 +1,7 @@
 "use client";
 import { RecoilRoot } from "recoil";
 import { SessionProvider } from "next-auth/react";
-import fetcher from "@/utils/fetcher";
+import fetcher, { fetcherWithToken } from "@/utils/fetcher";
 import { SWRConfig } from "swr";
 const GlobalProviders = ({ children, session }) => {
 
@@ -30,7 +30,7 @@ const GlobalProviders = ({ children, session }) => {
       value={{
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
-        fetcher: (resource, init) => fetcher(resource, init),
+        fetcher: (resource, init) => fetcherWithToken(resource, init),
         ...(typeof window !== "undefined" && {
           provider: localStorageProvider,
         }),

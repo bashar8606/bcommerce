@@ -2,12 +2,17 @@ import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useSession } from "next-auth/react";
-import { ADD_CART, ADD_WISHLIST, REMOVE_WISHLIST, WISHLIST } from "@/constants/apiRoutes";
+import {
+  ADD_CART,
+  ADD_WISHLIST,
+  REMOVE_WISHLIST,
+  WISHLIST,
+} from "@/constants/apiRoutes";
 import axios from "axios";
 import { apiFetcher } from "@/utils/fetcher";
 import { fetcherWithToken } from "@/utils/fetcher";
 
-export const useWishlistWidget = ({data, isWishlist, mutate}) => {
+export const useWishlistWidget = ({ data, isWishlist=false, mutate }) => {
   const session = useSession();
   const isinWishlist = data?.user_wishlist;
   const authToken = session?.data?.accessToken;
@@ -16,36 +21,52 @@ export const useWishlistWidget = ({data, isWishlist, mutate}) => {
   const [hasWishlist, setHasWishlist] = useState(isinWishlist);
 
   const handleWishlist = async (id) => {
-    console.log(isinWishlist, id, "isWishlist");
+    console.log(isWishlist, id, "isWishlist");
     const data = await fetcherWithToken(
       `${process.env.NEXT_PUBLIC_BASE_URL}${
-        (hasWishlist||isWishlist) ? REMOVE_WISHLIST : ADD_WISHLIST
+        hasWishlist || isWishlist ? REMOVE_WISHLIST : ADD_WISHLIST
       }/${id}`,
       { token: authToken }
     );
+
+   
     if (hasWishlist && data?.status === true) {
       setHasWishlist(false);
-     
-            toast({
-          title: "Cart rem",
-          variant: "destructive",
-          description: "Friday, February 10, 2023 at 5:57 PM",
-        })
+    
+
+  
+
+      toast({
+        title: "Cart rem",
+        variant: "destructive",
+        description: "Friday, February 10, 2023 at 5:57 PM",
+      });
     } else {
       setHasWishlist(true);
-    
-            toast({
-          title: "Cart item not removed",
-          variant: "success",
-          description: "Friday, February 10, 2023 at 5:57 PM",
-        })
+
+      toast({
+        title: "Cart item not removed",
+        variant: "success",
+        description: "Friday, February 10, 2023 at 5:57 PM",
+      });
     }
-    console.log('Cache before mutate:', mutate.get(`${WISHLIST}`)); // Get cached data
+    if (isWishlist) {
+        console.log('Cache before mutate:', await mutate(`${process.env.NEXT_PUBLIC_BASE_URL}${WISHLIST}`, false)); // Fetches cached data
+        await mutate(`${process.env.NEXT_PUBLIC_BASE_URL}${WISHLIST}`); // Refetch and update cache
+        console.log('Cache after mutate:', await mutate(`${process.env.NEXT_PUBLIC_BASE_URL}${WISHLIST}`, false)); 
+      }
+    // console.log(
+    //   "Cache before mutate:",
+    //   mutate.get(`${process.env.NEXT_PUBLIC_BASE_URL}${WISHLIST}`)
+    // ); 
 
-await mutate(`${WISHLIST}`); // Refetch and update cache
+   // Refetch and update cache
 
-console.log('Cache after mutate:', mutate.get(`${WISHLIST}`)); 
-    mutate(`${WISHLIST}`);
+    // console.log(
+    //   "Cache after mutate:",
+    //   mutate.get(`${process.env.NEXT_PUBLIC_BASE_URL}${WISHLIST}`)
+    // );
+    // mutate(`${WISHLIST}`);
     return data;
   };
 

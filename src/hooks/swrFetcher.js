@@ -6,12 +6,12 @@ const useSWRFetcher = (url, token) => {
 
     const session = useSession();
     const authToken = session?.data?.accessToken
-        const { data, error } = useSWR(
+        const { data, error, mutate, isLoading } = useSWR(
             authToken ? `${process.env.NEXT_PUBLIC_BASE_URL}${url}` : null,
             (url) => fetcherWithToken(url, { token: authToken })
         );
  
-        return { data, error, mutate };
+        return { data, error, mutate, isLoading };
 
 };
 
