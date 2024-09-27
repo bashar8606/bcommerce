@@ -28,7 +28,9 @@ const GlobalProviders = ({ children, session }) => {
   return (
     <SWRConfig
       value={{
-        revalidateOnFocus: false,
+        revalidateOnFocus: true, // Refreshes the data when the window is refocused
+        dedupingInterval: 10000, // Prevents re-fetching the same data within 10 seconds
+        // revalidateOnFocus: false,
         revalidateOnReconnect: false,
         fetcher: (resource, init) => fetcherWithToken(resource, init),
         ...(typeof window !== "undefined" && {

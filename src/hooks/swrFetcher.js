@@ -6,7 +6,7 @@ const useSWRFetcher = (url, token) => {
 
     const session = useSession();
     const authToken = session?.data?.accessToken
-        const { data, error } = useSWR(
+        const { data, error , isLoading} = useSWR(
             authToken ? `${url}` : null,
             (url) => fetcherWithToken(url, { token: authToken })
         );

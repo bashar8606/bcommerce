@@ -1,7 +1,6 @@
 "use client";
 import ProductCard from "@/components/ProductCard";
 import { WISHLIST } from "@/constants/apiRoutes";
-import useSWRFetcher from "@/hooks/swrFetcher";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 import {
   Breadcrumb,
@@ -11,24 +10,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import useSWR, { mutate } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 
 export default function WishlistWidget({}) {
   const { width } = useGetDeviceType();
-  // const { data, error, mutate } = useSWRFetcher(`${WISHLIST}`, true);
 
-
-
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}${WISHLIST}`);
+  const { data, error } = useSWR(`${WISHLIST}`);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
-  console.log(mutate,"datadatadatadatadatadatadata");
-
-
-
-
-{console.log(data,"swr data");}
 
   return (
     <section className="pt-2 pb-10">
@@ -56,7 +46,7 @@ export default function WishlistWidget({}) {
           {data?.results?.wishlist?.data?.map((item, i) => {
             return (
               <div key={i}>
-                <ProductCard data={item} isWishlist={true} mutate={mutate}/>
+                <ProductCard data={item} isWishlist={true}/>
               </div>
             );
           })}

@@ -15,10 +15,9 @@ import useGetDeviceType from "@/hooks/useGetDeviceType";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { GET_CART } from '@/constants/apiRoutes';
-import { swrFetcher } from '@/utils/fetcher';
+import { GET_CART } from "@/constants/apiRoutes";
+import { swrFetcher } from "@/utils/fetcher";
 import useSWRFetcher from "@/hooks/swrFetcher";
-
 
 const CartWidget = () => {
   const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
@@ -33,15 +32,16 @@ const CartWidget = () => {
   //       Authorization: `Bearer ${token}`,
   //     },
   //   });
-  
+
   //   return response.data;
   // };
-  
+
   // const { data, error } = useSWR(
   //   token ? `${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}?token=true` : null, fetcher);
 
+  const { data, error } = useSWR(`${GET_CART}?token=true`);
 
-const { data, error } = useSWRFetcher(`${GET_CART}?token=true`, true); 
+  console.log(data,"carrrddd");
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;

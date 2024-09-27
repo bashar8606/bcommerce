@@ -64,10 +64,8 @@ export async function getHomeProducts() {
 
 
 export async function getFilter(slug) {
-    const url = `${FILTER}`;
-    const urlParamsObject = {
-        slug: slug,
-    };
+    const url = `${FILTER}?slug=${slug}`;
+    const urlParamsObject = {};
     const data = await strapiFetch(url, urlParamsObject, options);
     if (data.status === "fulfilled") {
         const result = data.result;

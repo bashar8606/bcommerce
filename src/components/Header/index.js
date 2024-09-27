@@ -32,9 +32,7 @@ import { fetcherWithToken } from "@/utils/fetcher";
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
   const t = useTranslations('Index')
-
   const session = useSession();
-  console.log(session, "sessionsession");
   const authToken = session?.data?.accessToken
   const isLogined = session?.status === "authenticated";
   const [cartCount, setCartCount] = useRecoilState(cartCountState);
@@ -43,7 +41,6 @@ export default function Header() {
   const hasFetchedCart = useRef(false);
 
   useEffect(() => {
-    console.log("-----session-------->");
     const fetchCartData = async () => {
       if (isLogined && cartStateItem?.length === 0 && !hasFetchedCart.current) {
         hasFetchedCart.current = true;

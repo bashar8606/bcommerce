@@ -12,10 +12,10 @@ import { useRecoilState } from "recoil";
 import { errorMessageProductCard } from "@/recoil/atoms";
 import { useWishlistWidget } from "@/widgets/WishlistWidget/useWishlistWidget";
 
-export default function ProductCard({ data, isWishlist, mutate }) {
+export default function ProductCard({ data, isWishlist }) {
   const { selectVariant } = useProductCard();
   const pid=isWishlist?data?.product?.id:data?.id
-  const { handleWishlist, hasWishlist } = useWishlistWidget({data, isWishlist, mutate});
+  const { handleWishlist, hasWishlist } = useWishlistWidget({data, isWishlist});
   const [errorMessages, setErrorMessages] = useRecoilState(
     errorMessageProductCard
   );
