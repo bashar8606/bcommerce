@@ -32,7 +32,7 @@ const GlobalProviders = ({ children, session }) => {
         dedupingInterval: 10000, // Prevents re-fetching the same data within 10 seconds
         // revalidateOnFocus: false,
         revalidateOnReconnect: false,
-        fetcher: (resource, init) => fetcherWithToken(resource, init),
+        fetcher: (resource, init) => fetcherWithToken(resource, init, session),
         ...(typeof window !== "undefined" && {
           provider: localStorageProvider,
         }),

@@ -1,6 +1,6 @@
 "use client";
 import ProductCard from "@/components/ProductCard";
-import { WISHLIST } from "@/constants/apiRoutes";
+import { GET_CART, WISHLIST } from "@/constants/apiRoutes";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 import {
   Breadcrumb,

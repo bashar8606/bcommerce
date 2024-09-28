@@ -1,11 +1,11 @@
-import useSWR, { mutate } from 'swr';
+import useSWR, { mutate, useSWRConfig } from 'swr';
 import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { loginIsOpen, cartCountState, cartState, selectedVariantState, errorMessageProductCard } from "@/recoil/atoms";
 import { addCartItem, addToWishlist, removeCartItem, updateCartItemQty } from '@/lib/getHome';
 import { useSession } from 'next-auth/react';
-import { ADD_CART, ADD_WISHLIST } from '@/constants/apiRoutes';
+import { ADD_CART, ADD_WISHLIST, GET_CART } from '@/constants/apiRoutes';
 import axios from 'axios';
 import { apiFetcher } from '@/utils/fetcher';
 import { fetcherWithToken } from "@/utils/fetcher";
@@ -25,6 +25,7 @@ export const useCartWidget = () => {
 
   const [openLogin, setOpenLogin] =  useRecoilState(loginIsOpen);
   const [cartCount, setCartCount] = useRecoilState(cartCountState);
+  const { mutate } = useSWRConfig();
 
   const getPostOptions = (method, token = null) => {
     const options = {
@@ -76,6 +77,7 @@ export const useCartWidget = () => {
     const url = `${ADD_CART}`;
     const postOptions = getPostOptions("POST",token); // Token is needed
     const data = await apiFetcher(url, formData, postOptions);
+    await mutate(`${GET_CART}?token=true`); 
     return data;
   }
   
@@ -87,6 +89,7 @@ export const useCartWidget = () => {
         setOpenLogin(true)
       } else {
         const res = await addCartItem(item, 1, authToken, variant, null);
+        await mutate(`${GET_CART}?token=true`); 
         if(res.success){
           setCartCount(cartCount + 1)
           setIsOpen(true);
@@ -97,6 +100,7 @@ export const useCartWidget = () => {
             description: "Product is out of stock",
           })
         }
+
        
       }
     } catch (error) {
