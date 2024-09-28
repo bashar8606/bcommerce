@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getSession, session } from "next-auth/react";
 
 const BaseURL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -23,7 +24,13 @@ const BaseURL = process.env.NEXT_PUBLIC_BASE_URL
 const fetcher = url => axios.get(url).then(res => res.data);
 
 const fetcherWithToken = async (url, options = {}) => {
-    const { token } = options;
+    // const { token } = options;
+    const session = await getSession(); 
+    if (!session || !session.accessToken) {
+        const res = await axios.get(`${BaseURL}${url}`);
+        return res.data; // SWR will skip fetching data when this is returned
+      }
+      const token = session.accessToken;
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
     try {
         const res = await axios.get(`${BaseURL}${url}`, { headers });

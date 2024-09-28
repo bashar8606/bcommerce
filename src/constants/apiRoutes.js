@@ -4,7 +4,7 @@ export const ALL_CATEGORIES ="sidebar/categories"
 
 export const FILTER_PRODUCTS = "home/filtered_products"
 export const SINGLE_PRODUCT = "home/product-details"
-export const GET_CART = "carts"
+export const GET_CART = "carts?token=true"
 
 //auth
 export const OTP_SENT = "get-register-login-otp";
