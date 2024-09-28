@@ -89,8 +89,8 @@ export const useCartWidget = () => {
         setOpenLogin(true)
       } else {
         const res = await addCartItem(item, 1, authToken, variant, null);
-        await mutate(`${GET_CART}?token=true`); 
         if(res.success){
+          mutate(`${GET_CART}?token=true`);
           setCartCount(cartCount + 1)
           setIsOpen(true);
         } else {

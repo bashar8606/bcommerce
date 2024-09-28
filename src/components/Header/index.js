@@ -41,7 +41,6 @@ export default function Header() {
   const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
   const hasFetchedCart = useRef(false);
   const { cartLength } = useCartFetcher()
-  console.log(  cartLength, "cart length===>" );
   
   // useEffect(() => {
   //   const fetchCartData = async () => {
@@ -270,7 +269,7 @@ export default function Header() {
               >
                 { isLogined &&
                   <span className="absolute -top-[2px] -right-[2px] text-white text-xs font-medium  px-1 bg-stone-900 rounded-2xl border border-white flex-col justify-center items-center gap-2 inline-flex">
-                    {cartCount}
+                    {cartLength}
                   </span>
                   
                 }
