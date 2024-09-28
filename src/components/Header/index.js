@@ -28,6 +28,7 @@ import { loginIsOpen, cartCountState, cartState } from "@/recoil/atoms";
 import { useEffect, useRef } from "react";
 import { GET_CART } from "@/constants/apiRoutes";
 import { fetcherWithToken } from "@/utils/fetcher";
+import { useCartFetcher } from "./useCartFetcher";
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
@@ -39,21 +40,23 @@ export default function Header() {
   const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
   const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
   const hasFetchedCart = useRef(false);
-
-  useEffect(() => {
-    const fetchCartData = async () => {
-      if (isLogined && cartStateItem?.length === 0 && !hasFetchedCart.current) {
-        hasFetchedCart.current = true;
-      try {
-        const data = await fetcherWithToken(`${GET_CART}?token=true`,{ token: authToken });
-        setCartStateItem(data?.data?.carts);
-        setCartCount(data?.data?.carts?.length);
-      } catch (error) {
-        console.error('Failed to fetch cart data:', error);
-      }
-    }};
-    fetchCartData();
-  },[isLogined, authToken, cartStateItem ])
+  const { cartLength } = useCartFetcher()
+  console.log(  cartLength, "cart length===>" );
+  
+  // useEffect(() => {
+  //   const fetchCartData = async () => {
+  //     if (isLogined && cartStateItem?.length === 0 && !hasFetchedCart.current) {
+  //       hasFetchedCart.current = true;
+  //     try {
+  //       const data = await fetcherWithToken(`${GET_CART}?token=true`,{ token: authToken });
+  //       setCartStateItem(data?.data?.carts);
+  //       setCartCount(data?.data?.carts?.length);
+  //     } catch (error) {
+  //       console.error('Failed to fetch cart data:', error);
+  //     }
+  //   }};
+  //   fetchCartData();
+  // },[isLogined, authToken, cartStateItem ])
 
   return (
     <>
