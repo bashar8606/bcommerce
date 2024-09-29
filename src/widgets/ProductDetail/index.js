@@ -64,7 +64,7 @@ export default function ProductDetail({ data }) {
                 </span>
               </p>
               <p className="text-neutral-400 text-sm line-through">
-                140.76 SAR
+              {productDetail?.price} SAR
               </p>
             </div>
             {datas?.product?.related?.length > 0 && (
@@ -120,6 +120,7 @@ export default function ProductDetail({ data }) {
               </h3>
 
               <p className="text-sm ">
+              {datas?.product?.language_product?.description}
                 Elegant Hand Work Jalabiya. Rich And Comfortable Polyester And
                 Spun Blended Fabric. Contrast Abstract Print All Over.Designed
                 With A Touch Of Velvet To Give A Classy Look.
