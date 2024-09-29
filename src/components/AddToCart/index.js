@@ -29,20 +29,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-import { useState } from "react";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
-import { useRecoilState } from "recoil";
-import { cartState } from "@/recoil/atoms";
-import { useRouter } from "@/i18n/routing";
+import { useCartFetcher } from "../Header/useCartFetcher";
 
 export default function AddToCart({ data, size }) {
   const { addItem, isOpen, setIsOpen, isLoading, addToBag } = useCartWidget();
-  const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
-
-  const router = useRouter();
-
-  const isIncluded = cartStateItem.some((item) => item.product_id === data.id);
+  const { cart } = useCartFetcher();
   const { width } = useGetDeviceType();
 
   // const [isOpen, setIsOpen] = useState(false);
@@ -94,7 +86,7 @@ export default function AddToCart({ data, size }) {
                   className="btn btn-outline-secondary w-full"
                   onClick={() => setIsOpen(false)}
                 >
-                  Continue shopping
+                  Continue shoppings
                 </button>
               </div>
               {/* <DrawerFooter>
@@ -104,6 +96,12 @@ export default function AddToCart({ data, size }) {
               </DrawerClose>
             </DrawerFooter> */}
             </div>
+            {cart && cart?.map((item)=>(
+            <div>
+              {item.product_name
+              }
+            </div>
+          ))}
           </SheetContent>
         </Sheet>
       ) : (
@@ -136,6 +134,12 @@ export default function AddToCart({ data, size }) {
               </DrawerClose>
             </DrawerFooter> */}
             </div>
+            {cart && cart?.map((item)=>(
+            <div>
+              {item.product_name
+              }
+            </div>
+          ))}
           </DrawerContent>
         </Drawer>
       )}

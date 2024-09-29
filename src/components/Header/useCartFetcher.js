@@ -12,5 +12,5 @@ export const useCartFetcher = () => {
         }}
     });
 
-    return { cart: data, cartLength, isLoading: !error && !data, isError: error };
+    return { cart: data?.data?.carts, cartLength, isLoading: !error && !data, isError: error };
 };
