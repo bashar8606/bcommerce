@@ -5,7 +5,7 @@ import { GET_CART } from '@/constants/apiRoutes';
 export const useCartFetcher = () => {
     const [cartLength, setCartLength] = useState(0);  // Local state for cart length
     
-    const { data, error } = useSWR(`${GET_CART}?token=true`, { 
+    const { data, error } = useSWR(`${GET_CART}`, { 
         onSuccess: (data) => {
         if (data) {
             setCartLength(data.data.carts.length); // Set the cart length based on fetched data

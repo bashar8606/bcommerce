@@ -30,7 +30,7 @@ const CheckoutWidget = () => {
   // const { data, error } = useSWR(
   //   token ? `${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}?token=true` : null, fetcher);
 
-  const { data, error } = useSWRFetcher(`${GET_CART}?token=true`, true);
+  const { data, error } = useSWRFetcher(`${GET_CART}`, true);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;

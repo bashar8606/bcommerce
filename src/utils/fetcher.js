@@ -60,7 +60,7 @@ const deleteFetcher = async (url, options = {}) => {
     try {
         const { token } = options;
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const res = await axios.delete(`${BaseURL}${url}`, {headers});
+        const res = await axios.post(`${BaseURL}${url}`, {headers});
         return res.data;
     } catch (err) {
         console.error("Error in POST request:", err);

@@ -130,7 +130,7 @@ export async function updateCartItemQty(id, quantity, token) {
 
 export async function getCart(token) {
    
-    const url = `${GET_CART}?token=true`;
+    const url = `${GET_CART}`;
     const postOptions = getPostOptions("GET", token); // Token is needed
     const data = await apiFetcher(url, null, postOptions);
     return data;

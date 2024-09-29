@@ -77,7 +77,7 @@ export const useCartWidget = () => {
     const url = `${ADD_CART}`;
     const postOptions = getPostOptions("POST",token); // Token is needed
     const data = await apiFetcher(url, formData, postOptions);
-    await mutate(`${GET_CART}?token=true`); 
+    await mutate(`${GET_CART}`); 
     return data;
   }
   
@@ -90,7 +90,7 @@ export const useCartWidget = () => {
       } else {
         const res = await addCartItem(item, 1, authToken, variant, null);
         if(res.success){
-          mutate(`${GET_CART}?token=true`);
+          mutate(`${GET_CART}`);
           setCartCount(cartCount + 1)
           setIsOpen(true);
         } else {
@@ -118,6 +118,7 @@ export const useCartWidget = () => {
         const res = await removeCartItem(id, authToken);
         if(res.success){
           setCartCount(cartCount - 1)
+          mutate(`${GET_CART}`);
         }
         toast({ 
           title: "Cart item not removed",

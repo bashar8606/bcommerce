@@ -55,6 +55,8 @@ const { data, error } = useSWR(`${GET_CART}`);
   if (!data) return <div>Loading...</div>;
   
 
+
+
   return (
     <section className="">
       <div className="container">
