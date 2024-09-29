@@ -28,7 +28,7 @@ import { loginIsOpen, cartCountState, cartState } from "@/recoil/atoms";
 import { useEffect, useRef } from "react";
 import { GET_CART } from "@/constants/apiRoutes";
 import { fetcherWithToken } from "@/utils/fetcher";
-import useSWR, { useSWRConfig } from "swr";
+import { useCartFetcher } from "./useCartFetcher";
 
 export default function Header() {
   const { main, isScrollingDown } = useHeader();
@@ -40,7 +40,8 @@ export default function Header() {
   const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
   const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
   const hasFetchedCart = useRef(false);
-  const { mutate } = useSWRConfig();
+  const { cartLength } = useCartFetcher()
+  
   // useEffect(() => {
   //   const fetchCartData = async () => {
   //     if (isLogined && cartStateItem?.length === 0 && !hasFetchedCart.current) {
@@ -55,13 +56,6 @@ export default function Header() {
   //   }};
   //   fetchCartData();
   // },[isLogined, authToken, cartStateItem ])
-
-  const { data, error } = useSWR(`${GET_CART}`);
-
-  console.log(data?.data?.carts?.length,"cartcount");
-
-  // if (error) return <div>Error: {error.message}</div>;
-  // if (!data) return <div>Loading...</div>;
 
   return (
     <>
@@ -275,7 +269,7 @@ export default function Header() {
               >
                 { isLogined &&
                   <span className="absolute -top-[2px] -right-[2px] text-white text-xs font-medium  px-1 bg-stone-900 rounded-2xl border border-white flex-col justify-center items-center gap-2 inline-flex">
-                    {cartCount}
+                    {cartLength}
                   </span>
                   
                 }
