@@ -8,7 +8,8 @@ export const useCartFetcher = () => {
     const { data, error } = useSWR(`${GET_CART}`, { 
         onSuccess: (data) => {
         if (data) {
-            setCartLength(data.data.carts.length); // Set the cart length based on fetched data
+            const totalQuantity = data?.data?.carts?.reduce((acc, item) => acc + item.quantity, 0);
+            setCartLength(totalQuantity); // Set the cart length based on fetched data
         }}
     });
 
