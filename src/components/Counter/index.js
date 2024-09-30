@@ -5,20 +5,28 @@ import { useState } from "react";
 
 export default function Counter({data}) {
   
-  const { updateItem } = useCartWidget();
+  const { updateItem, removeItem } = useCartWidget();
   const [count, setCount] = useState(data?.quantity);
-  const increment = () => {
+  const increment = async () => {
     const increasedCount = count + 1
-    const res = updateItem(data.id,increasedCount)
-    if(res){
+    const res = await updateItem(data.id,1)
+    if(res.success === true){
       setCount(count + 1);
     }
   };
-  const decrement = () => {
+  
+  const decrement = async () => {
     const decreasedCount = count - 1
-    const res = updateItem(data.id, decreasedCount)
-    if(res){
-      setCount(count - 1);
+    if(decreasedCount === 0){
+      removeItem(data?.id)
+    // if(res.success === true){
+    //   setCount(count - 1);
+    // }
+    } else {
+      const res = await updateItem(data.id, -1)
+      if(res.success === true){
+        setCount(count - 1);
+      }
     }
   };
   return (

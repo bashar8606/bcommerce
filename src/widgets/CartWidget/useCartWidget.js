@@ -138,19 +138,20 @@ export const useCartWidget = () => {
       } else {
         const res = await updateCartItemQty(id, quantity, authToken);
         if(res.success){
+          mutate(`${GET_CART}`)
           toast({ 
             title: "Cart item updated",
             variant: "destructive",
             description: "Friday, February 10, 2023 at 5:57 PM",
           })
-          return true
+          return res
         } else{
           toast({ 
             title: "Cart item not updated",
             variant: "destructive",
             description: "Friday, February 10, 2023 at 5:57 PM",
           })
-          return fasle
+          return res
         }
       }
     } catch (error) {
