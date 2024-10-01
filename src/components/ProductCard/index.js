@@ -25,7 +25,7 @@ export default function ProductCard({ data, isWishlist }) {
   return (
     <div className="group">
       <div className="relative overflow-hidden">
-        <RadioGroup className="border transition-all  duration-500 translate-y-4 opacity-0  transform group-hover:opacity-100  group-hover:translate-y-0 inline-flex px-1 rounded-md items-center py-1 justify-center space-x-[4px] absolute bottom-[4px] -translate-x-[50%] left-[50%] w-auto  z-50  gap-0 bg-white ">
+        {/* <RadioGroup className="border transition-all  duration-500 translate-y-4 opacity-0  transform group-hover:opacity-100  group-hover:translate-y-0 inline-flex px-1 rounded-md items-center py-1 justify-center space-x-[4px] absolute bottom-[4px] -translate-x-[50%] left-[50%] w-auto  z-50  gap-0 bg-white ">
           {data &&
             data?.stock?.map((option) => (
               <Label
@@ -57,7 +57,7 @@ export default function ProductCard({ data, isWishlist }) {
                 <div className="flex-1 ">{option.stock_variant}</div>
               </Label>
             ))}
-        </RadioGroup>
+        </RadioGroup> */}
 
         <div
           className="relative bg-slate-50 overflow-hidden rounded-sm"
@@ -111,15 +111,15 @@ export default function ProductCard({ data, isWishlist }) {
           </span>
           Only {data?.current_stock} left in stock
         </p>
-        {errorMessages[data.id] && (
+        {/* {errorMessages[data.id] && (
           <p style={{ color: "red" }}>{errorMessages[data.id]}</p>
-        )}
+        )} */}
         <div className="pt-4">
-          {/* {data?.has_variant ? (
-            <SelectVariantDialog stock={data?.stock} />
-          ) : ( */}
+          {data?.has_variant ? (
+            <SelectVariantDialog data={data} />
+          ) : (
           <AddToCart data={data} />
-          {/* // )} */}
+          )}
         </div>
       </div>
     </div>
