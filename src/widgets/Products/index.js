@@ -18,9 +18,11 @@ import LoadMoreTrigger from "@/components/LoadmoreTrigger";
 import { BsSliders } from "react-icons/bs";
 import { BsSortDown } from "react-icons/bs";
 import MobileFilter from "./MobileFiter";
+import useGetDeviceType from "@/hooks/useGetDeviceType";
 
 export default function Products({ slug }) {
   const { categories, isLoading, isError } = useCategories({ slug });
+  const {width} = useGetDeviceType()
   const { products, filters, handleFilterChange,handleAttributeChange, handlePriceChange, loadMore } =
     useProducts({ slug });
 
@@ -40,6 +42,7 @@ export default function Products({ slug }) {
           </BreadcrumbList>
         </Breadcrumb>
         <div className="flex">
+          {width>=992&&
           <div className="flex-col-auto lg:w-[260px] border-e hidden lg:block">
             {isLoading ? <div>Loading...</div> : ""}
             <FilterSideBar
@@ -50,6 +53,7 @@ export default function Products({ slug }) {
               handlePriceChange={handlePriceChange}
             />
           </div>
+          }
           <div className="flex-col-auto w-full lg:w-[calc(100%-260px)]">
             <CategoryInnerSlider data={products?.results?.page?.categories} />
             <div className="flex justify-between mb-4 border-b lg:px-4 py-3">
@@ -59,9 +63,10 @@ export default function Products({ slug }) {
                 </h2>
               </div>
               <div className="fixed bg-white bottom-0 left-0 w-full z-50 border-b py-1">
-                <div className="grid grid-cols-2">
+              {width<992&&
+                <div className="grid lg:hidden grid-cols-2">
                   <div>
-                    <MobileFilter />
+                    <MobileFilter  data={categories} />
                   </div>
                   <div>
                     <div>
@@ -74,6 +79,7 @@ export default function Products({ slug }) {
                     </div>
                   </div>
                 </div>
+}
               </div>
               <div className="hidden lg:block">
                 <select

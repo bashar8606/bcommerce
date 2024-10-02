@@ -3,8 +3,6 @@ import FilterCheckBox from "../FilterCheckBox";
 import FilterPriceRange from "../FilterPriceRange";
 
 export default function FilterSideBar({ data, catId, handleFilterChange,handleAttributeChange, filters, handlePriceChange }) {
-  console.log(data, "asdasdad");
-  
   return (
     <div className="">
       <h2 className="text-md font-semibold">FILTERS</h2>

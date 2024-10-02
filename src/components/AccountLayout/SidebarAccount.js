@@ -19,12 +19,9 @@ export default function SidebarAccount({data, path}) {
             <div className="mb-6">
                 {data?.map((item, i)=>{
                     return(
-                      <>
-                        {console.log(item?.url, path,"pathname")}
-                        <Link key={i} href={`${item?.url}`} className={`${item?.url?.startsWith(path) ? 
+                        <Link key={i} href={`${item?.url}`}  className={`${item?.url?.startsWith(path) ? 
     'bg-black text-white border-transparent' : 
     'text-black border-gray-200'}  px-2 py-4  border-b rounded font-medium  gap-1.5 flex`}>{item?.title}</Link>
-                        </>
                     )
                 })}
             </div>

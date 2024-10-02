@@ -2,7 +2,9 @@
 
 import { AddressModal } from "../AddressModal";
 
-export default function AddressItem() {
+export default function AddressItem({ data }) {
+  console.log(data, "ssssssssss");
+
   return (
     <div className="p-6 rounded border border-gray-200 flex space-x-3 mb-4">
       <div className="flex-col-auto w-auto">
@@ -11,19 +13,19 @@ export default function AddressItem() {
 
       <div className="flex-1 w-full">
         <h3 className="text-black text-base font-semibold mb-3">
-          Joseph Samual
+          {data?.name}
           <span className="ms-2 px-1 py-0.5 bg-neutral-200 rounded inline-block text-stone-500 text-xs font-medium ">
             Work
           </span>
         </h3>
 
         <p className=" text-neutral-500 text-sm font-normal leading-tight mb-4">
-          mo1 building , dubai, UAE,{" "}
+          {data?.building}, {data?.area}, {data?.city}, {data?.country}
         </p>
         <p className="text-neutral-500 text-sm font-normal  leading-tight mb-4">
           Mobile:
           <span className="text-black text-sm font-medium leading-tight">
-            +971 9123 456 7890
+            {data?.phone_no}
           </span>
         </p>
 
@@ -32,8 +34,7 @@ export default function AddressItem() {
             <button className="btn btn-outline-secondary btn-sm me-3">
               Remove
             </button>
-            <AddressModal/>
-           
+            <AddressModal data={data} />
           </div>
           <div className="text-black text-sm font-normal">Default address</div>
         </div>

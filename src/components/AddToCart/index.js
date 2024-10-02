@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/sheet";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 import { useCartFetcher } from "../Header/useCartFetcher";
+import CartItem from "../CartItem";
 
 export default function AddToCart({ data, size }) {
   const { addItem, isOpen, setIsOpen, isLoading, addToBag } = useCartWidget();
@@ -79,6 +80,9 @@ export default function AddToCart({ data, size }) {
                     </div>
                   </div>
                 </DrawerTitle>
+                {cart && cart?.map((item, i) => {
+              return <CartItem isSidebar={true} data={item} key={i} />;
+            })}
               </DrawerHeader>
               <div className="  px-3 grid grid-cols-2 gap-2 ">
                 <button className="btn btn-grad w-full">Checkout</button>
@@ -96,12 +100,7 @@ export default function AddToCart({ data, size }) {
               </DrawerClose>
             </DrawerFooter> */}
             </div>
-            {cart && cart?.map((item)=>(
-            <div>
-              {item.product_name
-              }
-            </div>
-          ))}
+           
           </SheetContent>
         </Sheet>
       ) : (

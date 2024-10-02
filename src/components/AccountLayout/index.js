@@ -29,7 +29,7 @@ const AccountLayout = ({ children }) => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div class=" w-full max-w-5xl mx-auto ">
+        <div className=" w-full max-w-5xl mx-auto ">
           <div className="flex md:space-x-5 col-span-12">
             <div className="flex-col-auto w-[280px] hidden md:block">
               <SidebarAccount path={pathname} data={links} />

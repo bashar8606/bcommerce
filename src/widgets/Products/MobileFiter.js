@@ -1,4 +1,7 @@
 "use client";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import {
   Sheet,
   SheetContent,
@@ -8,50 +11,113 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { BsSliders } from "react-icons/bs";
+import { useState } from "react";
+import { MdArrowBack } from "react-icons/md";
 
-export default function MobileFilter({ slug }) {
+export default function MobileFilter({ data }) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <Sheet>
-      <SheetTrigger className="w-full text-center text-sm font-medium py-2 inline-flex items-center justify-center border-e border-[#e4e4e4]">
+    <>
+      <button
+        className="w-full text-center text-sm font-medium py-2 inline-flex items-center justify-center border-e border-[#e4e4e4]"
+        onClick={() => setIsOpen(true)}
+      >
         <span className="inline-block mr-3 text-base ">
           <BsSliders />
         </span>
         Filter{" "}
-      </SheetTrigger>
-      <SheetContent side={"left"} className="px-0 h-full pt-0">
-        <div className="flex flex-col h-full">
-          <div className="px-2.5 py-10 relative overflow-hidden bg-gradient-to-br from-stone-200 to-amber-100 rounded-md justify-end items-start gap-[23px] inline-flex">
-            <img
-              className="w-[93px] left-6 absolute rounded-md shadow"
-              src="https://via.placeholder.com/93x241"
-            />
-            <div className="relative w-[50%] ml-auto">
-              <div className=" text-neutral-950 text-lg font-bold uppercase leading-[18px] mb-2">
-                GRAB YOUR
-                <br />
-                ITEM NOW
-              </div>
-              <div className=" text-orange-400 text-xs font-medium uppercase leading-3">
-                SIGN UP/LOGIN
-              </div>
+      </button>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetContent side={"left"} className="px-0 h-full pt-0 w-full pb-0">
+          <div className="w-full  bg-white shadow grid-cols-3 grid relative z-20 py-[14px] px-3 items-center">
+              <button onClick={() => setIsOpen(false)} className="text-2xl">
+                <MdArrowBack />
+              </button>
+            <div className=" text-stone-950 text-lg font-semibold text-center">
+              Filters
+            </div>
+            <div className="text-right text-neutral-500 text-base font-medium ">
+              Clear all
             </div>
           </div>
 
-          <div className="py-4 px-3  rounded-md justify-start items-center gap-2.5 flex">
-            <div className="w-9 h-9 bg-zinc-100 rounded-[110px] justify-center items-center gap-2.5 flex" />
-            <div className="relative">
-              <div className=" text-neutral-950 text-base font-normal  capitalize leading-none tracking-tight mb-1">
-                Hi Username
-              </div>
-              <div className=" text-orange-400 text-xs font-medium capitalize leading-3">
-                View Profile
-              </div>
+          <div className="grid grid-cols-2 absolute bottom-0 left-0 z-10 w-full bg-white shadow py-2 px-3 gap-3">
+            <div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-full text-center text-black text-base font-semibold py-[10px] rounded border border-zinc-300 justify-center items-center inline-flex"
+              >
+                Close
+              </button>
+            </div>
+            <div>
+              <button className="w-full text-center text-white text-base font-semibold py-[10px] rounded border border-zinc-300 justify-center bg-black items-center inline-flex">
+                Apply
+              </button>
             </div>
           </div>
 
-          <div className="px-3 "></div>
-        </div>
-      </SheetContent>
-    </Sheet>
+          <Tabs
+            defaultValue="tab0"
+            className="w-full flex h-full"
+            orientation="vertical"
+          >
+            <TabsList className="flex flex-col justify-start h-auto w-[146px] flex-col-auto p-0 bg-stone-50">
+              {data?.results?.attributes?.map((item, i) => {
+                return (
+                  <TabsTrigger
+                    className="text-left rounded-none block w-full pl-4 pr-2 py-4 text-stone-950 text-sm font-normal shadow-none border-b border-gray-200 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-black"
+                    value={`tab${i}`}
+                    key={i}
+                  >
+                    {item?.title}
+                  </TabsTrigger>
+                );
+              })}
+              <TabsTrigger
+                className="text-left rounded-none block w-full pl-4 pr-2 py-4 text-stone-950 text-sm font-normal shadow-none border-b border-gray-200 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-black"
+                value="Price"
+              >
+                Password
+              </TabsTrigger>
+            </TabsList>
+
+            <div className="grow w-full px-3">
+              {data?.results?.attributes?.map((item, i) => {
+                return (
+                  <TabsContent value={`tab${i}`} key={i}>
+                    <div className="pt-5 pb-3">
+                      {item?.attribute_value?.map((item1, i1) => {
+                        return (
+                          <div
+                            className="flex items-center space-x-2 mb-[18px]"
+                            key={i1}
+                          >
+                            <Checkbox id={item1?.id} />
+                            <label
+                              htmlFor={item1?.id}
+                              className="text-sm  leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              {item1?.value}
+                              <span className="text-black opacity-50">
+                                (64)
+                              </span>
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </TabsContent>
+                );
+              })}
+
+              <TabsContent value="price">
+                Change your password here.
+              </TabsContent>
+            </div>
+          </Tabs>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }

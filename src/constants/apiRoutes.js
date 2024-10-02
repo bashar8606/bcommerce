@@ -22,9 +22,10 @@ export const WISHLIST = "user/wishlists"
 
 
 
-export const ALL_ADDRESSES = "user/get-all-address"
+export const ALL_ADDRESSES = "user/shipping-addresses"
+export const ADD_ADDRESS = ""
 
-export const ALL_ORDERS ="user/order-list"
+export const ALL_ORDERS ="user/order-list?page=1"
 
 export const ADD_WISHLIST ="user/add-to-wishlist"
 export const REMOVE_WISHLIST ="user/remove-wishlist-product"
