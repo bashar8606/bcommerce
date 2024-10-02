@@ -93,7 +93,11 @@ export const useCartWidget = () => {
           mutate(`${GET_CART}`);
           setCartCount(cartCount + 1)
           setIsOpen(true);
+          setSelectedVariant([])
+          setErrorMessages({})
         } else {
+          setSelectedVariant([])
+          setErrorMessages({})
           toast({
             // title: "Prod",
             variant: "destructive",

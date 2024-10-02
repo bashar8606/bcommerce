@@ -16,12 +16,16 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 import { useRecoilState } from "recoil";
-import { cartState } from "@/recoil/atoms";
+import { cartState, errorMessageProductCard } from "@/recoil/atoms";
 import { useRouter } from "@/i18n/routing";
+import useProductCard from "../ProductCard/useProductCard";
+import AddToCart from "../AddToCart";
 
-export default function SelectVariantDialog({ stock }) {
-  const { addItem, isOpen, setIsOpen, isLoading } = useCartWidget();
+export default function SelectVariantDialog({ data }) {
+  const { addItem, isOpen, setIsOpen, isLoading,addToBag,  } = useCartWidget();
   const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
+  const { selectVariant,stockFromVariant } = useProductCard();
+  const [errorMessages, setErrorMessages] = useRecoilState(errorMessageProductCard);
 
   const router = useRouter();
 
@@ -45,8 +49,21 @@ export default function SelectVariantDialog({ stock }) {
             </DialogDescription>
           </DialogHeader>
 
-          <RadioGroup className="flex items-center space-x-2">
-            {stock?.map((option) => (
+          <RadioGroup className="flex items-center space-x-2"
+            onValueChange={(value)=>
+              // console.log("------------------->",value,data)
+              {
+                selectVariant(
+                  data?.id,
+                  value,
+                  stockFromVariant(data?.stock, value),
+                  null
+                ),
+                  setErrorMessages({});
+              }
+            }
+          >
+            {data?.stock?.map((option) => (
               <Label
                 key={option.stock_variant}
                 htmlFor={option.stock_variant}
@@ -68,6 +85,20 @@ export default function SelectVariantDialog({ stock }) {
               </Label>
             ))}
           </RadioGroup>
+          {errorMessages[data.id] && (
+          <p style={{ color: "red" }}>{errorMessages[data.id]}</p>
+        )}
+          <AddToCart data={data} />
+          {/* <button
+          className="w-full btn btn-grad btn-lg  mb-3 "
+          // onClick={() => addItem(data)}
+          onClick={() => {
+            data?.has_variant ? addToBag(data?.id) : addItem(data?.id, null);
+          }}
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Add to Bag"}
+        </button> */}
         </DialogContent>
       </Dialog>
     </>

@@ -52,8 +52,17 @@ export default function useProductCard (){
       });
     };
 
+    const stockFromVariant = (data, value) => {
+      const foundStock = data.find(item => item.stock_variant === value);
+      // Get the current_stock value if found, otherwise return null or a default value
+      const currentStock = foundStock ? foundStock.current_stock : null;
+
+      return currentStock
+    }
+
 
     return {
-        selectVariant
+        selectVariant,
+        stockFromVariant
     }
 }
