@@ -134,7 +134,7 @@ export default function AddToCart({ data, size }) {
             </DrawerFooter> */}
             </div>
             {cart && cart?.map((item)=>(
-            <div>
+            <div key={i}>
               {item.product_name
               }
             </div>
