@@ -23,7 +23,8 @@ export function ProfileDropdown() {
     // Clear all user-specific data (cart, wishlist, etc.)
  
     mutate(`${GET_CART}lang=${locale}&token=true`, null, { revalidate: false });
-    mutate(`${WISHLIST}`, null, { revalidate: false });
+    // mutate(`${WISHLIST}lang=${locale}`, null, { revalidate: false });
+    mutate(WISHLIST(), null, { revalidate: false });
 
     // Perform the actual logout logic
     signOut();

@@ -11,11 +11,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import useSWR, { useSWRConfig } from "swr";
+import { useLocale } from "next-intl";
 
 export default function WishlistWidget({}) {
   const { width } = useGetDeviceType();
+  const locale = useLocale();
 
-  const { data, error } = useSWR(`${WISHLIST}`);
+  // const { data, error } = useSWR(`${WISHLIST}lang=${locale}`);
+  const { data, error } = useSWR(WISHLIST()); 
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
