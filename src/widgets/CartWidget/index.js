@@ -18,11 +18,13 @@ import axios from "axios";
 import { GET_CART } from '@/constants/apiRoutes';
 import { swrFetcher } from '@/utils/fetcher';
 import useSWRFetcher from "@/hooks/swrFetcher";
+import { useCartFetcher } from "@/components/Header/useCartFetcher";
 
 
 const CartWidget = () => {
-  const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
+  // const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
   const { width } = useGetDeviceType();
+  const { cart, calculations, isLoading} = useCartFetcher()
 
   // const session = useSession();
   // const token = session?.data?.accessToken
@@ -49,10 +51,10 @@ const CartWidget = () => {
   //       },
   //     }).then((res) => res.json()));
 
-const { data, error } = useSWR(`${GET_CART}`); 
+// const { data, error } = useSWR(`${GET_CART}`); 
 
-  if (error) return <div>Error: {error.message}</div>;
-  if (!data) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+  if (!isLoading) return <div>Loading...</div>;
   
 
 
@@ -106,7 +108,7 @@ const { data, error } = useSWR(`${GET_CART}`);
       <div className="container px-0 lg:px-3">
         <div className="flex flex-wrap lg:-mx-4">
           <div className="flex-col-auto w-full lg:w-[72%] lg:px-4">
-            {data?.data?.carts?.map((item, i) => {
+            {cart?.map((item, i) => {
               return <CartItem data={item} key={i} />;
             })}
 
@@ -115,7 +117,7 @@ const { data, error } = useSWR(`${GET_CART}`);
             ))} */}
           </div>
           <div className="flex-col-auto w-full lg:w-[28%] lg:px-4">
-            <OrderSummary data={data?.data?.calculations} />
+            <OrderSummary data={calculations} />
             {/* <p>Total: ${cart.total}</p>
             <button onClick={() => addItem({ id: 'new-item', name: 'New Item', price: 10 })}>
               Add Item

@@ -27,8 +27,9 @@ import { useLocale } from "next-intl";
 import { useHeader } from "./useHeader";
 
 export function LangSwitcher() {
-  const locale = useLocale();
   const { onSelectChange } = useHeader()
+  const locale = useLocale();
+  
 
   return (
     <>
@@ -43,7 +44,7 @@ export function LangSwitcher() {
                 alt="sdfsdf"
               />
             </span>
-            العربية
+            {locale === 'en' ?'English': 'العربية' }
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
@@ -116,7 +117,7 @@ export function LangSwitcher() {
                 alt="sdfsdf"
               />
             </span>
-            العربية
+              {locale === 'en' ?'English': 'العربية' }
           </button>
         </DrawerTrigger>
         <DrawerContent>
@@ -130,10 +131,16 @@ export function LangSwitcher() {
             <div className="  px-3">
               <div className="">
                 <div className="self-stretch gap-1 flex mb-3">
-                  <button className="text-white text-xs font-medium  w-full px-3.5 py-2 bg-black rounded">
+                  <button 
+                    className="text-white text-xs font-medium  w-full px-3.5 py-2 bg-black rounded"
+                    onClick={() => onSelectChange('en')}
+                  >
                     English
                   </button>
-                  <button className="text-black text-xs font-medium w-full px-3.5 py-[9px] bg-gray-200 rounded">
+                  <button 
+                    className="text-black text-xs font-medium w-full px-3.5 py-[9px] bg-gray-200 rounded"
+                    onClick={() => onSelectChange('ar')}
+                  >
                     العربية
                   </button>
                 </div>

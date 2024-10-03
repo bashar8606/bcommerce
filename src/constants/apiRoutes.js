@@ -4,8 +4,9 @@ export const ALL_CATEGORIES ="sidebar/categories"
 
 export const FILTER_PRODUCTS = "home/filtered_products"
 export const SINGLE_PRODUCT = "home/product-details"
-export const GET_CART = "carts?token=true"
+// export const GET_CART = "carts?token=true"
 
+export const GET_CART = "carts?"
 //auth
 export const OTP_SENT = "get-register-login-otp";
 export const OTP_VERIFY = "verify-register-login-otp";

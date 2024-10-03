@@ -9,6 +9,7 @@ import { ADD_CART, ADD_WISHLIST, GET_CART } from '@/constants/apiRoutes';
 import axios from 'axios';
 import { apiFetcher } from '@/utils/fetcher';
 import { fetcherWithToken } from "@/utils/fetcher";
+import { useLocale } from 'next-intl';
 
 
 export const useCartWidget = () => {
@@ -21,11 +22,11 @@ export const useCartWidget = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageProductCard);
   const [selectedVariant, setSelectedVariant] = useRecoilState(selectedVariantState);
-
-
   const [openLogin, setOpenLogin] =  useRecoilState(loginIsOpen);
   const [cartCount, setCartCount] = useRecoilState(cartCountState);
   const { mutate } = useSWRConfig();
+
+  const locale = useLocale();
 
   const getPostOptions = (method, token = null) => {
     const options = {
@@ -77,7 +78,7 @@ export const useCartWidget = () => {
     const url = `${ADD_CART}`;
     const postOptions = getPostOptions("POST",token); // Token is needed
     const data = await apiFetcher(url, formData, postOptions);
-    await mutate(`${GET_CART}`); 
+    await mutate(`${GET_CART}lang=${locale}&token=true`); 
     return data;
   }
   
@@ -90,7 +91,7 @@ export const useCartWidget = () => {
       } else {
         const res = await addCartItem(item, 1, authToken, variant, null);
         if(res.success){
-          mutate(`${GET_CART}`);
+          mutate(`${GET_CART}lang=${locale}&token=true`);
           setCartCount(cartCount + 1)
           setIsOpen(true);
           setSelectedVariant([])
@@ -122,7 +123,7 @@ export const useCartWidget = () => {
         const res = await removeCartItem(id, authToken);
         if(res.success){
           setCartCount(cartCount - 1)
-          mutate(`${GET_CART}`);
+          mutate(`${GET_CART}lang=${locale}&token=true`);
         }
         toast({ 
           title: "Cart item not removed",
@@ -142,7 +143,7 @@ export const useCartWidget = () => {
       } else {
         const res = await updateCartItemQty(id, quantity, authToken);
         if(res.success){
-          mutate(`${GET_CART}`)
+          mutate(`${GET_CART}lang=${locale}&token=true`)
           toast({ 
             title: "Cart item updated",
             variant: "destructive",

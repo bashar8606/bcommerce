@@ -14,15 +14,17 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useSWRConfig } from "swr";
 import { GET_CART, WISHLIST } from "@/constants/apiRoutes";
+import { useLocale } from "next-intl";
 
 export function ProfileDropdown() {
   const { mutate }=useSWRConfig()
+  const locale = useLocale();
   const handleLogout = () => {
     // Clear all user-specific data (cart, wishlist, etc.)
  
-    mutate(`${GET_CART}`, null, { revalidate: false });
+    mutate(`${GET_CART}lang=${locale}&token=true`, null, { revalidate: false });
     mutate(`${WISHLIST}`, null, { revalidate: false });
-    
+
     // Perform the actual logout logic
     signOut();
   };
