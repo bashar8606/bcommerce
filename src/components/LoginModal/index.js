@@ -40,7 +40,8 @@ export function LoginModal() {
     session,
     validationSchema,
     inValid,
-    setIsOpen,
+    setIsOpen,setIsPhone,
+    isPhone,
     isOpen,
     expired,
     setIsOtpSent,
@@ -49,7 +50,7 @@ export function LoginModal() {
     signIn("google", { callbackUrl: "/" });
   };
 
-  const [isPhone, setIsPhone] = useState(true);
+
 
   const [phoneValue, setPhoneValue] = useState("");
 
@@ -174,8 +175,10 @@ export function LoginModal() {
                               </>
                             ) : (
                               <>
-                                <Label htmlFor="name">E-mail</Label>
-                                <Input id="username" defaultValue="" />
+                                <Label htmlFor="id">E-mail</Label>
+                                {/* <Input id="username" defaultValue="" /> */}
+                                <Input id="email" name="email" value={values.email} onChange={handleChange} className={`mt-1 block w-full p-3 rounded-md border ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`} />
+                              <ErrorMessage name="email" component="div" className="text-red-600 text-xs" />
                               </>
                             )}
 
@@ -210,7 +213,7 @@ export function LoginModal() {
                           </button>
                           <div className="text-center">
                             <p className="text-xs mt-5 text-[#565656]">
-                              By continuing, you agree to Voizzit’s{" "}
+                              By continuing, you agree to IKXXA{" "}
                               <Link href="/">Terms of Service</Link> and{" "}
                               <Link href="/">Privacy Policy</Link>
                             </p>
@@ -220,7 +223,7 @@ export function LoginModal() {
                     ) : (
                       <div className="">
                         <div className="mb-8">
-                          <h3 className=" text-black text-2xl font-semibold ">
+                          <h3 className=" text-black text-2xl font-semibold mb-1">
                             Verify OTP
                           </h3>
                           <p className="text-zinc-500 text-base">
@@ -229,6 +232,7 @@ export function LoginModal() {
                           </p>
                         </div>
                         <div className="space-y-4">
+                          <div  className="mb-5">
                           <InputOTP
                             maxLength={6}
                             value={values.otp}
@@ -254,6 +258,7 @@ export function LoginModal() {
                           {inValid && (
                             <p className="text-red-700 text-xs">Invalid OTP</p>
                           )}
+                          </div>
 
                           <button
                             type="submit"

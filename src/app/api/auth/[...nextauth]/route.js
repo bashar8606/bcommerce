@@ -17,15 +17,33 @@ const handler = NextAuth({
             credentials: {
                 country_code: { label: "Country Code", type: "text" },
                 phone: { label: "Phone Number", type: "text" },
+                email:{label:"email", type:"text"},
                 otp: { label: "OTP", type: "text" },
             },
             async authorize(credentials, req) {
                 try {
-                    const verifyOtpResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${OTP_VERIFY}`, {
-                        country_code: credentials.country_code,
-                        phone: credentials.phone_number,
-                        otp: credentials.otp
-                    });
+
+                    let payload = {};
+
+                    if (credentials.email) {
+                        // Email OTP
+                        payload = {
+                            email: credentials.email,
+                            otp: credentials.otp,
+                        };
+                    } else if (credentials.phone && credentials.country_code) {
+                        // Phone OTP (with country code)
+                        payload = {
+                            country_code: credentials.country_code,
+                            phone: credentials.phone,
+                            otp: credentials.otp,
+                        };
+                    } else {
+                        throw new Error('Invalid login credentials');
+                    }
+
+
+                    const verifyOtpResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${OTP_VERIFY}`, payload);
                    
 
                     if (verifyOtpResponse.status === 200) {
