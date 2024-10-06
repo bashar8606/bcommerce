@@ -22,6 +22,10 @@ export const useCartWidget = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageProductCard);
   const [selectedVariant, setSelectedVariant] = useRecoilState(selectedVariantState);
+
+  const [variantOpen, setIsVariantOpen] = useState(false)
+
+
   const [openLogin, setOpenLogin] =  useRecoilState(loginIsOpen);
   const [cartCount, setCartCount] = useRecoilState(cartCountState);
   const { mutate } = useSWRConfig();
@@ -237,6 +241,7 @@ export const useCartWidget = () => {
     // isError: error,
     addItem,
     removeItem,
+    variantOpen, setIsVariantOpen,
     isOpen, 
     setIsOpen,
     updateItem,

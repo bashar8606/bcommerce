@@ -13,7 +13,7 @@ import { loginIsOpen } from "@/recoil/atoms";
 export const useLogin = ({ }) => {
     const router = useRouter();
     const session = useSession();
-
+    const [isPhone, setIsPhone] = useState(true);
     const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
 
     const [isOtpSent, setIsOtpSent] = useState(false);
@@ -23,15 +23,36 @@ export const useLogin = ({ }) => {
    
    
     const validationSchema = Yup.object().shape({
-        countryCode: Yup.string().required("Country code is required"),
-        phoneNumber: Yup.string()
-        .required('Phone number is required')
-        .min(8, 'Phone number must be at least 8 characters')
-        .test('is-valid-phone', 'Phone number is not valid', (value) => {
-          if (!value) return false;
-          const phoneRegex = /^\+?[1-9]\d{1,14}$/; 
-          return phoneRegex.test(value);
-        }),
+        // countryCode: Yup.string().required("Country code is required"),
+        countryCode: Yup.string().when("isPhone", {
+            is: true,
+            then: Yup.string().required("Country code is required"),
+          }),
+        phoneNumber: Yup.string().when("isPhone", {
+            is: true,
+            then: Yup.string()
+              .required("Phone number is required")
+              .min(8, "Phone number must be at least 8 characters")
+              .test('is-valid-phone', 'Phone number is not valid', (value) => {
+                if (!value) return false;
+                const phoneRegex = /^\+?[1-9]\d{1,14}$/; 
+                return phoneRegex.test(value);
+              }),
+          }),
+          email: Yup.string().when("isPhone", {
+            is: false,
+            then: Yup.string()
+              .email("Invalid email address")
+              .required("Email is required"),
+          }),
+        // phoneNumber: Yup.string()
+        // .required('Phone number is required')
+        // .min(8, 'Phone number must be at least 8 characters')
+        // .test('is-valid-phone', 'Phone number is not valid', (value) => {
+        //   if (!value) return false;
+        //   const phoneRegex = /^\+?[1-9]\d{1,14}$/; 
+        //   return phoneRegex.test(value);
+        // }),
         otp: Yup.string().when('isOtpSent', {
             is: true,
             then: Yup.string().required("OTP is required").min(6, "OTP must be 6 digits")
@@ -40,12 +61,16 @@ export const useLogin = ({ }) => {
 
     const sendOtp = async (values) => {
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${OTP_SENT}`, {
-                country_code: values.countryCode,
-                phone: values.phoneNumber,
-            });
+           
+            const payload = isPhone
+        ? { country_code: values.countryCode, phone: values.phoneNumber }
+        : { email: values.email };
 
-            console.log(response.data,"response of send");
+
+        console.log(payload,"response of send");
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${OTP_SENT}`, payload);
+
+          
             // && response.data.resend_count>0
 
             if (response.data.success === true ) {
@@ -62,13 +87,35 @@ export const useLogin = ({ }) => {
     };
 
     const handleSubmit = async (values) => {
+   
+        let payload = {};
+       
+    if (isPhone) {
+        // Phone OTP
+        if (!values.countryCode || !values.phoneNumber) {
+            alert("Phone and country code are required for phone OTP.");
+            return;
+        }
+        payload = { country_code: values.countryCode, phone: values.phoneNumber, otp: values.otp };
+    } else {
+        // Email OTP
+        if (!values.email) {
+            alert("Email is required for email OTP.");
+            return;
+        }
+        payload = { email: values.email, otp: values.otp };
+    }
+
+  
+
         try {
             const result = await signIn('credentials', {
                 redirect: false,
                 // country_code: values.countryCode,
-                phone: "+966111111111",
+                // phone: "+966111111111",
                 // phone: values.phoneNumber,
-                otp: values.otp,
+                // otp: values.otp,
+                ...payload,
             });
 
             if (result.error) {
@@ -93,6 +140,8 @@ export const useLogin = ({ }) => {
         session,
         validationSchema,
         inValid, 
+        setIsPhone,
+        isPhone,
         setIsOtpSent,
         expired
     };

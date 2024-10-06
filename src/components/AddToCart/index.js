@@ -80,10 +80,12 @@ export default function AddToCart({ data, size }) {
                     </div>
                   </div>
                 </DrawerTitle>
+                </DrawerHeader>
+                <div className="px-3">
                 {cart && cart?.map((item, i) => {
               return <CartItem isSidebar={true} data={item} key={i} />;
             })}
-              </DrawerHeader>
+            </div>
               <div className="  px-3 grid grid-cols-2 gap-2 ">
                 <button className="btn btn-grad w-full">Checkout</button>
                 <button

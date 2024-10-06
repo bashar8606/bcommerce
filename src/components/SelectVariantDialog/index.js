@@ -22,7 +22,7 @@ import useProductCard from "../ProductCard/useProductCard";
 import AddToCart from "../AddToCart";
 
 export default function SelectVariantDialog({ data }) {
-  const { addItem, isOpen, setIsOpen, isLoading,addToBag,  } = useCartWidget();
+  const { addItem, isOpen, setIsOpen, isLoading,addToBag,variantOpen, setIsVariantOpen  } = useCartWidget();
   const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
   const { selectVariant,stockFromVariant } = useProductCard();
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageProductCard);
@@ -36,10 +36,11 @@ export default function SelectVariantDialog({ data }) {
   const productItem = {};
   return (
     <>
-      <Dialog>
-        <DialogTrigger className="btn btn-outline-secondary">
+       <button className="btn btn-outline-secondary" onClick={()=>{setIsVariantOpen(true)}}>
           Add to Bag
-        </DialogTrigger>
+        </button>
+      <Dialog open={variantOpen} onOpenChange={setIsVariantOpen}>
+     
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>

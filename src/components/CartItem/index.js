@@ -51,7 +51,7 @@ export default function CartItem({ data, isSidebar }) {
                   10% Off
                 </span>
               </p>
-              <h3 className=" text-stone-950 text-sm font-normal  leading-tight mb-[10px] lg:mb-3">
+              <h3 className=" text-stone-950 text-sm font-normal  leading-tight mb-2 lg:mb-3">
                 {data?.product_name}
               </h3>
               <p className=" mb-2 lg:mb-2">
@@ -65,15 +65,16 @@ export default function CartItem({ data, isSidebar }) {
             <div>
               <div className="flex items-end justify-between">
                 <div className="flex items-center">
-                  {width >= 992 && <Counter data={data} />}
+                  {(width >= 992) && <Counter data={data} />}
                   <div className="lg:ml-3 text-zinc-800 text-sm lg:text-base font-semibold ">
                     {data?.formatted_sub_total / data?.quantity} SAR
+                    {!isSidebar&&
                     <span className="ml-1 text-gray-400 text-sm font-semibold line-through">
                       {data?.formatted_price} SAR
-                    </span>
+                    </span>}
                   </div>
                 </div>
-                {width >= 992 && (
+                {(width >= 992&&!isSidebar )&& (
                   <div>
                     <button
                       className="text-black text-xs font-semibold inline-flex items-center "
@@ -94,13 +95,13 @@ export default function CartItem({ data, isSidebar }) {
       {width < 992 && (
         <div className="w-full flex mt-5">
           <Counter data={data} />
-
+          {!isSidebar&&
           <button className="text-black w-full text-xs font-semibold inline-flex items-center justify-center">
             <span className="text-lg me-2">
               <BsHeart />
             </span>
             Move to Wishlist
-          </button>
+          </button>}
         </div>
       )}
     </div>
