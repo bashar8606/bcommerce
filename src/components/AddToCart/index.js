@@ -43,7 +43,6 @@ export default function AddToCart({ data, size }) {
   const productItem = {};
   return (
     <>
-    
       {size === "lg" ? (
         <button
           className="w-full btn btn-grad btn-lg  mb-3 "
@@ -80,12 +79,13 @@ export default function AddToCart({ data, size }) {
                     </div>
                   </div>
                 </DrawerTitle>
-                </DrawerHeader>
-                <div className="px-3">
-                {cart && cart?.map((item, i) => {
-              return <CartItem isSidebar={true} data={item} key={i} />;
-            })}
-            </div>
+              </DrawerHeader>
+              <div className="px-3">
+                {cart &&
+                  cart?.map((item, i) => {
+                    return <CartItem isSidebar={true} data={item} key={i} />;
+                  })}
+              </div>
               <div className="  px-3 grid grid-cols-2 gap-2 ">
                 <button className="btn btn-grad w-full">Checkout</button>
                 <button
@@ -102,7 +102,6 @@ export default function AddToCart({ data, size }) {
               </DrawerClose>
             </DrawerFooter> */}
             </div>
-           
           </SheetContent>
         </Sheet>
       ) : (
@@ -119,15 +118,7 @@ export default function AddToCart({ data, size }) {
                   </div>
                 </DrawerTitle>
               </DrawerHeader>
-              <div className="  px-3 grid grid-cols-2 gap-2 ">
-                <button className="btn btn-grad w-full">Checkout</button>
-                <button
-                  className="btn btn-outline-secondary w-full"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Continue shopping
-                </button>
-              </div>
+
               {/* <DrawerFooter>
               <Button>Submit</Button>
               <DrawerClose asChild>
@@ -135,12 +126,22 @@ export default function AddToCart({ data, size }) {
               </DrawerClose>
             </DrawerFooter> */}
             </div>
-            {cart && cart?.map((item)=>(
-            <div key={i}>
-              {item.product_name
-              }
+            <div className="max-h-[60vh] overflow-y-auto pb-11">
+            {cart &&
+              cart?.map((item, i) => {
+                return <CartItem isSidebar={true} data={item} key={i} />;
+              })}
+              </div>
+
+            <div className="bg-white py-2  px-3 grid grid-cols-2 gap-2 absolute bottom-0 left-0 w-full">
+              <button className="btn btn-grad w-full">Checkout</button>
+              <button
+                className="btn btn-outline-secondary w-full"
+                onClick={() => setIsOpen(false)}
+              >
+                Continue shopping
+              </button>
             </div>
-          ))}
           </DrawerContent>
         </Drawer>
       )}
