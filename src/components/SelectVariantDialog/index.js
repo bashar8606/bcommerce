@@ -16,14 +16,15 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import useGetDeviceType from "@/hooks/useGetDeviceType";
 import { useRecoilState } from "recoil";
-import { cartState, errorMessageProductCard } from "@/recoil/atoms";
+import { cartState, errorMessageProductCard, selectedVariantState } from "@/recoil/atoms";
 import { useRouter } from "@/i18n/routing";
 import useProductCard from "../ProductCard/useProductCard";
 import AddToCart from "../AddToCart";
 
 export default function SelectVariantDialog({ data }) {
-  const { addItem, isOpen, setIsOpen, isLoading,addToBag,variantOpen, setIsVariantOpen  } = useCartWidget();
+  const { addItem, isOpen, setIsOpen, isLoading,addToBag,variantOpen, setIsVariantOpen, getVariantByProductID  } = useCartWidget();
   const [cartStateItem, setCartStateItem] = useRecoilState(cartState);
+  const [selectedVariant, setSelectedVariant] = useRecoilState(selectedVariantState);
   const { selectVariant,stockFromVariant } = useProductCard();
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageProductCard);
 
