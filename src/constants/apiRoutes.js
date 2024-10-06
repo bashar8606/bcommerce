@@ -1,8 +1,8 @@
-import { useLocale } from "next-intl";
+// import { useLocale } from "next-intl";
 
-export const getLocale = () => {
-    return useLocale();
-};
+// export const getLocale = () => {
+//     return useLocale();
+// };
 
 export const HOME = "home/page";
 export const FILTER = "home/filter_data";
@@ -25,11 +25,11 @@ export const UPDATE_CART = "cart-update"
 //Delete method
 export const DELETE_CART = "cart-delete"
 
-// export const WISHLIST = "user/wishlists?"
-export const WISHLIST = () => {
-    const locale = getLocale();
-    return `user/wishlists?lang=${locale}`;
-  };
+export const WISHLIST = "user/wishlists?"
+// export const WISHLIST = () => {
+//     const locale = getLocale();
+//     return `user/wishlists?lang=${locale}`;
+//   };
 
 export const ALL_ADDRESSES = "user/shipping-addresses"
 export const ADD_ADDRESS = ""

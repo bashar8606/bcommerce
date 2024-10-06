@@ -23,10 +23,8 @@ export const useWishlistWidget = ({ data, isWishlist = false }) => {
     } else {
       setHasWishlist(true);
     }
-    // const wishlistKey = `${WISHLIST}lang=${locale}`;
-    // await mutate(wishlistKey);
-    await mutate(WISHLIST()); // Refetch and update cache
-
+    const wishlistKey = `${WISHLIST}lang=${locale}`;
+    await mutate(wishlistKey);
     return data;
   };
 
