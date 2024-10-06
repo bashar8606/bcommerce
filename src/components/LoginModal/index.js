@@ -227,8 +227,9 @@ export function LoginModal() {
                             Verify OTP
                           </h3>
                           <p className="text-zinc-500 text-base">
-                            Code has been sent to {values?.countryCode}&nbsp;
-                            {values?.phoneNumber} <span className="text-teal-500 text-base font-medium underline ">change</span>
+
+                            Code has been sent to {isPhone?values?.countryCode+values?.phoneNumber:values?.email}
+                            <span className="text-teal-500 text-base font-medium underline ">change</span>
                           </p>
                         </div>
                         <div className="space-y-4">
