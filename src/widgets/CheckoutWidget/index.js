@@ -10,9 +10,11 @@ import { GET_CART } from "@/constants/apiRoutes";
 import { swrFetcher } from "@/utils/fetcher";
 import useSWRFetcher from "@/hooks/swrFetcher";
 import AddressItem from "@/components/AddressItem";
+import { useCartFetcher } from "@/components/Header/useCartFetcher";
 
 const CheckoutWidget = () => {
   const { width } = useGetDeviceType();
+  const { isLoading, calculations } = useCartFetcher()
 
   // const session = useSession();
   // const token = session?.data?.accessToken
@@ -30,10 +32,10 @@ const CheckoutWidget = () => {
   // const { data, error } = useSWR(
   //   token ? `${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}?token=true` : null, fetcher);
 
-  const { data, error } = useSWRFetcher(`${GET_CART}`, true);
+  // const { data, error } = useSWRFetcher(`${GET_CART}`, true);
 
-  if (error) return <div>Error: {error.message}</div>;
-  if (!data) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+  if (!isLoading) return <div>Loading...</div>;
 
   return (
     <section className="">
@@ -75,7 +77,7 @@ const CheckoutWidget = () => {
             </div>
           </div>
           <div className="flex-col-auto w-full lg:w-[28%] lg:px-4">
-            <OrderSummary data={data?.data?.calculations} />
+            <OrderSummary data={calculations} />
             {/* <p>Total: ${cart.total}</p>
             <button onClick={() => addItem({ id: 'new-item', name: 'New Item', price: 10 })}>
               Add Item
@@ -98,7 +100,7 @@ const CheckoutWidget = () => {
             </div>
           </div>
           <div className="flex-col-auto w-full lg:w-[28%] lg:px-4">
-            <OrderSummary data={data?.data?.calculations} />
+            <OrderSummary data={calculations} />
             {/* <p>Total: ${cart.total}</p>
             <button onClick={() => addItem({ id: 'new-item', name: 'New Item', price: 10 })}>
               Add Item

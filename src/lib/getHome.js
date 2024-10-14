@@ -128,13 +128,13 @@ export async function updateCartItemQty(id, quantity, token) {
     return data;
 }
 
-export async function getCart(token) {
+// export async function getCart(token) {
    
-    const url = `${GET_CART}`;
-    const postOptions = getPostOptions("GET", token); // Token is needed
-    const data = await apiFetcher(url, null, postOptions);
-    return data;
-}
+//     const url = `${GET_CART}`;
+//     const postOptions = getPostOptions("GET", token); // Token is needed
+//     const data = await apiFetcher(url, null, postOptions);
+//     return data;
+// }
 
 
 export async function addToWishlist(id, token) {

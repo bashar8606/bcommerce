@@ -13,10 +13,9 @@ import { LiaUserSolid } from "react-icons/lia";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useSWRConfig } from "swr";
-import { GET_CART, WISHLIST } from "@/constants/apiRoutes";
 
 export function ProfileDropdown() {
-  const { mutate } = useSWRConfig();
+  const { mutate }=useSWRConfig()
   const handleLogout = async () => {
     await signOut();
     mutate(() => true, null, { revalidate: false });
