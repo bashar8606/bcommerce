@@ -50,9 +50,9 @@ export default function OrderItem({ data }) {
             />
           </Link>
         </div>
-        <div className=" flex-1 w-full h-full">
-          <div className="flex space-x-3">
-            <div className="flex-1 flex flex-col justify-between">
+        <div className=" flex-1 w-full">
+          <div className="flex space-x-3 items-end  h-full">
+            <div className="flex-1 flex flex-col justify-between w-full">
               <div>
                 <h3 className=" text-stone-950 text-sm font-normal  leading-tight mb-2">
                 {data?.product?.product_name}
@@ -72,6 +72,9 @@ export default function OrderItem({ data }) {
                 </p>
               </div>
             </div>
+            <div>
+              <button className=" text-teal-500 text-sm font-semibold inline-block underline leading-none tracking-wide text-nowrap">Cancel item</button>
+              </div>
           </div>
         </div>
       </div>

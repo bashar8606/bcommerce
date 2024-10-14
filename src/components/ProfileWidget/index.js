@@ -2,27 +2,25 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import * as Yup from "yup";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import AppBack from "../AppBack";
-import { useSession } from "next-auth/react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useRecoilState } from "recoil";
 import { userDetail } from "@/recoil/atoms";
 import { Field, Form, Formik } from "formik";
+import { UPDATE_PROFILE } from "@/constants/apiRoutes";
+import { axiosPostWithToken } from "@/lib/getHome";
 
 export default function ProfileWidget() {
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(null);
   const [userDetails, setUserDetails] = useRecoilState(userDetail);
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState(null);
 
+  // Form validation schema
   const validationSchema = Yup.object({
     first_name: Yup.string().required("First name is required"),
     last_name: Yup.string().required("Last name is required"),
@@ -34,54 +32,60 @@ export default function ProfileWidget() {
   const initialValues = {
     first_name: userDetails?.first_name || "",
     last_name: userDetails?.last_name || "",
-    gender: "",
+    gender: "M",
+    phone: "+966111111111",
     date_of_birth: null,
+  };
+
+  // Handle form submission
+  const handleFormSubmit = async (values) => {
+    setLoading(true);
+    const data = {
+      first_name: values.first_name,
+      last_name: values.last_name,
+      gender: values.gender,
+      phone: values.phone,
+      date_of_birth: values.date_of_birth,
+    };
+
+    try {
+      const result = await axiosPostWithToken(UPDATE_PROFILE, data); // Post form data
+      setResponse(result); // Set response state
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    } finally {
+      setLoading(false); // Stop loading state
+    }
   };
 
   return (
     <>
-      {/* <AppBack /> */}
-
       <div className="md:p-6 md:bg-white md:rounded md:border md:border-stone-200 mb-4">
-        <h3 className=" text-black text-lg font-semibold mb-5 leading-relaxed">
+        <h3 className="text-black text-lg font-semibold mb-5 leading-relaxed">
           Account Information
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 xl:gap-8">
-          <div className="">
-            <div className="flex justify-between items-end mb-2">
-              <Label className="mb-0" htmlFor="email">
-                Email address
-              </Label>
-              {/* <button className=" text-teal-500 text-sm font-semibold underline tracking-wide">
-                Edit
-              </button> */}
-            </div>
+          <div>
+            <Label htmlFor="email">Email address</Label>
             <Input
               type="email"
               id="email"
               value={`${userDetails?.email}`}
               placeholder="Enter here"
-              disabled={userDetails?.email}
+              disabled={true}
             />
           </div>
 
-          <div className="">
-            <div className="flex justify-between items-end mb-2">
-              <Label className="mb-0" htmlFor="phone">
-                Mobile
-              </Label>
-              {/* <button className=" text-teal-500 text-sm font-semibold underline tracking-wide">
-                Edit
-              </button> */}
-            </div>
+          <div>
+            <Label htmlFor="phone">Mobile</Label>
             <Input type="number" id="phone" value="" placeholder="Enter here" />
           </div>
         </div>
       </div>
 
       <div className="md:p-6 md:bg-white md:rounded md:border md:border-stone-200 md:mb-4">
-        <h3 className=" text-black text-lg font-semibold mb-5 leading-relaxed">
+        <h3 className="text-black text-lg font-semibold mb-5 leading-relaxed">
           My profile
         </h3>
 
@@ -89,23 +93,12 @@ export default function ProfileWidget() {
           initialValues={initialValues}
           validationSchema={validationSchema}
           enableReinitialize={true}
-          onSubmit={(values) => {
-            console.log("Form values:", values);
-            // Handle form submission
-          }}
+          onSubmit={handleFormSubmit} // Submit form and post data
         >
-          {({
-            values,
-            handleChange,
-            setFieldValue,
-            errors,
-            touched,
-            isValid,
-            dirty,
-          }) => (
+          {({ values, setFieldValue, errors, touched, isValid, dirty }) => (
             <Form>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-9">
-                <div className="">
+                <div>
                   <Label htmlFor="first_name">First name</Label>
                   <Field
                     as={Input}
@@ -119,14 +112,14 @@ export default function ProfileWidget() {
                         : ""
                     }
                   />
-                  {errors.first_name && touched.first_name ? (
+                  {errors.first_name && touched.first_name && (
                     <div className="text-red-500 text-sm">
                       {errors.first_name}
                     </div>
-                  ) : null}
+                  )}
                 </div>
 
-                <div className="">
+                <div>
                   <Label htmlFor="last_name">Last name</Label>
                   <Field
                     as={Input}
@@ -140,14 +133,14 @@ export default function ProfileWidget() {
                         : ""
                     }
                   />
-                  {errors.last_name && touched.last_name ? (
+                  {errors.last_name && touched.last_name && (
                     <div className="text-red-500 text-sm">
                       {errors.last_name}
                     </div>
-                  ) : null}
+                  )}
                 </div>
 
-                <div className="">
+                <div>
                   <Label htmlFor="gender">Gender</Label>
                   <Field
                     as={Input}
@@ -159,12 +152,12 @@ export default function ProfileWidget() {
                       errors.gender && touched.gender ? "border-red-500" : ""
                     }
                   />
-                  {errors.gender && touched.gender ? (
+                  {errors.gender && touched.gender && (
                     <div className="text-red-500 text-sm">{errors.gender}</div>
-                  ) : null}
+                  )}
                 </div>
 
-                <div className="">
+                <div>
                   <Label htmlFor="date_of_birth">Date of Birth</Label>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -191,23 +184,30 @@ export default function ProfileWidget() {
                       />
                     </PopoverContent>
                   </Popover>
-                  {errors.date_of_birth && touched.date_of_birth ? (
+                  {errors.date_of_birth && touched.date_of_birth && (
                     <div className="text-red-500 text-sm">
                       {errors.date_of_birth}
                     </div>
-                  ) : null}
+                  )}
                 </div>
               </div>
               <button
                 type="submit"
                 className="btn btn-primary btn-lg w-48"
-                disabled={!dirty} 
+                disabled={!dirty}
               >
-                Update
+                {loading ? 'Updating...' : 'Update'}
               </button>
             </Form>
           )}
         </Formik>
+
+        {/* Optionally display response */}
+        {response && (
+          <div className="mt-4">
+            <p>Response: {JSON.stringify(response)}</p>
+          </div>
+        )}
       </div>
     </>
   );

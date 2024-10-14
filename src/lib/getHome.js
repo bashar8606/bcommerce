@@ -1,8 +1,8 @@
 import { FILTER, HOME, SINGLE_PRODUCT, ADD_CART, DELETE_CART, GET_CART, UPDATE_CART, ADD_WISHLIST } from "@/constants/apiRoutes";
 import { deleteFetcher, apiFetcher } from "@/utils/fetcher";
 import strapiFetch from "@/utils/strapiFetch";
-import { useSession} from "next-auth/react";
-
+import axios from 'axios';
+import { getSession } from 'next-auth/react';
 const options = {
     method: 'GET',
     // headers: {
@@ -144,3 +144,27 @@ export async function addToWishlist(id, token) {
     const data = await apiFetcher(url, null, postOptions);
     return data;
 }
+
+
+
+export const axiosPostWithToken = async (url, data) => {
+  try {
+    const session = await getSession();
+    
+    const token = session?.accessToken;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`, // Include token in Authorization header
+        'Content-Type': 'application/json', // Set content type
+      },
+    };
+
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, data, config);
+
+    return response.data;
+  } catch (error) {
+    console.error('Error making POST request:', error);
+    throw error;
+  }
+};

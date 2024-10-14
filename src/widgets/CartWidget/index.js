@@ -19,6 +19,7 @@ import { GET_CART } from '@/constants/apiRoutes';
 import { swrFetcher } from '@/utils/fetcher';
 import useSWRFetcher from "@/hooks/swrFetcher";
 import { useCartFetcher } from "@/components/Header/useCartFetcher";
+import NoCart from "./NoCart";
 
 
 const CartWidget = () => {
@@ -26,39 +27,8 @@ const CartWidget = () => {
   const { width } = useGetDeviceType();
   const { cart, calculations, isLoading} = useCartFetcher()
 
-  // const session = useSession();
-  // const token = session?.data?.accessToken
-
-  // const fetcher = async (url) => {
-  //   const response = await axios.get(url, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
+  // if (cart?.length===0) return <NoCart/>;
   
-  //   return response.data;
-  // };
-  
-  // const { data, error } = useSWR(
-  //   token ? `${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}?token=true` : null, fetcher);
-
-  // const { data, error } = useSWR(token?[`${process.env.NEXT_PUBLIC_BASE_URL}${GET_CART}`, token]:null, // Only fetch if token exists
-  //   ([url, token]) =>
-  //     fetch(url, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         'Content-Type': 'application/json',
-  //       },
-  //     }).then((res) => res.json()));
-
-// const { data, error } = useSWR(`${GET_CART}`); 
-
-  // if (error) return <div>Error: {error.message}</div>;
-  if (!isLoading) return <div>Loading...</div>;
-  
-
-
-
   return (
     <section className="">
       <div className="container">

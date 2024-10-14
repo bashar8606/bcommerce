@@ -40,19 +40,20 @@ export function LoginModal() {
     session,
     validationSchema,
     inValid,
-    setIsOpen,setIsPhone,
+    setIsOpen,
+    setIsPhone,
     isPhone,
     isOpen,
     expired,
     setIsOtpSent,
   } = useLogin({});
+  
   const handleGoogleSignIn = () => {
     signIn("google", { callbackUrl: "/" });
   };
 
-
-
   const [phoneValue, setPhoneValue] = useState("");
+  const [otpValue, setOtpValue] = useState(""); // Store OTP value locally
 
   const handlePhoneChange = (value, setFieldValue) => {
     setPhoneValue(value);
@@ -69,6 +70,8 @@ export function LoginModal() {
     }
   };
 
+  const isOtpValid = otpValue.length === 6; // Check if OTP length is 6
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -76,8 +79,8 @@ export function LoginModal() {
           {t("LOGIN")}
         </button>
       </DialogTrigger>
-      <DialogContent className="h-screen md:h-auto sm:max-w-[410px] p-0  rounded-1">
-        <div className=" ">
+      <DialogContent className="h-screen md:h-auto sm:max-w-[410px] p-0 rounded-1">
+        <div className="">
           {session?.status === "authenticated" ? (
             <button onClick={signOut}>Logout</button>
           ) : (
@@ -88,12 +91,13 @@ export function LoginModal() {
                 otp: "",
               }}
               validationSchema={validationSchema}
-              onSubmit={(values) => {
+              onSubmit={(values, { setSubmitting }) => {
                 if (!isOtpSent) {
                   sendOtp(values);
                 } else {
                   handleSubmit(values);
                 }
+                setSubmitting(false); // Reset submitting state
               }}
             >
               {({
@@ -103,6 +107,7 @@ export function LoginModal() {
                 setFieldValue,
                 errors,
                 touched,
+                isSubmitting,
               }) => (
                 <Form onSubmit={handleSubmit}>
                   {width < 992 && (
@@ -122,36 +127,36 @@ export function LoginModal() {
                     {!isOtpSent ? (
                       <div className="">
                         <div className="text-left mb-7">
-                          <p className=" text-black text-sm font-medium ">
+                          <p className="text-black text-sm font-medium">
                             Welcome back!
                           </p>
-                          <h3 className=" text-black text-2xl font-semibold ">
+                          <h3 className="text-black text-2xl font-semibold">
                             Sign in to your account
                           </h3>
                         </div>
                         <div className="space-y-4">
                           <div>
                             <div>
-                              <div className=" p-0.5 bg-gray-200 rounded-3xl justify-start items-start inline-flex mb-7">
+                              <div className="p-0.5 bg-gray-200 rounded-3xl justify-start items-start inline-flex mb-7">
                                 <div
-                                  className={`px-6 py-1.5 cursor-pointer rounded-3xl  text-xs font-medium ${
+                                  className={`px-6 py-1.5 cursor-pointer rounded-3xl text-xs font-medium ${
                                     isPhone
                                       ? "bg-black text-white"
-                                      : " bg-gray-200  text-black"
+                                      : "bg-gray-200 text-black"
                                   }`}
                                   onClick={() => setIsPhone(true)}
                                 >
-                                  Phone{" "}
+                                  Phone
                                 </div>
                                 <div
-                                  className={`px-6 py-1.5 cursor-pointer rounded-3xl  text-xs font-medium ${
+                                  className={`px-6 py-1.5 cursor-pointer rounded-3xl text-xs font-medium ${
                                     isPhone
-                                      ? "bg-gray-200  text-black"
-                                      : " bg-black text-white"
+                                      ? "bg-gray-200 text-black"
+                                      : "bg-black text-white"
                                   }`}
                                   onClick={() => setIsPhone(false)}
                                 >
-                                  E mail
+                                  E-mail
                                 </div>
                               </div>
                             </div>
@@ -175,38 +180,39 @@ export function LoginModal() {
                               </>
                             ) : (
                               <>
-                                <Label htmlFor="id">E-mail</Label>
-                                {/* <Input id="username" defaultValue="" /> */}
-                                <Input id="email" name="email" value={values.email} onChange={handleChange} required className={`mt-1 block w-full p-3 rounded-md border ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`} />
-                              <ErrorMessage name="email" component="div" className="text-red-600 text-xs mt-2" />
-                          
-                        
+                                <Label htmlFor="email">E-mail</Label>
+                                <Input
+                                  id="email"
+                                  name="email"
+                                  value={values.email}
+                                  onChange={handleChange}
+                                  required
+                                  className={`mt-1 block w-full p-3 rounded-md border ${
+                                    errors.email && touched.email
+                                      ? "border-red-500"
+                                      : "border-gray-300"
+                                  }`}
+                                />
+                                <ErrorMessage
+                                  name="email"
+                                  component="div"
+                                  className="text-red-600 text-xs mt-2"
+                                />
                               </>
                             )}
-
-                            {expired && (
-                              <div className="text-red-600 text-xs mt-2">
-                                Retry attempts over. Try after 1 hour
-                              </div>
-                            )}
-                            {errors.phoneNumber && touched.phoneNumber ? (
-                              <div className="text-red-600 text-xs mt-2">
-                                {errors.phoneNumber}
-                              </div>
-                            ) : null}
-
-                            {/* <ErrorMessage name="countryCode" component="div" className="text-red-600 text-xs" /> */}
                           </div>
 
                           <button
                             type="submit"
                             className="btn btn-lg btn-primary w-full"
+                            disabled={isSubmitting}
                           >
-                            Send OTP
+                            {isSubmitting ? "Loading..." : "Send OTP"}
                           </button>
                           <button
                             onClick={handleGoogleSignIn}
                             className="btn btn-lg border w-full flex justify-center items-center"
+                            disabled={isSubmitting} // Disable while submitting
                           >
                             <span className="me-2 text-xl">
                               <FcGoogle />
@@ -225,56 +231,67 @@ export function LoginModal() {
                     ) : (
                       <div className="">
                         <div className="mb-8">
-                          <h3 className=" text-black text-2xl font-semibold mb-1">
+                          <h3 className="text-black text-2xl font-semibold mb-1">
                             Verify OTP
                           </h3>
                           <p className="text-zinc-500 text-base">
-
-                            Code has been sent to {isPhone?values?.countryCode+values?.phoneNumber:values?.email}
-                            <span className="text-teal-500 text-base font-medium underline " onClick={() => setIsOtpSent(false)}>change</span>
+                            Code has been sent to{" "}
+                            {isPhone
+                              ? values?.countryCode + values?.phoneNumber
+                              : values?.email}
                           </p>
                         </div>
                         <div className="space-y-4">
-                          <div  className="mb-5">
-                          <InputOTP
-                            maxLength={6}
-                            value={values.otp}
-                            onChange={(value) =>
-                              handleChange({ target: { name: "otp", value } })
-                            }
-                          >
-                            <InputOTPGroup className="justify-between gap-2 mb-0">
-                              {[...Array(6)].map((_, index) => (
-                                <InputOTPSlot
-                                  className="text-2xl h-[50px]"
-                                  key={index}
-                                  index={index}
-                                />
-                              ))}
-                            </InputOTPGroup>
-                          </InputOTP>
-                          <ErrorMessage
-                            name="otp"
-                            component="div"
-                            className="text-red-600 text-xs"
-                          />
-                          {inValid && (
-                            <p className="text-red-700 text-xs mt-2">Invalid OTP</p>
-                          )}
+                          <div className="mb-5">
+                            <InputOTP
+                              maxLength={6}
+                              value={otpValue}
+                              onChange={(value) => {
+                                setOtpValue(value); // Update OTP value in state
+                                handleChange({
+                                  target: { name: "otp", value },
+                                });
+                              }}
+                            >
+                              <InputOTPGroup className="justify-between gap-2 mb-0">
+                                {[...Array(6)].map((_, index) => (
+                                  <InputOTPSlot
+                                    className="text-2xl h-[50px]"
+                                    key={index}
+                                    index={index}
+                                  />
+                                ))}
+                              </InputOTPGroup>
+                            </InputOTP>
+                            <ErrorMessage
+                              name="otp"
+                              component="div"
+                              className="text-red-600 text-xs"
+                            />
+                            {inValid && (
+                              <p className="text-red-700 text-xs mt-2">
+                                Invalid OTP
+                              </p>
+                            )}
                           </div>
 
                           <button
                             type="submit"
                             className="btn btn-lg btn-primary w-full"
+                            disabled={!isOtpValid || isSubmitting} // Disable if OTP is not valid or submitting
                           >
-                            Verify OTP
+                            {isSubmitting ? "Loading..." : "Verify OTP"}
                           </button>
                           <div className="text-center">
                             <p className="text-xs mt-5 text-[#565656]">
                               Didn&apos;t get OTP Code{" "}
-                              <button onClick={() => setIsOtpSent(false)}>
+                              <button
+                                className="text-teal-500 font-medium underline ml-2 cursor-pointer"
+                                onClick={() => setIsOtpSent(false)}
+                                disabled={isSubmitting} // Disable while submitting
+                              >
                                 Resend OTP
-                              </button>{" "}
+                              </button>
                             </p>
                           </div>
                         </div>
@@ -285,38 +302,6 @@ export function LoginModal() {
               )}
             </Formik>
           )}
-          {/* 
-          <div className="grid gap-4 pb-4">
-            <div className="">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                defaultValue="Pedro Duarte"
-                className="col-span-3"
-              />
-            </div>
-            <div className=" gap-4">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
-          </div> */}
-
-          {/* <div className=" ">
-            <button className="btn btn-primary btn-lg w-full mb-4 ">
-              Login
-            </button>
-            <button className="btn btn-primary btn-lg w-full mb-4 ">
-              {" "}
-              Log in with Google{" "}
-            </button>
-
-            <p className=" text-center text-black text-sm font-medium">
-              Don’t have an account?{" "}
-              <Link className="text-teal-500 text-sm font-semibold  ">
-                Sign up
-              </Link>{" "}
-            </p>
-          </div> */}
         </div>
       </DialogContent>
     </Dialog>

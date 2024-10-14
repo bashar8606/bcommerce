@@ -12,16 +12,22 @@ import {
 } from "@/components/ui/breadcrumb";
 import useSWR, { useSWRConfig } from "swr";
 import { useLocale } from "next-intl";
-
+import { Suspense } from "react";
+import { WishlistSkeleton } from "./WishlistSkeleton";
+import NoWishlist from "./NoWishlist";
 export default function WishlistWidget({}) {
   const { width } = useGetDeviceType();
   const locale = useLocale();
 
   const { data, error } = useSWR(`${WISHLIST}lang=${locale}`);
 
-  if (error) return <div>Error: {error.message}</div>;
-  if (!data) return <div>Loading...</div>;
-
+  // if (error) return <div>Error: {error.message}</div>;
+  if (!data)
+    return (
+      <div>
+        <WishlistSkeleton />
+      </div>
+    );
 
   return (
     <section className="pt-2 pb-10">
@@ -39,21 +45,28 @@ export default function WishlistWidget({}) {
             </BreadcrumbList>
           </Breadcrumb>
         )}
-        <h2 className="text-stone-950 text-2xl font-medium mb-4">
-          My Wishlist{" "}
-          <span className="text-neutral-400 text-sm font-medium">
-            {data?.results?.wishlist?.total} items
-          </span>
-        </h2>
-        <div className="grid grid-cols-5 gap-4 py-4">
-          {data?.data?.favourite_products?.map((item, i) => {
-            return (
-              <div key={i}>
-                <ProductCard data={item} isWishlist={true}/>
-              </div>
-            );
-          })}
-        </div>
+        {data?.data?.favourite_products?.length > 1 ? (
+          <div>
+            <h2 className="text-stone-950 text-2xl font-medium mb-4">
+              My Wishlist{" "}
+              <span className="text-neutral-400 text-sm font-medium">
+                {data?.results?.wishlist?.total} items
+              </span>
+            </h2>
+
+            <div className="grid grid-cols-2 md:grid-cols-md-3 lg:grid-cols-md-4 xl:grid-cols-5 gap-4 py-4">
+              {data?.data?.favourite_products?.map((item, i) => {
+                return (
+                  <div key={i}>
+                    <ProductCard data={item} isWishlist={true} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <NoWishlist />
+        )}
       </div>
     </section>
   );

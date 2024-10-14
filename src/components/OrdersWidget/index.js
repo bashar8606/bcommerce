@@ -15,10 +15,11 @@ export default function OrdersWidget({}) {
   return (
     <div className="p-6 bg-white rounded border border-stone-200 mb-4">
       <h3 className=" text-black text-lg font-semibold mb-5 leading-relaxed">
-        Orders <button onClick={()=>mutate(`${ALL_ORDERS}`)}>dsf</button>
+        Orders 
       </h3>
+      {/* <button onClick={()=>mutate(`${ALL_ORDERS}`)}></button> */}
       <Tabs defaultValue="Recent">
-        <TabsList>
+        <TabsList className="bg-transparent">
           <TabsTrigger value="Recent">Recent</TabsTrigger>
           <TabsTrigger value="Delivered">Delivered</TabsTrigger>
           <TabsTrigger value="Cancelled">Cancelled</TabsTrigger>

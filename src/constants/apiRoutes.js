@@ -36,7 +36,11 @@ export const ADD_ADDRESS = ""
 
 export const ALL_ORDERS ="user/orders"
 export const TRACK_ORDER ="user/track-order"
+export const CANCEL_ORDER="user/cancel-order?id="
+export const RETURN_ORDER="user/return-order?id="
  
 
 export const ADD_WISHLIST ="user/add-to-wishlist"
 export const REMOVE_WISHLIST ="user/remove-wishlist-product"
+
+export const UPDATE_PROFILE ="user/update-profile"
