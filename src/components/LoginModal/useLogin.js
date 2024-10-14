@@ -39,12 +39,12 @@ export const useLogin = ({ }) => {
                 return phoneRegex.test(value);
               }),
           }),
-          email: Yup.string().when("isPhone", {
-            is: false,
-            then: Yup.string()
-              .email("Invalid email address")
-              .required("Email is required"),
-          }),
+          email: Yup.string()
+    .email("Invalid email")
+    .when("isPhone", {
+      is: false, // Only validate when isPhone is false
+      then: Yup.string().required("Email is required"),
+    }),
         // phoneNumber: Yup.string()
         // .required('Phone number is required')
         // .min(8, 'Phone number must be at least 8 characters')

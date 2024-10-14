@@ -1,19 +1,22 @@
 
 import { Link } from "@/i18n/routing";
+import { userDetail } from "@/recoil/atoms";
 import React from "react";
+import { useRecoilState } from "recoil";
 
 
 export default function SidebarAccount({data, path}) {
+  const [userDetails, setUserDetails] = useRecoilState(userDetail);
   return (
     <div>
       <div className="p-6 bg-white rounded border border-stone-200 ">
           <div className="">
             <div className="pb-4 border-b">
               <div className=" text-black text-base font-semibold mb-2">
-                Hello David!
+                Hello {userDetails?.first_name}!
               </div>
               <div className=" text-stone-500 text-sm font-medium ">
-                johndoe@gmail.com
+              {userDetails?.email}
               </div>
             </div>
             <div className="mb-6">

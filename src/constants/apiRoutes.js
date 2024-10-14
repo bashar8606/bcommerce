@@ -25,7 +25,9 @@ export const WISHLIST = "user/wishlists"
 export const ALL_ADDRESSES = "user/shipping-addresses"
 export const ADD_ADDRESS = ""
 
-export const ALL_ORDERS ="user/order-list?page=1"
+export const ALL_ORDERS ="user/orders"
+export const TRACK_ORDER ="user/track-order"
+ 
 
 export const ADD_WISHLIST ="user/add-to-wishlist"
 export const REMOVE_WISHLIST ="user/remove-wishlist-product"

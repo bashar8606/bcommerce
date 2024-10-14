@@ -125,23 +125,3 @@ export default function ProductCard({ data, isWishlist }) {
     </div>
   );
 }
-
-// "id": 2571,
-// "slug": "mandarin-collar-hand-embroidered-jalabiya-cj1044-beige",
-// "category_id": 15,
-// "product_name": "Mandarin Collar Hand Embroidered Jalabiya CJ1044",
-// "special_discount_type": "flat",
-// "special_discount_check": 220,
-// "discount_percentage": 229,
-// "image_190x230": "https://www.ikkxa.com/public/images/20240729102942image_320x320_media_171.jpg",
-// "price": 449,
-// "rating": 0,
-// "reviews_count": 0,
-// "current_stock": 10,
-// "reward": 0,
-// "minimum_order_quantity": 1,
-// "todays_deal": 0,
-// "has_variant": 1,
-// "user_wishlist": false,
-// "is_catalog": false,
-// "is_classified": false

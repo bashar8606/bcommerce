@@ -177,8 +177,10 @@ export function LoginModal() {
                               <>
                                 <Label htmlFor="id">E-mail</Label>
                                 {/* <Input id="username" defaultValue="" /> */}
-                                <Input id="email" name="email" value={values.email} onChange={handleChange} className={`mt-1 block w-full p-3 rounded-md border ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`} />
-                              <ErrorMessage name="email" component="div" className="text-red-600 text-xs" />
+                                <Input id="email" name="email" value={values.email} onChange={handleChange} required className={`mt-1 block w-full p-3 rounded-md border ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`} />
+                              <ErrorMessage name="email" component="div" className="text-red-600 text-xs mt-2" />
+                          
+                        
                               </>
                             )}
 
@@ -229,7 +231,7 @@ export function LoginModal() {
                           <p className="text-zinc-500 text-base">
 
                             Code has been sent to {isPhone?values?.countryCode+values?.phoneNumber:values?.email}
-                            <span className="text-teal-500 text-base font-medium underline ">change</span>
+                            <span className="text-teal-500 text-base font-medium underline " onClick={() => setIsOtpSent(false)}>change</span>
                           </p>
                         </div>
                         <div className="space-y-4">
@@ -257,7 +259,7 @@ export function LoginModal() {
                             className="text-red-600 text-xs"
                           />
                           {inValid && (
-                            <p className="text-red-700 text-xs">Invalid OTP</p>
+                            <p className="text-red-700 text-xs mt-2">Invalid OTP</p>
                           )}
                           </div>
 

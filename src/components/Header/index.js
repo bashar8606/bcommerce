@@ -24,7 +24,7 @@ import { LoginModal } from "../LoginModal";
 import {useTranslations} from 'next-intl'
 import { ProfileDropdown } from "./ProfileDropdown";
 import { useRecoilState } from "recoil";
-import { loginIsOpen, cartCountState, cartState } from "@/recoil/atoms";
+import { loginIsOpen, cartCountState, cartState, userDetail } from "@/recoil/atoms";
 import { useEffect, useRef } from "react";
 import { GET_CART } from "@/constants/apiRoutes";
 import { fetcherWithToken } from "@/utils/fetcher";
@@ -41,6 +41,12 @@ export default function Header() {
   const [isOpen, setIsOpen] =  useRecoilState(loginIsOpen);
   const hasFetchedCart = useRef(false);
   const { cartLength } = useCartFetcher()
+
+  const [userDetails, setUserDetails] = useRecoilState(userDetail)
+  useEffect(() => {
+    setUserDetails(session?.data?.user)
+  }, [session])
+  
   
   // useEffect(() => {
   //   const fetchCartData = async () => {

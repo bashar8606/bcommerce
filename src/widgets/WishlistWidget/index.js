@@ -20,6 +20,7 @@ export default function WishlistWidget({}) {
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
 
+
   return (
     <section className="pt-2 pb-10">
       <div className="container">
@@ -43,7 +44,7 @@ export default function WishlistWidget({}) {
           </span>
         </h2>
         <div className="grid grid-cols-5 gap-4 py-4">
-          {data?.results?.wishlist?.data?.map((item, i) => {
+          {data?.data?.favourite_products?.map((item, i) => {
             return (
               <div key={i}>
                 <ProductCard data={item} isWishlist={true}/>

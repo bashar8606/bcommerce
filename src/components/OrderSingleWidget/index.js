@@ -3,9 +3,14 @@
 import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import Image from "../Image/image";
+import useSWR from "swr";
+import { TRACK_ORDER } from "@/constants/apiRoutes";
 
 export default function OrderSingleWidget() {
   const [date, setDate] = useState();
+  const slug = "IK-6974929309"
+  const { data, error } = useSWR(`${TRACK_ORDER}?invoice_no=${slug}`);
+  console.log(data,"order-deads");
   return (
     <div className="p-6 bg-white rounded border border-stone-200">
       <div className="justify-between items-center flex mb-6">

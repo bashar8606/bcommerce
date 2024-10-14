@@ -57,3 +57,7 @@ export const errorMessageProductCard = atom({
   key: 'errorMessagesState',
   default: {},
 });
+export const userDetail = atom({
+  key: 'userDetails',
+  default: {},
+});

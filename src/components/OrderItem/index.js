@@ -24,7 +24,7 @@ export default function OrderItem({ data }) {
 
   return (
     <Link
-      href="/en/orders/sdf"
+      href="/en/orders/IK-6974929309"
       className="block w-full mb-4 p-4 rounded border border-neutral-200"
     >
       <div className="justify-between items-center flex w-full flex-1 mb-4">
