@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,9 +11,15 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "../Link";
+import { useAddressModal } from "./useAddressModal";
 
-export function AddressModal({data}) {
+export function AddressModal({ data }) {
+  const [countryId, setCountryId] = useState(null);
+  const [stateId, setStateId] = useState(null);
+
+  // Fetch countries, states, and cities based on selected country and state
+  const { countries, states, cities } = useAddressModal(countryId, stateId);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -29,56 +36,74 @@ export function AddressModal({data}) {
         <div className="grid grid-cols-2 gap-4 py-4">
           <div className="">
             <Label htmlFor="name">First Name*</Label>
-            <Input
-              id="name"
-              defaultValue={data?.name}
-              className="col-span-3"
-            />
+            <Input id="name" defaultValue={data?.name} className="col-span-3" />
           </div>
           <div className="">
-            <Label htmlFor="name">Last Name*</Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
+            <Label htmlFor="lastName">Last Name*</Label>
+            <Input id="lastName" defaultValue="Pedro Duarte" className="col-span-3" />
           </div>
           <div className="col-span-2">
-            <Label htmlFor="name">Mobile number*</Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
+            <Label htmlFor="mobile">Mobile number*</Label>
+            <Input id="mobile" defaultValue={data?.phone_no} className="col-span-3" />
           </div>
+
+          {/* Country Select */}
           <div className="">
-            <Label htmlFor="username">Building Number / Name</Label>
-            <Input id="username" defaultValue="@peduarte" />
+            <Label htmlFor="country">Country*</Label>
+            <select
+              id="country"
+              value={countryId || ""}
+              onChange={(e) => setCountryId(e.target.value)}
+              className="w-full"
+            >
+              <option value="">Select Country</option>
+              {countries.map((country) => (
+                <option key={country.id} value={country.id}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
           </div>
 
+          {/* State Select */}
           <div className="">
-            <Label htmlFor="username">Street name / Area*</Label>
-            <Input id="username" defaultValue="@peduarte" />
+            <Label htmlFor="state">State*</Label>
+            <select
+              id="state"
+              value={stateId || ""}
+              onChange={(e) => setStateId(e.target.value)}
+              className="w-full"
+              disabled={!countryId}
+            >
+              <option value="">Select State</option>
+              {states.map((state) => (
+                <option key={state.id} value={state.id}>
+                  {state.name}
+                </option>
+              ))}
+            </select>
           </div>
 
+          {/* City Select */}
           <div className="">
-            <Label htmlFor="username">City*</Label>
-            <Input id="username" defaultValue="@peduarte" />
+            <Label htmlFor="city">City*</Label>
+            <select
+              id="city"
+              className="w-full"
+              disabled={!stateId}
+            >
+              <option value="">Select City</option>
+              {cities.map((city) => (
+                <option key={city.id} value={city.id}>
+                  {city.name}
+                </option>
+              ))}
+            </select>
           </div>
-
-          <div className="">
-            <Label htmlFor="username">State</Label>
-            <Input id="username" defaultValue="@peduarte" />
-          </div>
-
-
-
         </div>
 
-        <div className=" ">
-          <button className="btn btn-primary btn-lg  ">Add address</button>
-
-        
+        <div className="">
+          <button className="btn btn-primary btn-lg">Add address</button>
         </div>
       </DialogContent>
     </Dialog>
