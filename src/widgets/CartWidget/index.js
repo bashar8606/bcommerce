@@ -15,23 +15,25 @@ import useGetDeviceType from "@/hooks/useGetDeviceType";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { GET_CART } from '@/constants/apiRoutes';
-import { swrFetcher } from '@/utils/fetcher';
+import { GET_CART } from "@/constants/apiRoutes";
+import { swrFetcher } from "@/utils/fetcher";
 import useSWRFetcher from "@/hooks/swrFetcher";
 import { useCartFetcher } from "@/components/Header/useCartFetcher";
 import NoCart from "./NoCart";
-
+import { CartSkeleton } from "./CartSkeleton";
 
 const CartWidget = () => {
   // const { cart, isLoading, isError, addItem, removeItem } = useCartWidget();
   const { width } = useGetDeviceType();
-  const { cart, calculations, isLoading} = useCartFetcher()
+  const { cart, calculations, isLoading } = useCartFetcher();
 
-  // if (cart?.length===0) return <NoCart/>;
-  
+  if (isLoading) return <CartSkeleton/>;
+
   return (
     <section className="">
-      <div className="container">
+      {cart?.length>0?
+      <>
+       <div className="container">
         {width >= 992 && (
           <>
             <Breadcrumb className="mb-2">
@@ -96,6 +98,8 @@ const CartWidget = () => {
           </div>
         </div>
       </div>
+      </>:<NoCart/>}
+     
     </section>
   );
 };
