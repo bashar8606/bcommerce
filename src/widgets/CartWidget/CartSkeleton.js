@@ -12,7 +12,8 @@ import {
 export function CartSkeleton() {
   const { width } = useGetDeviceType();
   return (
-    <section className="pt-2 pb-10">
+    <>
+   <section className="pt-2 pb-10">
       <div className="container">
         <Breadcrumb className="mb-7">
           <BreadcrumbList>
@@ -25,8 +26,9 @@ export function CartSkeleton() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <h2 className="text-stone-950 text-2xl font-medium mb-4">
-          My Wishlist{" "}
+        <h2 className="text-black text-xl font-semibold mb-4">
+          Your Cart{" "}
+        
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-md-3 lg:grid-cols-md-4 xl:grid-cols-5 gap-4 py-4">
           {data?.map((item, i) => {
@@ -45,6 +47,9 @@ export function CartSkeleton() {
         </div>
       </div>
     </section>
+
+    </>
+ 
   );
 }
 
