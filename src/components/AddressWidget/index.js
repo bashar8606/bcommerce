@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import AddressItem from "../AddressItem";
 import { ALL_ADDRESSES, ALL_ORDERS } from "@/constants/apiRoutes";
 import useSWR from "swr";
+import { AddressModal } from "../AddressModal";
 
 export default function AddressWidget() {
   const { data, error } = useSWR(`${ALL_ADDRESSES}`);
@@ -21,6 +22,7 @@ export default function AddressWidget() {
       {data?.data?.addresses?.map((item, i) => {
         return <AddressItem data={item} key={i} />;
       })}
+      <AddressModal mode='add'/>
     </div>
   );
 }

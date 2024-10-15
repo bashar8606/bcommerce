@@ -1,9 +1,10 @@
 "use client";
 
 import { AddressModal } from "../AddressModal";
+import { useAddressItem } from "./useAddressItem";
 
 export default function AddressItem({ data }) {
-  console.log(data, "ssssssssss");
+  const { removeHandler } = useAddressItem()
 
   return (
     <div className="p-6 rounded border border-gray-200 flex space-x-3 mb-4">
@@ -31,10 +32,13 @@ export default function AddressItem({ data }) {
 
         <div className="flex justify-between items-center">
           <div>
-            <button className="btn btn-outline-secondary btn-sm me-3">
+            <button 
+              className="btn btn-outline-secondary btn-sm me-3"
+              onClick={() => removeHandler(data?.id)}
+            >
               Remove
             </button>
-            <AddressModal data={data} />
+            <AddressModal data={data} mode='edit'/>
           </div>
           <div className="text-black text-sm font-normal">Default address</div>
         </div>
