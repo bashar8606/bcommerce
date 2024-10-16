@@ -92,7 +92,7 @@ export const useLogin = ({ }) => {
        
     if (isPhone) {
         // Phone OTP
-        if (!values.countryCode || !values.phoneNumber) {
+        if (!values.phoneNumber) {
             alert("Phone and country code are required for phone OTP.");
             return;
         }

@@ -109,7 +109,8 @@ export function LoginModal() {
                 touched,
                 isSubmitting,
               }) => (
-                <Form onSubmit={handleSubmit}>
+                <Form >
+                  {/* onSubmit={handleSubmit} */}
                   {width < 992 && (
                     <div className="px-4 py-[10px] lg:p-10 bg-white border-b border-black border-opacity-5">
                       <div className="aspect-[126/52] w-[84px] md:w-[126px] relative me-5 lg:hidden">
@@ -212,7 +213,7 @@ export function LoginModal() {
                           <button
                             onClick={handleGoogleSignIn}
                             className="btn btn-lg border w-full flex justify-center items-center"
-                            disabled={isSubmitting} // Disable while submitting
+                            
                           >
                             <span className="me-2 text-xl">
                               <FcGoogle />
