@@ -168,3 +168,26 @@ export const axiosPostWithToken = async (url, data) => {
     throw error;
   }
 };
+
+
+export const axiosDeleteWithToken = async (url) => {
+    try {
+      const session = await getSession();
+      
+      const token = session?.accessToken;
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in Authorization header
+          'Content-Type': 'application/json', // Set content type
+        },
+      };
+  
+      const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, config);
+  
+      return response.data;
+    } catch (error) {
+      console.error('Error making POST request:', error);
+      throw error;
+    }
+  };

@@ -32,7 +32,9 @@ export const WISHLIST = "user/wishlists?"
 //   };
 
 export const ALL_ADDRESSES = "user/shipping-addresses"
-export const ADD_ADDRESS = ""
+export const ADD_ADDRESS = "user/shipping-addresses"
+export const EDIT_ADDRESS = ""
+export const DELETE_ADDRESS = "user/shipping-addresses"
 
 export const ALL_ORDERS ="user/orders"
 export const TRACK_ORDER ="user/track-order"
@@ -44,3 +46,7 @@ export const ADD_WISHLIST ="user/add-to-wishlist"
 export const REMOVE_WISHLIST ="user/remove-wishlist-product"
 
 export const UPDATE_PROFILE ="user/update-profile"
+
+export const COUNTRY_LIST = "get/country-list"
+export const CITY_BY_STATE = "city/by-state"
+export const STATE_BY_COUNTRY = "state/by-country" 

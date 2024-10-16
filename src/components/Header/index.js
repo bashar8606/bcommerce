@@ -226,7 +226,7 @@ export default function Header() {
                 </span>
               </Link>
               <Link
-                href={`/en/cart`}
+                href={`/cart`}
                 className="rounded-md px-1 py-2 text-base text-center relative"
               >
                 <span className="absolute -top-[2px] -right-[2px] text-white text-xs font-medium  px-1 bg-stone-900 rounded-2xl border border-white flex-col justify-center items-center gap-2 inline-flex">
@@ -270,7 +270,7 @@ export default function Header() {
                 </span>
               </Link>
               <Link
-                href={`/en/cart`}
+                href={`/cart`}
                 className="rounded-md px-1 py-2 text-lg text-center relative"
               >
                 { isLogined &&
