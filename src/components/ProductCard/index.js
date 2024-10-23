@@ -15,13 +15,11 @@ import useGetDeviceType from "@/hooks/useGetDeviceType";
 
 export default function ProductCard({ data, isWishlist }) {
   const { selectVariant } = useProductCard();
-  const pid=isWishlist?data?.product?.id:data?.id
+  const pid=isWishlist?data?.id:data?.id
   const { handleWishlist, hasWishlist } = useWishlistWidget({data, isWishlist});
   const [errorMessages, setErrorMessages] = useRecoilState(
     errorMessageProductCard
   );
-
-  
   const { width } = useGetDeviceType();
 
   const offerPerc =
@@ -82,7 +80,7 @@ export default function ProductCard({ data, isWishlist }) {
           </span>
           {isWishlist ? (
             <Image
-              src={data?.product?.image_190x230}
+              src={data?.image_190x230}
               className="object-cover"
               fill
               alt="sdfsdf"
