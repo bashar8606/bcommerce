@@ -95,13 +95,13 @@ export const useCartWidget = () => {
   }
   
 
-  const addItem = async (item, variant=null) => {
+  const addItem = async (item, variant=null, variant_id=null) => {
     setIsLoading(true)
     try {
       if(session?.status === "unauthenticated"){
         setOpenLogin(true)
       } else {
-        const res = await addCartItem(item, 1, authToken, variant, null);
+        const res = await addCartItem(item, 1, authToken, variant, variant_id);
         if(res.success){
           mutate(`${GET_CART}lang=${locale}&token=true`);
           setCartCount(cartCount + 1)
@@ -197,13 +197,13 @@ export const useCartWidget = () => {
       return;
     }
   
-    const { variant, stock } = selectedProduct; // Assuming single variant selection
+    const { variant, variantId } = selectedProduct; // Assuming single variant selection
     // Check if the product with this variant exists in the cart
     const cartProduct = findProductInCart(productId, variant);
   
     if (cartProduct) {
       if (isStockAvailable(cartProduct, selectedProduct)) {
-        addItem(productId, variant);
+        addItem(productId, variant, variantId);
         // Clear the error message if adding succeeds
         setErrorMessages((prevErrors) => ({
           ...prevErrors,
@@ -217,7 +217,7 @@ export const useCartWidget = () => {
       }
     } else {
       // Add product to cart if it doesn't exist
-      addItem(productId, variant);
+      addItem(productId, variant, variantId);
       // Clear any previous error message
       setErrorMessages({
         [productId]: ""

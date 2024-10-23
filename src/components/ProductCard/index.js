@@ -41,7 +41,7 @@ export default function ProductCard({ data, isWishlist }) {
                       data?.id,
                       option.stock_variant,
                       option.current_stock,
-                      null
+                      option.variant_id,
                     ),
                       setErrorMessages({});
                   }}

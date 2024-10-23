@@ -56,8 +56,9 @@ export default function useProductCard (){
       const foundStock = data.find(item => item.stock_variant === value);
       // Get the current_stock value if found, otherwise return null or a default value
       const currentStock = foundStock ? foundStock.current_stock : null;
+      const variantId = foundStock ? foundStock.variant_id : null;
 
-      return currentStock
+      return {currentStock, variantId}
     }
 
 

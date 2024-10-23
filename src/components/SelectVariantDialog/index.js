@@ -87,13 +87,13 @@ export default function SelectVariantDialog({ data }) {
             <RadioGroup
               className="flex items-center space-x-2"
               onValueChange={(value) =>
-                // console.log("------------------->",value,data)
                 {
+                  const stockData = stockFromVariant(data?.stock, value);
                   selectVariant(
                     data?.id,
                     value,
-                    stockFromVariant(data?.stock, value),
-                    null
+                    stockData.currentStock,
+                    stockData.variantId
                   ),
                     setErrorMessages({});
                 }
